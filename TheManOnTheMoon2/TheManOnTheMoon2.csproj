@@ -280,6 +280,19 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Img\Layout_StoreFront\close_edit.png" />
+    <Content Include="Img\Layout_StoreFront\edit.png" />
+    <Content Include="Img\Layout_StoreFront\logo.png" />
+    <Content Include="Img\Layout_StoreFront\nav.png" />
+    <Content Include="Content\Layout_StoreFront\style.css" />
+    <Content Include="Img\Page_Index\ContentBottom\2.jpg" />
+    <Content Include="Img\Page_Index\Flexisel\flex_1.jpg" />
+    <Content Include="Img\Page_Index\Flexisel\flex_2.jpg" />
+    <Content Include="Img\Page_Index\Flexisel\flex_3.gif" />
+    <Content Include="Img\Page_Index\Flexisel\flex_4.jpg" />
+    <Content Include="Img\Page_Index\Slider\slide_1.jpg" />
+    <Content Include="Img\Page_Index\Slider\slide_2.jpg" />
+    <Content Include="Img\Page_Index\Slider\slide_3.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -306,6 +319,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Img\Page_Index\ContentBottom\1.webp" />
     <None Include="Models\DataBaseModels.dbml.layout">
       <DependentUpon>DataBaseModels.dbml</DependentUpon>
     </None>
@@ -319,9 +333,16 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Layout-StoreFront\classie.js" />
+    <Content Include="Scripts\Page_Index\jquery.flexisel.js" />
+    <Content Include="Scripts\Layout-StoreFront\jquery.min.js" />
+    <Content Include="Scripts\Layout-StoreFront\responsive-nav.js" />
+    <Content Include="Scripts\Layout-StoreFront\uisearch.js" />
     <Content Include="Scripts\mdb\mdb.js" />
     <Content Include="Scripts\mdb\mdb.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Page_Index\fwslider.js" />
+    <Content Include="Scripts\Page_Index\jquery-ui.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -446,7 +467,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Img\" />
+    <Folder Include="Content\Page_Index\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

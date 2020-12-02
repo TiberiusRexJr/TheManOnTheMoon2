@@ -18,7 +18,7 @@ namespace TheManOnTheMoon2
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include
                 (
-                      "~/Scripts/jquery.min.js",
+                      //"~/Scripts/jquery.min.js",
                        "~/Scripts/popper.min.js",
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/mdb/mdb.min.js"

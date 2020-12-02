@@ -11,6 +11,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="stylesheet" href="~/Content/Layout_StoreFront/style.css" media="all">
+
+    <script src="~/Scripts/Layout-StoreFront/jquery.min.js"></script>
 
 
     @Styles.Render("~/Content/css")
@@ -24,8 +27,8 @@
     <!--<script src="js/jquery.easydropdown.js"></script>-->
     <!--start slider -->
     <link rel="stylesheet" href="~/Content/Layout_StoreFront/fwslider.css" media="all">
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/fwslider.js"></script>
+    <script src="~/Scripts/Page_Index/jquery-ui.min.js"></script>
+    <script src="~/Scripts/Page_Index/fwslider.js"></script>
     <!--end slider -->
 
     <script type="text/javascript">
@@ -61,91 +64,78 @@
     </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="header">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Basic dropdown -->
-    <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-        Basic dropdown
-    </button>
-
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-            <!-- Toggle button -->
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarRightAlignExample"
-                    aria-controls="navbarRightAlignExample"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarRightAlignExample">
-                <!-- Left links -->
-                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <!-- Navbar dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           id="navbarDropdown"
-                           role="button"
-                           data-toggle="dropdown"
-                           aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <!-- Dropdown menu -->
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider" /></li>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header-left">
+                        <div class="logo">
+                            <a href="index.html"><img src="~/Img/Layout_StoreFront/logo.png" alt="store_logo" /></a>
+                        </div>
+                        <div class="menu">
+                            <a class="toggleMenu" href="#"><img src="~/Img/Layout_StoreFront/nav.png" alt="" /></a>
+                            <ul class="nav" id="nav">
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="team.html">Team</a></li>
+                                <li><a href="experiance.html">Events</a></li>
+                                <li><a href="experiance.html">Experiance</a></li>
+                                <li><a href="shop.html">Company</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <div class="clear"></div>
+                            </ul>
+                            <script type="text/javascript" src="~/Scripts/Layout-StoreFront/responsive-nav.js"></script>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="header_right">
+                        <!-- start search-->
+                        <div class="search-box">
+                            <div id="sb-search" class="sb-search">
+                                <form>
+                                    <input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+                                    <input class="sb-search-submit" type="submit" value="">
+                                    <span class="sb-icon-search"> </span>
+                                </form>
+                            </div>
+                        </div>
+                        <!----search-scripts---->
+                        <script src="~/Scripts/Layout-StoreFront/classie.js"></script>
+                        <script src="~/Scripts/Layout-StoreFront/uisearch.js"></script>
+                        <script>
+                            new UISearch(document.getElementById('sb-search'));
+                        </script>
+                        <!----//search-scripts---->
+                        <ul class="icon1 sub-icon1 profile_img">
                             <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="active-icon c1" href="#"> </a>
+                                <ul class="sub-icon1 list">
+                                    <div class="product_control_buttons">
+                                        <a href="#"><img src="~/Img/Layout_StoreFront/edit.png" alt="" /></a>
+                                        <a href="#"><img src="~/Img/Layout_StoreFront/close_edit.png" alt="" /></a>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <li class="list_img"><img src="images/1.jpg" alt="1.jpg" /></li>
+                                    <li class="list_desc">
+                                        <h4><a href="#">velit esse molestie</a></h4><span class="actual">
+                                            1 x
+                                            $12.00
+                                        </span>
+                                    </li>
+                                    <div class="login_buttons">
+                                        <div class="check_button"><a href="checkout.html">Check out</a></div>
+                                        <div class="login_button"><a href="login.html">Login</a></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-                <!-- Left links -->
+                        <div class="clear"></div>
+                    </div>
+                </div>
             </div>
-            <!-- Collapsible wrapper -->
         </div>
-        <!-- Container wrapper -->
-    </nav>
+    </div>
     <!-- Basic dropdown -->
     <div class="container body-content">
         @RenderBody()

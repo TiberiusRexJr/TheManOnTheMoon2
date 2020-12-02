@@ -1,24 +1,106 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿<div class="banner">
+    <!-- start slider -->
+    <div id="fwslider">
+        <div class="slider_container">
+            <div class="slide">
+                <!-- Slide image -->
+                <img src="~/Img/Page_Index/Slider/slide_1.jpg" class="img-responsive" alt="" />
+                <!-- /Slide image -->
+                <!-- Texts container -->
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <!-- Text title -->
+                        <h1 class="title">Run Over<br>Everything</h1>
+                        <!-- /Text title -->
+                        <div class="button"><a href="#">See Details</a></div>
+                    </div>
+                </div>
+                <!-- /Texts container -->
+            </div>
+            <!-- /Duplicate to create more slides -->
+            <div class="slide">
+                <img src="~/Img/Page_Index/Slider/slide_2.jpg" class="img-responsive" alt="" />
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <h1 class="title">Run Over<br>Everything</h1>
+                        <div class="button"><a href="#">See Details</a></div>
+                    </div>
+                </div>
+            </div>
+            <!--/slide -->
+            <div class="slide">
+                <!-- Slide image -->
+                <img src="~/Img/Page_Index/Slider/slide_3.jpg" class="img-responsive" alt="" />
+                <!-- /Slide image -->
+                <!-- Texts container -->
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <!-- Text title -->
+                        <h1 class="title">Run Over<br>Everything</h1>
+                        <!-- /Text title -->
+                        <div class="button"><a href="#">See Details</a></div>
+                    </div>
+                </div>
+                <!-- /Texts container -->
+            </div>
+        </div>
+        <div class="timers"></div>
+        <div class="slidePrev"><span></span></div>
+        <div class="slideNext"><span></span></div>
+    </div>
+    <!--/slider -->
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+<div class="main">
+    <div class="content-top">
+        <h2>snowboards</h2>
+        <p>hendrerit in vulputate velit esse molestie consequat, vel illum dolore</p>
+        <div class="close_but"><i class="close1"> </i></div>
+        <ul id="flexiselDemo3">
+            <li><img src="~/Img/Page_Index/Flexisel/flex_1.jpg" /></li>
+            <li><img src="~/Img/Page_Index/Flexisel/flex_2.jpg" /></li>
+            <li><img src="~/Img/Page_Index/Flexisel/flex_3.gif" /></li>
+            <li><img src="~/Img/Page_Index/Flexisel/flex_4.jpg" /></li>
+
+        </ul>
+        <h3>SnowBoard Extreme Series</h3>
+        <script type="text/javascript">
+		$(window).load(function() {
+			$("#flexiselDemo3").flexisel({
+				visibleItems: 4,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+		    	responsiveBreakpoints: {
+		    		portrait: {
+		    			changePoint:480,
+		    			visibleItems: 1
+		    		},
+		    		landscape: {
+		    			changePoint:640,
+		    			visibleItems: 2
+		    		},
+		    		tablet: {
+		    			changePoint:768,
+		    			visibleItems: 3
+		    		}
+		    	}
+		    });
+
+		});
+        </script>
+        <script type="text/javascript" src="~/Scripts/Page_Index/jquery.flexisel.js"></script>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+</div>
+<div class="content-bottom">
+    <div class="container">
+        <div class="row content_bottom-text">
+            <div class="col-md-7">
+                <h3>The Mountains<br>Snowboarding</h3>
+                <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.</p>
+                <p class="m_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.</p>
+            </div>
+        </div>
     </div>
 </div>
