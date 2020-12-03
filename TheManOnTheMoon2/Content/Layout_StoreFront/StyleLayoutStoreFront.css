@@ -191,7 +191,7 @@ body a{
 	cursor: pointer;
 }
 .sb-search-submit {
-	background: #333 url('../images/img-sprite.png') no-repeat 0px 1px;
+	background: #333 url('../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png') no-repeat 0px 1px;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
     filter: alpha(opacity=0); /* IE 5-7 */
    
@@ -203,18 +203,18 @@ body a{
 }
 .sb-icon-search {
 	color: #FFF;
-background: #000 url('../images/img-sprite.png') no-repeat 0px 1px;
-z-index: 90;
+	background: #000 url('../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png') no-repeat 0px 1px;
+	z-index: 90;
 }
 /* Open state */
 .sb-search.sb-search-open,.no-js .sb-search {
 	width:40%;
 }
-.sb-search.sb-search-open .sb-icon-search,.no-js .sb-search .sb-icon-search {
-	background: #c0c0c0 url('../images/img-sprite.png') no-repeat 0px 1px;
-	color: #fff;
-	z-index: 11;
-}
+	.sb-search.sb-search-open .sb-icon-search, .no-js .sb-search .sb-icon-search {
+		background: #c0c0c0 url('../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png') no-repeat 0px 1px;
+		color: #fff;
+		z-index: 11;
+	}
 .sb-search.sb-search-open .sb-search-submit,.no-js .sb-search .sb-search-submit {
 	z-index: 90;
 }
@@ -353,8 +353,8 @@ li.list_desc h4 a{
 li.list_desc h4 a:hover{
 	color:red;
 }
-.c1{
-	background: url(../images/img-sprite.png) no-repeat -66px -8px;
+.c1 {
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png) no-repeat -66px -8px;
 	width: 22px;
 	height: 24px;
 	display: inline-block;
@@ -536,15 +536,15 @@ li.list_desc h4 a:hover{
 }
 .nbs-flexisel-nav-left {
 	left: 205px;
-	background: url(../images/img-sprite.png) no-repeat -110px 1px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png) no-repeat -110px 1px;
 }
 .nbs-flexisel-nav-right {
-	right:205px;
-	background: url(../images/img-sprite.png) no-repeat -254px 1px;
+	right: 205px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png) no-repeat -254px 1px;
 }
 .content-bottom{
 	width:100%;
-	background: url(../images/bg_image.jpg)no-repeat center top;
+	background: url(../../Img/Page_Index/ContentBottom/2.jpg)no-repeat center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -588,11 +588,11 @@ h3.m_3{
 	text-align:center;
 	margin-bottom:6%;
 }
-i.close1{
-	width:46px;
-	height:42px;
-	background:url(../images/img-sprite.png)-196px -269px;
-	display:inline-block;
+i.close1 {
+	width: 46px;
+	height: 42px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)-196px -269px;
+	display: inline-block;
 }
 .view {
    overflow: hidden;
@@ -843,43 +843,43 @@ ul.social li{
 }	
 ul.social li a span:hover{
 	opacity:0.5;
-}		
+}
 li.facebook a span {
 	height: 25px;
 	width: 25px;
 	display: block;
-	background: url(../images/img-sprite.png)no-repeat -256px -276px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -256px -276px;
 }
 li.twitter a span {
 	height: 25px;
 	width: 25px;
 	display: block;
-	background: url(../images/img-sprite.png)no-repeat -298px -276px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -298px -276px;
 }
 li.instagram a span {
 	height: 25px;
 	width: 25px;
 	display: block;
-	background: url(../images/img-sprite.png)no-repeat -346px -276px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -346px -276px;
 }
 li.pinterest a span {
 	height: 25px;
 	width: 25px;
 	display: block;
-	background: url(../images/img-sprite.png)no-repeat -391px -276px;
-}	
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -391px -276px;
+}
 li.youtube a span {
 	height: 25px;
 	width: 47px;
 	display: block;
-	background: url(../images/img-sprite.png)no-repeat -437px -276px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -437px -276px;
 }	
 .dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
 .dropdown dd { position:relative; }
 .dropdown a, .dropdown a:visited { color:#fff; text-decoration:none; outline:none;}
 .dropdown a:hover { color:#fff;}
 .dropdown dt a:hover { color:#fff;}
-.dropdown dt a {background:url(../images/arrow.png) no-repeat scroll right center; display:block; padding-right:20px;
+.dropdown dt a {background:url(../../Img/Resources/arrows.png) no-repeat scroll right center; display:block; padding-right:20px;
 }
 .dropdown dt a span {cursor: pointer;
 	cursor: pointer;
@@ -1303,53 +1303,53 @@ p.m_8{
 	color: #FFF;
 	background-color: #00AAF0;
 }
-i.icon-twitter{
+i.icon-twitter {
 	height: 20px;
 	width: 20px;
-	background: url(../images/img-sprite.png)no-repeat -260px -318px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -260px -318px;
 	float: left;
 	margin-right: 2px;
 }
-.btn1-twitter:hover i{
-	background: url(../images/img-sprite.png)no-repeat -260px -341px;
+.btn1-twitter:hover i {
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -260px -341px;
 }
-i.icon-facebook{
+i.icon-facebook {
 	height: 20px;
 	width: 20px;
-	background: url(../images/img-sprite.png)no-repeat -292px -317px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -292px -317px;
 	float: left;
 	margin-right: 2px;
 }
-.btn1-facebook:hover i{
-	background: url(../images/img-sprite.png)no-repeat -292px -341px;
+.btn1-facebook:hover i {
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -292px -341px;
 }
 .btn1-facebook:hover {
 	color: #FFF;
 	background-color:#435F9F;
 }
-i.icon-google{
+i.icon-google {
 	height: 20px;
 	width: 20px;
-	background: url(../images/img-sprite.png)no-repeat -321px -317px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -321px -317px;
 	float: left;
 	margin-right: 2px;
 }
-.btn1-google:hover i{
-	background: url(../images/img-sprite.png)no-repeat -321px -341px;
+.btn1-google:hover i {
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -321px -341px;
 }
 .btn1-google:hover {
 	color: #FFF;
 	background-color:#E04B34;
 }
-i.icon-pinterest{
+i.icon-pinterest {
 	height: 20px;
 	width: 20px;
-	background: url(../images/img-sprite.png)no-repeat -353px -318px;
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -353px -318px;
 	float: left;
 	margin-right: 2px;
 }
-.btn1-pinterest:hover i{
-	background: url(../images/img-sprite.png)no-repeat -353px -342px;
+.btn1-pinterest:hover i {
+	background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -353px -342px;
 }
 .btn1-pinterest:hover {
 	color: #FFF;
@@ -1500,20 +1500,20 @@ p.price2{
 	width: 1px;
 	z-index: 2;
 }
-.box-info-product .exclusive:before {
-	background: url(../images/img-sprite.png)no-repeat -401px -308px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	color: #FFF;
-	font-size: 25px;
-	line-height: 47px;
-	content: "";
-	z-index: 2;
-	width: 51px;
-	text-align: center;
-}
+	.box-info-product .exclusive:before {
+		background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png)no-repeat -401px -308px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		color: #FFF;
+		font-size: 25px;
+		line-height: 47px;
+		content: "";
+		z-index: 2;
+		width: 51px;
+		text-align: center;
+	}
 .box-info-product .exclusive:hover {
 	background: #303030;
 	background-position: 0 0;
@@ -1960,14 +1960,14 @@ fieldset.input input[type="submit"]:hover {
 	width: 75px;
 	height:126px;
  }
- .nbs-flexisel-nav-left {
-	left:10px;
-	background: url(../images/img-sprite.png) no-repeat -17px -372px;
- }
- .nbs-flexisel-nav-right {
-	right:10px;
-	background: url(../images/img-sprite.png) no-repeat -80px -372px;
- }
+	.nbs-flexisel-nav-left {
+		left: 10px;
+		background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png) no-repeat -17px -372px;
+	}
+	.nbs-flexisel-nav-right {
+		right: 10px;
+		background: url(../../Img/Layout_StoreFront/StyleLayoutStoreFrontCSS/img-sprite.png) no-repeat -80px -372px;
+	}
  .content-top h3 {
 	font-size: 1em;
   }
