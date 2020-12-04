@@ -648,7 +648,9 @@ namespace ManOnTheMoon.Models
 		private int _Id;
 		
 		private string _Name;
+
 		
+
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions

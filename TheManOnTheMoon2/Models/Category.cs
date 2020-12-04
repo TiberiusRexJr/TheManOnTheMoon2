@@ -10,17 +10,44 @@ namespace ManOnTheMoon.Models
     {
         List<Category> categories;
 
+        private string _Category_Image_Url;
+
+        partial void OnCategory_Image_UrlChanging(string value);
+        partial void OnCategory_Image_UrlChanged();
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Category_Image_Url", DbType = "VarChar(MAX)")]
+        public string Category_Image_Url
+        {
+            get
+            {
+                return this._Category_Image_Url;
+            }
+            set
+            {
+                if ((this._Category_Image_Url != value))
+                {
+                    this.OnCategory_Image_UrlChanging(value);
+                    this.SendPropertyChanging();
+                    this._Category_Image_Url = value;
+                    this.SendPropertyChanged("Category_Image_Url");
+                    this.OnCategory_Image_UrlChanged();
+                }
+            }
+        }
+
 
 
         public class CategoryEnumerator : IEnumerator
         {
             List<Category> categoryEnumerationList;
-
+            
             int position = -1;
 
             public CategoryEnumerator(List<Category> categories)
             {
                 categoryEnumerationList = categories;
+                Category category = new Category();
+                
             }
 
             public object Current 

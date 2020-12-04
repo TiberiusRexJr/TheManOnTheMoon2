@@ -19,15 +19,8 @@
       <Column Name="On_Sale_Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Width" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Product_Product_Image" Member="Product_Images" ThisKey="Id" OtherKey="Product_Id" Type="Product_Image" />
-      <Association Name="Category_Product" Member="Category1" ThisKey="Category" OtherKey="Name" Type="Category" IsForeignKey="true" />
       <Association Name="Brand_Product" Member="Brand1" ThisKey="Brand" OtherKey="Name" Type="Brand" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Categories" Member="Categories">
-    <Type Name="Category">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Category_Product" Member="Products" ThisKey="Name" OtherKey="Category" Type="Product" />
+      <Association Name="Category_Product" Member="Category1" ThisKey="Category" OtherKey="Name" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Brands" Member="Brands">
@@ -45,6 +38,14 @@
       <Column Name="Product_Image_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Product_Image_3" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Product_Product_Image" Member="Product" ThisKey="Product_Id" OtherKey="Id" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Category_Image_Url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Products" ThisKey="Name" OtherKey="Category" Type="Product" />
     </Type>
   </Table>
 </Database>
