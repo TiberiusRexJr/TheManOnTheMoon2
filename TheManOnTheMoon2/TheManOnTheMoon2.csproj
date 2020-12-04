@@ -209,7 +209,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Database\DbAdmin.cs" />
     <Compile Include="Database\DbQueryProducts.cs" />
@@ -238,6 +240,34 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Team.aspx.cs">
+      <DependentUpon>Team.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Team.aspx.designer.cs">
+      <DependentUpon>Team.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +336,11 @@
     <Content Include="Img\Page_Index\Slider\slide_1.jpg" />
     <Content Include="Img\Page_Index\Slider\slide_2.jpg" />
     <Content Include="Img\Page_Index\Slider\slide_3.jpg" />
+    <Content Include="Img\Page_Team\team_1.jpg" />
+    <Content Include="Img\Page_Team\team_2.jpg" />
+    <Content Include="Img\Page_Team\team_3.jpg" />
+    <Content Include="Img\Page_Team\team_4.jpg" />
+    <Content Include="Img\Page_Team\team_5.jpg" />
     <Content Include="Img\Resources\arrows.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -334,6 +369,9 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Img\Page_Index\ContentBottom\1.webp" />
+    <Content Include="WebForms\Login.aspx" />
+    <Content Include="WebForms\Register.aspx" />
+    <Content Include="WebForms\Team.aspx" />
     <None Include="Models\DataBaseModels.dbml.layout">
       <DependentUpon>DataBaseModels.dbml</DependentUpon>
     </None>
@@ -479,9 +517,14 @@
     <Content Include="Scripts\mdb\mdb.min.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="WebForms\MasterPage.Master" />
+    <Content Include="Views\Products\AllProducts.cshtml" />
+    <Content Include="Views\Products\SingleProductDetail.cshtml" />
+    <Content Include="Views\Categories\GetAllProductCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Page_Index\" />
+    <Folder Include="Views\SingleProduct\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

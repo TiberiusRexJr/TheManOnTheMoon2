@@ -1,36 +1,37 @@
-﻿<!DOCTYPE html>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="TheManOnTheMoon2.WebForms.MasterPage" %>
+
+<!DOCTYPE html>
+
 <html>
-<head>
-    <meta charset="utf-8" />
+<head runat="server">
+
+    <title></title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }; alert("hi"); </script>
 
-    <script src="~/Scripts/Layout-StoreFront/jquery.min.js"></script>
+          <script src="../Scripts/Layout-StoreFront/jquery.min.js"></script>
 
    
-    
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <%:Styles.Render("~/Content/css")%>
+    <%:Scripts.Render("~/bundles/modernizr")%>
+    <%:Scripts.Render("~/bundles/bootstrap")%>
 
-    <link href="~/Content/Layout_StoreFront/StyleLayoutStoreFront.css" rel='stylesheet' type='text/css' />
+         <link href="../Content/Layout_StoreFront/StyleLayoutStoreFront.css" rel='stylesheet' type='text/css' />
+       <script src="../Scripts/Page_Index/jquery-ui.min.js"></script>
 
-
-    <!--<script src="js/jquery.easydropdown.js"></script>-->
-    <!--start slider -->
-    <link rel="stylesheet" href="~/Content/Layout_StoreFront/fwslider.css" media="all">
-    <script src="~/Scripts/Page_Index/jquery-ui.min.js"></script>
-    <script src="~/Scripts/Page_Index/fwslider.js"></script>
-    <!--end slider -->
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -71,10 +72,10 @@
                 <div class="col-md-12">
                     <div class="header-left">
                         <div class="logo">
-                            <a href="index.html"><img src="~/Img/Layout_StoreFront/logo.png" alt="store_logo" /></a>
+                            <a href="index.html"><img src="../Img/Layout_StoreFront/logo.png" alt="store_logo" /></a>
                         </div>
                         <div class="menu">
-                            <a class="toggleMenu" href="#"><img src="~/Img/Layout_StoreFront/nav.png" alt="" /></a>
+                            <a class="toggleMenu" href="#"><img src="../Img/Layout_StoreFront/nav.png" alt="" /></a>
                             <ul class="nav" id="nav">
                                 <li><a href="shop.html">Shop</a></li>
                                 <li><a href="team.html">Team</a></li>
@@ -84,7 +85,7 @@
                                 <li><a href="contact.html">Contact</a></li>
                                 <div class="clear"></div>
                             </ul>
-                            <script type="text/javascript" src="~/Scripts/Layout-StoreFront/responsive-nav.js"></script>
+                            <script type="text/javascript" src="../Scripts/Layout-StoreFront/responsive-nav.js"></script>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -100,8 +101,8 @@
                             </div>
                         </div>
                         <!----search-scripts---->
-                        <script src="~/Scripts/Layout-StoreFront/classie.js"></script>
-                        <script src="~/Scripts/Layout-StoreFront/uisearch.js"></script>
+                        <script src="../Scripts/Layout-StoreFront/classie.js"></script>
+                        <script src="../Scripts/Layout-StoreFront/uisearch.js"></script>
                         <script>
                             new UISearch(document.getElementById('sb-search'));
                         </script>
@@ -111,11 +112,11 @@
                                 <a class="active-icon c1" href="#"> </a>
                                 <ul class="sub-icon1 list">
                                     <div class="product_control_buttons">
-                                        <a href="#"><img src="~/Img/Layout_StoreFront/edit.png" alt="" /></a>
-                                        <a href="#"><img src="~/Img/Layout_StoreFront/close_edit.png" alt="" /></a>
+                                        <a href="#"><img src="../Img/Layout_StoreFront/edit.png" alt="" /></a>
+                                        <a href="#"><img src="../Img/Layout_StoreFront/close_edit.png" alt="" /></a>
                                     </div>
                                     <div class="clear"></div>
-                                    <li class="list_img"><img src="~/Img/Layout_StoreFront/1.jpg" alt="1.jpg" /></li>
+                                    <li class="list_img"><img src="../Img/Layout_StoreFront/1.jpg" alt="1.jpg" /></li>
                                     <li class="list_desc">
                                         <h4><a href="#">velit esse molestie</a></h4><span class="actual">
                                             1 x
@@ -137,12 +138,18 @@
             </div>
         </div>
     </div>
-    
 
-    <!-- Basic dropdown -->
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+            </asp:ContentPlaceHolder>
+
+            
+        </div>
+    </form>
+
+
         <footer>
             <div class="footer">
                 <div class="container">
@@ -215,11 +222,8 @@
                 </div>
             </div>
         </footer>
-    </div>
 
 
-
-
-
+    
 </body>
 </html>
