@@ -1,14 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/MasterPage.Master" AutoEventWireup="true" CodeBehind="Team.aspx.cs" Inherits="TheManOnTheMoon2.WebForms.Team" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="main">
+    
+	      <!-- Add fancyBox main JS and CSS files -->
+	<script src="../Scripts/Layout-StoreFront/jquery.magnific-popup.js" type="text/javascript"></script>
+	<link href="../Content/Layout_StoreFront/magnific-popup.css" rel="stylesheet" type="text/css">
+		<script>
+            $(document).ready(function () {
+                $('.popup-with-zoom-anim').magnificPopup({
+                    type: 'inline',
+                    fixedContentPos: false,
+                    fixedBgPos: true,
+                    overflowY: 'auto',
+                    closeBtnInside: true,
+                    preloader: false,
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'my-mfp-zoom-in'
+                });
+            });
+        </script>
+
+      <div class="main">
       <div class="shop_top">
 		<div class="container">
 			<div class="row team_box">
 				<h3 class="m_2">Our Team</h3>
 				<div class="col-md-3 team1">
-				  <a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team_1.jpg" class="img-responsive" title="continue" alt=""/></a>
+				  <a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team1.jpg" class="img-responsive" title="continue" alt=""/></a>
 				    <div id="small-dialog3" class="mfp-hide">
 					   <div class="pop_up2">
 					   	 <h2>Lorem ipsum </h2>
@@ -20,7 +41,7 @@
 				    <p class="m_6">sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna</p>
 				</div>
 				<div class="col-md-3 team1">
-					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team_3.jpg" class="img-responsive" title="continue" alt=""/></a>
+					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team2.jpg" class="img-responsive" title="continue" alt=""/></a>
 				    <div id="small-dialog3" class="mfp-hide">
 					   <div class="pop_up2">
 					   	 <h2>Lorem ipsum </h2>
@@ -32,7 +53,7 @@
 				    <p class="m_6">sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna</p>
 				</div>
 				<div class="col-md-3 team1">
-					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team_2.jpg" class="img-responsive" title="continue" alt=""/></a>
+					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team3.jpg"" class="img-responsive" title="continue" alt=""/></a>
 				    <div id="small-dialog3" class="mfp-hide">
 					   <div class="pop_up2">
 					   	 <h2>Lorem ipsum </h2>
@@ -44,7 +65,7 @@
 				    <p class="m_6">sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna</p>
 				</div>
 				<div class="col-md-3 team1">
-					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team_5.jpg" class="img-responsive" title="continue" alt=""/></a>
+					<a class="popup-with-zoom-anim" href="#small-dialog3"><img src="../Img/Page_Team/team4.jpg" class="img-responsive" title="continue" alt=""/></a>
 				    <div id="small-dialog3" class="mfp-hide">
 					   <div class="pop_up2">
 					   	 <h2>Lorem ipsum </h2>
@@ -70,11 +91,12 @@
 					<ul class="team_list">
 					 <h4>Vision Statement</h4>
 					 <p class="m_7">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-		             <img src="images/team5.jpg" class="img-responsive" alt=""/>
+		             <img src="../Img/Page_Team/team5.jpg" class="img-responsive" alt=""/>
 		          </ul>
 				</div>
 			</div>
 		</div>
 	   </div>
 	  </div>
+	  
 </asp:Content>

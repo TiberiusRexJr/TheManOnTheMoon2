@@ -1143,7 +1143,7 @@ ul.team_list h4{
 	text-transform: uppercase;
 }
 ul.team_list li {
-	list-style-image: url(../images/marker.png);
+	list-style-image: url(../../Img/Resources/marker.png);
 	margin: 0 0px 20px 15px;
 }
 ul.team_list li a {

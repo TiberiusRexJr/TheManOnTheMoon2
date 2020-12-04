@@ -218,12 +218,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DataBaseModels.designer.cs" />
     <Compile Include="Models\DataBaseModels1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseModels.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dummy.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Mobile.Master.cs">
@@ -283,7 +285,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Layout_StoreFront\etalage.css" />
     <Content Include="Content\Layout_StoreFront\fwslider.css" />
+    <Content Include="Content\Layout_StoreFront\jquery.fancybox.css" />
+    <Content Include="Content\Layout_StoreFront\magnific-popup.css" />
     <Content Include="Content\Layout_StoreFront\StyleLayoutStoreFront.css" />
     <Content Include="Content\mdb\mdb.css" />
     <Content Include="Content\mdb\mdb.lite.css" />
@@ -336,12 +341,18 @@
     <Content Include="Img\Page_Index\Slider\slide_1.jpg" />
     <Content Include="Img\Page_Index\Slider\slide_2.jpg" />
     <Content Include="Img\Page_Index\Slider\slide_3.jpg" />
+    <Content Include="Img\Page_Team\team1.jpg" />
+    <Content Include="Img\Page_Team\team2.jpg" />
+    <Content Include="Img\Page_Team\team3.jpg" />
+    <Content Include="Img\Page_Team\team4.jpg" />
+    <Content Include="Img\Page_Team\team5.jpg" />
     <Content Include="Img\Page_Team\team_1.jpg" />
     <Content Include="Img\Page_Team\team_2.jpg" />
     <Content Include="Img\Page_Team\team_3.jpg" />
     <Content Include="Img\Page_Team\team_4.jpg" />
     <Content Include="Img\Page_Team\team_5.jpg" />
     <Content Include="Img\Resources\arrows.png" />
+    <Content Include="Img\Resources\marker.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -369,6 +380,9 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Img\Page_Index\ContentBottom\1.webp" />
+    <Content Include="Scripts\Layout-StoreFront\jquery.etalage.min.js" />
+    <Content Include="Scripts\Layout-StoreFront\jquery.fancybox.js" />
+    <Content Include="Scripts\Layout-StoreFront\jquery.magnific-popup.js" />
     <Content Include="WebForms\Login.aspx" />
     <Content Include="WebForms\Register.aspx" />
     <Content Include="WebForms\Team.aspx" />
