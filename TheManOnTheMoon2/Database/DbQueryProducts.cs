@@ -192,8 +192,43 @@ namespace TheManOnTheMoon2.Database
         }
         #endregion
 
+        #region Unions
+        public Tuple<Product,List<Product>> GetProductandReleatedProducts(int primaryProductId)
+        {
+            Product primaryProduct=null;
+            List<Product> relatedProducts=null;
 
-       
+            /*? primaryProduct & relatedProdcuts may stay NULL here. Not sure if my
+                reassingments will apply to the primaryProduct and relatedProduct nested in
+                the Resultdata.
+             */
+            var resultData = new Tuple<Product,List<Product>>(primaryProduct,relatedProducts);
+            
+            primaryProduct = db.Products.Where(p => p.Id == primaryProductId).FirstOrDefault();
+
+            if(primaryProduct==null)
+            {
+                primaryProduct = null;
+                relatedProducts = null;
+                return (resultData);
+            }
+            else
+            {
+
+             relatedProducts = db.Products.Where(p => p.Category == primaryProduct.Category && p.Brand == primaryProduct.Brand).OrderBy(p => p.Name).ToList();
+                if(relatedProducts==null)
+                {
+                    relatedProducts = db.Products.OrderBy(p => p.Retail_Price).ToList();
+                }
+            }
+
+
+            return resultData;
+        }
+        #endregion
+
+
+
 
     }
 }

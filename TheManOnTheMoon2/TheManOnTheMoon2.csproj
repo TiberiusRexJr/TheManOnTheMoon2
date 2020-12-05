@@ -213,6 +213,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ViewModelMultipleModels.cs" />
     <Compile Include="Database\DbAdmin.cs" />
     <Compile Include="Database\DbQueryProducts.cs" />
     <Compile Include="Global.asax.cs">

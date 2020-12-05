@@ -8,13 +8,17 @@ namespace ManOnTheMoon.Models
 {
     public partial class Category : IEnumerable
     {
+
+        #region Variables
         List<Category> categories;
-
         private string _Category_Image_Url;
+        #endregion
 
-        partial void OnCategory_Image_UrlChanging(string value);
-        partial void OnCategory_Image_UrlChanged();
+        #region Constructor
 
+        #endregion
+
+        #region Properties
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Category_Image_Url", DbType = "VarChar(MAX)")]
         public string Category_Image_Url
         {
@@ -34,23 +38,28 @@ namespace ManOnTheMoon.Models
                 }
             }
         }
+        #endregion
 
+        #region Functions
+        partial void OnCategory_Image_UrlChanging(string value);
+        partial void OnCategory_Image_UrlChanged();
+        #endregion
 
-
+        #region NestedClasses
         public class CategoryEnumerator : IEnumerator
         {
             List<Category> categoryEnumerationList;
-            
+
             int position = -1;
 
             public CategoryEnumerator(List<Category> categories)
             {
                 categoryEnumerationList = categories;
-                Category category = new Category();
-                
+               
+
             }
 
-            public object Current 
+            public object Current
             {
                 get
                 {
@@ -58,7 +67,7 @@ namespace ManOnTheMoon.Models
                     {
                         return categoryEnumerationList[position];
                     }
-                    catch(IndexOutOfRangeException)
+                    catch (IndexOutOfRangeException)
                     {
                         throw new InvalidOperationException();
                     }
@@ -76,7 +85,9 @@ namespace ManOnTheMoon.Models
                 position = -1;
             }
         }
+        #endregion
 
+        #region Implementations
         // Implementation for the GetEnumerator method.
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -87,6 +98,8 @@ namespace ManOnTheMoon.Models
         {
             return new CategoryEnumerator(categories);
         }
+        #endregion
+
 
     }
 }

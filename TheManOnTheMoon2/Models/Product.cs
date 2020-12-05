@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 
 namespace ManOnTheMoon.Models
 {
-    public partial class Product
+    public partial class Product: IEnumerable
     {
         #region Constructor
 
@@ -16,6 +17,7 @@ namespace ManOnTheMoon.Models
         private string productImageUrl_2;
         private string productImageUrl_3;
         private int productImagesTableRecordId;
+        public List<Product> productsList;
         #endregion
 
         #region Properties
@@ -38,6 +40,60 @@ namespace ManOnTheMoon.Models
         {
             get { return this.productImagesTableRecordId; }
             set { productImagesTableRecordId = value; }
+        }
+        #endregion
+
+        #region NestedClasses
+        public class ProductEnumerator : IEnumerator
+        {
+            List<Product> productEnumerationList;
+
+            int position = -1;
+
+            public ProductEnumerator(List<Product> products)
+            {
+                productEnumerationList = products;
+ 
+            }
+
+            public object Current
+            {
+                get
+                {
+                    try
+                    {
+                        return productEnumerationList[position];
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+
+            public bool MoveNext()
+            {
+                position++;
+                return (position < productEnumerationList.Count);
+            }
+
+            public void Reset()
+            {
+                position = -1;
+            }
+        }
+        #endregion
+
+        #region Implementations
+        // Implementation for the GetEnumerator method.
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public ProductEnumerator GetEnumerator()
+        {
+            return new ProductEnumerator(productsList);
         }
         #endregion
     }
