@@ -244,6 +244,27 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebForms\Admin\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Admin\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Admin\MasterPageAdmin.Master.cs">
+      <DependentUpon>MasterPageAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Admin\MasterPageAdmin.Master.designer.cs">
+      <DependentUpon>MasterPageAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\dummy.Master.cs">
+      <DependentUpon>dummy.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\dummy.Master.designer.cs">
+      <DependentUpon>dummy.Master</DependentUpon>
+    </Compile>
     <Compile Include="WebForms\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -280,6 +301,7 @@
     </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\Admin\Drag&amp;Drop.css" />
+    <Content Include="Content\Admin\StylesAdmin.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -354,6 +376,11 @@
     <Content Include="Img\Page_Team\team_5.jpg" />
     <Content Include="Img\Resources\arrows.png" />
     <Content Include="Img\Resources\marker.png" />
+    <Content Include="Scripts\Admin\assets\chart-area-demo.js" />
+    <Content Include="Scripts\Admin\assets\chart-bar-demo.js" />
+    <Content Include="Scripts\Admin\assets\chart-pie-demo.js" />
+    <Content Include="Scripts\Admin\assets\datatables-demo.js" />
+    <Content Include="Scripts\Admin\ScriptsAdmin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -384,6 +411,7 @@
     <Content Include="Scripts\Layout-StoreFront\jquery.etalage.min.js" />
     <Content Include="Scripts\Layout-StoreFront\jquery.fancybox.js" />
     <Content Include="Scripts\Layout-StoreFront\jquery.magnific-popup.js" />
+    <Content Include="WebForms\Admin\Dashboard.aspx" />
     <Content Include="WebForms\Login.aspx" />
     <Content Include="WebForms\Register.aspx" />
     <Content Include="WebForms\Team.aspx" />
@@ -536,6 +564,8 @@
     <Content Include="Views\Products\AllProducts.cshtml" />
     <Content Include="Views\Products\SingleProductDetail.cshtml" />
     <Content Include="Views\Categories\GetAllProductCategories.cshtml" />
+    <Content Include="WebForms\dummy.Master" />
+    <Content Include="WebForms\Admin\MasterPageAdmin.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Page_Index\" />
