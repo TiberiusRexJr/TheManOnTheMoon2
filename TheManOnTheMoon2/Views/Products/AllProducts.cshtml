@@ -1,5 +1,5 @@
-﻿@model ManOnTheMoon.Models.Product
-
+﻿@model IEnumerable<ManOnTheMoon.Models.Product>
+@using ManOnTheMoon.Models;
 @{
     ViewBag.Title = "AllProducts";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,165 +7,46 @@
 
 <h2>AllProducts</h2>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <div class="row shop_box-top">
+                @if(Model!=null)
+                {
+                    foreach(Product p in Model)
+                    {
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Upc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Upc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Length)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Length)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cost)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Retail_Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Retail_Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sale_Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sale_Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock_Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stock_Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sub_Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sub_Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.On_Sale_Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.On_Sale_Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Width)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Width)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImageUrl_1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImageUrl_1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImageUrl_2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImageUrl_2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImageUrl_3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImageUrl_3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImagesTableRecordId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImagesTableRecordId)
-        </dd>
-
-    </dl>
+                    <div class="col-md-3 shop_box">
+                        <a href="single.html">
+                            <img src="@p.ProductImageUrl_1" class="img-responsive" alt="" />
+                            <span class="new-box">
+                                <span class="new-label">New</span>
+                            </span>
+                            <span class="sale-box">
+                                <span class="sale-label">Sale!</span>
+                            </span>
+                            <div class="shop_desc">
+                                <h3><a href="#">@p.Name</a></h3>
+                                <p>Lorem ipsum consectetuer adipiscing </p>
+                                <span class="reducedfrom">@p.Retail_Price</span>
+                                <span class="actual">@p.Retail_Price</span><br>
+                                <ul class="buttons">
+                                    <li class="cart"><a href="#">Add To Cart</a></li>
+                                    <li class="shop_btn"><a href="#">Read More</a></li>
+                                    <div class="clear"> </div>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                    }
+                }
+                
+            </div>
+            
+        </div>
+    </div>
 </div>
-<p>
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
