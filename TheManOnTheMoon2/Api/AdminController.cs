@@ -8,6 +8,8 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TheManOnTheMoon2.Api
 {
@@ -128,7 +130,7 @@ namespace TheManOnTheMoon2.Api
         {
             Response<Brand> responseMessage = new Response<Brand>();
 
-            if(brand==null)
+            if (brand == null)
             {
                 responseMessage.status = HttpStatusCode.BadRequest;
                 responseMessage.returnData = null;
@@ -138,26 +140,26 @@ namespace TheManOnTheMoon2.Api
                 try
                 {
 
-                        var DbResponse = db.CreateBrand(brand);
+                    var DbResponse = db.CreateBrand(brand);
 
-                        if (DbResponse == null)
-                        {
-                            responseMessage.returnData = null;
-                                  responseMessage.status=HttpStatusCode.InternalServerError;
-                        }
-                        else
-                        {
-                            responseMessage.returnData = DbResponse;
-                            
-                            responseMessage.status = HttpStatusCode.Created;
-                        }
+                    if (DbResponse == null)
+                    {
+                        responseMessage.returnData = null;
+                        responseMessage.status = HttpStatusCode.InternalServerError;
+                    }
+                    else
+                    {
+                        responseMessage.returnData = DbResponse;
+
+                        responseMessage.status = HttpStatusCode.Created;
+                    }
                 }
                 catch (Exception e)
                 {
                     Errorhead(e);
                 }
             }
-           
+
             return responseMessage;
         }
 
@@ -194,7 +196,7 @@ namespace TheManOnTheMoon2.Api
         }
         #endregion
 
-                #region Put
+        #region Put
         [HttpPut]
         public Response<Product> PutProduct(Product product)
         {
@@ -325,7 +327,7 @@ namespace TheManOnTheMoon2.Api
                 if (DbResponse == null)
                 {
                     responseMessage.returnData = DbResponse;
-                    responseMessage.status = HttpStatusCode.Conflict;
+                    responseMessage.status = HttpStatusCode.NotFound;
                     responseMessage.ReasonPhrase = "Requested item was Not Found";
                 }
                 else
@@ -337,6 +339,8 @@ namespace TheManOnTheMoon2.Api
             }
             catch (Exception e)
             {
+                responseMessage.returnData = null;
+                responseMessage.status = HttpStatusCode.InternalServerError;
                 Errorhead(e);
             }
             return responseMessage;
@@ -344,11 +348,97 @@ namespace TheManOnTheMoon2.Api
         }
 
         [HttpGet]
-        [Route("api/Admin/Test/{anystring}")]
-        public int Test(int anystring)
+        [Route("api/Admin/GetAllProducts")]
+      
+        public Response<List<Product>> GetAllProducts()
         {
-            return anystring;
+
+            Response<List<Product>> responseMessage = new Response<List<Product>>();
+            try
+            {
+                List<Product> returnList = db.GetAllProducts();
+                if(returnList==null)
+                {
+                    responseMessage.status = HttpStatusCode.NotFound;
+                    responseMessage.returnData = null;
+                }
+                else
+                {
+                    responseMessage.status = HttpStatusCode.OK;
+                    responseMessage.returnData = returnList;
+                }
+            }
+            catch(Exception e)
+            {
+                responseMessage.status = HttpStatusCode.InternalServerError;
+                responseMessage.returnData = null;
+                Errorhead(e);
+            }
+            return responseMessage;
         }
+
+        [HttpGet]
+        [Route("api/Admin/GetAllCategories")]
+        public Response<List<Category>> GetAllCategories()
+        {
+   
+            Response<List<Category>> responseMessage = new Response<List<Category>>();
+            try
+            {
+                 var _=db.GetAllCategories();
+
+                if(_==null)
+                {
+                    responseMessage.status = HttpStatusCode.NotFound;
+                    responseMessage.returnData = null;
+                }
+                else
+                {
+                    responseMessage.status = HttpStatusCode.OK;
+                    responseMessage.returnData = _;
+
+                }
+            }
+            catch(Exception e)
+            {
+                Errorhead(e);
+                responseMessage.status = HttpStatusCode.InternalServerError;
+                responseMessage.returnData = null;
+            }
+            return responseMessage;
+        }
+
+        [HttpGet]
+        [Route("api/Admin/GetAllBrands")]
+        public Response<List<Brand>> GetAllBrands()
+        {
+
+            Response<List<Brand>> responseMessage = new Response<List<Brand>>();
+            try
+            {
+                var _ = db.GetAllBrands();
+
+                if (_ == null)
+                {
+                    responseMessage.status = HttpStatusCode.NotFound;
+                    responseMessage.returnData = null;
+                }
+                else
+                {
+                    responseMessage.status = HttpStatusCode.OK;
+                    responseMessage.returnData = _;
+
+                }
+            }
+            catch (Exception e)
+            {
+                Errorhead(e);
+                responseMessage.status = HttpStatusCode.InternalServerError;
+                responseMessage.returnData = null;
+            }
+            return responseMessage;
+        }
+
         #endregion
 
         #region Delete

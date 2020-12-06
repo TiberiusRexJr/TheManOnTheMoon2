@@ -389,6 +389,7 @@
     <Content Include="Scripts\Admin\assets\chart-pie-demo.js" />
     <Content Include="Scripts\Admin\assets\datatables-demo.js" />
     <Content Include="Scripts\Admin\Crud.js" />
+    <Content Include="Scripts\Admin\datatables-Crud.js" />
     <Content Include="Scripts\Admin\ScriptsAdmin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

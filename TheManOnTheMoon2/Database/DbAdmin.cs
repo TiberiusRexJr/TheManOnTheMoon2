@@ -250,7 +250,7 @@ namespace TheManOnTheMoon2.Database
         
         #endregion
 
-        #region RetrieveBy
+        #region Retrieve
         public Product GetproductById(int id)
         {
             Product product = null;
