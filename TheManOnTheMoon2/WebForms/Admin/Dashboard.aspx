@@ -554,8 +554,5 @@
                                 </div>
                             </div>
                         </div>
-    <script src="../../Scripts/Admin/ScriptsAdmin.js"></script>
-    <script src="../../Scripts/Admin/assets/datatables-demo.js"></script>
-     <script src="../../Scripts/Admin/assets/chart-area-demo.js"></script>
-        <script src="../../Scripts/Admin/assets/chart-bar-demo.js"></script>
+    
 </asp:Content>
