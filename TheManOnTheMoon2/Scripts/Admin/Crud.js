@@ -1,5 +1,8 @@
-﻿//#region Functions
-
+﻿//#region DocumentOnREady
+// Call the dataTables jQuery plugin
+$(document).ready(function () {
+    $('#dataTableInventory').DataTable({ responsive: true });
+});
 //#endregion
 function AjaxGetALL(senderId)
 {
@@ -47,11 +50,8 @@ function AjaxGetALL(senderId)
         url: sendToAdress,
         success: function (response, jqXHR, data)
         {
-            alert(data.Name);
-            alert(data[0]);
-            var data2 = $.parseJSON(data);
-            alert(data2.Name);
-            InventorySubTableAdjust($.parseJSON(data), tableType)
+           
+            InventorySubTableAdjust(data.responseJSON, tableType)
         },
         statusCode:
         {
@@ -143,7 +143,7 @@ function AjaxExistByName(dataObj, tableType) {
 function InventorySubTableAdjust(data,tableType)
 {
     var HTML_tableTitle = " ";
-
+    var HTML_thead_titles = "";
 
     if (data==null||tableType==null) {
         ModalMessenger("Update Table Failed", false, "GET", "NULL Data or null TAbleType");
@@ -165,10 +165,22 @@ function InventorySubTableAdjust(data,tableType)
         }
         
         $('#cardHeaderDataTableInventory').html(HTML_tableTitle);
+        var indiviaulObj = data[0];
+        var keys = Object.keys(indiviaulObj);
 
-        var keys = Object(data).keys;
-        alert(keys[0]);
-        $.each(keys, function (index, value) { alert(value) });
+        $.each(keys, function (index, value)
+        {
+            HTML_thead_titles += "<th>" + value + "</th>";
+
+
+        });
+
+        $("#dataTableInventoryTHeadTRow").html(HTML_thead_titles);
+        $("#dataTableInventoryTfootTRow").html(HTML_thead_titles);
+        $("#dataTableInventory").DataTable().clear().draw();
+        //$("#dataTableInventory").DataTable().rows.add(data).draw();
+
+
     }
 }
 
