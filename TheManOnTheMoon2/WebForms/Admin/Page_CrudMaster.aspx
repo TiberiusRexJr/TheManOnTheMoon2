@@ -50,22 +50,31 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTableInventory" width="100%" cellspacing="0">
-                                        <thead id="dataTableInventoryThead">
-                                            <tr id="dataTableInventoryTHeadTRow">
-                                                <th>default</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr id="dataTableInventoryTfootTRow">
-                                                <th>default</th>
-                                            </tr>
-                                        </tfoot>
+                                    <button type="button" class="btn btn-primary btn-sm bg-success"><i class="fas fa-plus-circle"></i>Add</button>
+<button type="button" class="btn btn-secondary btn-sm bg-danger" onclick="AjaxDeleteRecords()"><i class="fas fa-skull-crossbones"></i>Mass Delete</button>
+                                    <table id="dataTableInventory" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                
+               
+
+                
+            </tr>
+        </thead>
                                         <tbody>
-                                            
+
                                         </tbody>
-                                    </table>
+        <tfoot>
+            <tr>
+                <th></th>
+                
+            </tr>
+        </tfoot>
+    </table>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -116,12 +125,69 @@
 </div>
 </div>
 </div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal_Edit_Brand">
+  Launch demo modal
+</button>
+   <!--Modal_Edit_Products-->
+  <div class="modal fade" id="Modal_Edit_Brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edit Brand</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
+             <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
+          <div class="row justify-content-center" style="background-color:purple;">
+                
+              <div class="col-lg-6 col-md-6 bg-info">
+                 
+                  <form>
+                 
+                 </form>
+                  <form id="form_brand_name">
+                                           <div class="form-group">
+                     <i class="fas fa-hashtag"></i>
+                    <label class="small mb-1" for="Id ">Id</label>
+                    <input class="form-control py-4" readonly id="Id" name="Id" value="" type="number" />
+                 </div>
+                 <div class="form-group">
+                     <i class="fas fa-tag"></i>
+                    <label class="small mb-1" for="Name">Name</label>
+                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                 </div>
+                                            
+                                        </form>
+                  
+              </div>
+              
 
+        </div>
 
+         </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
+          
+        </div>
+      </div>
+          
+    </div>
+  </div>
     
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterResources" runat="server">
         <script src="../../Scripts/Admin/datatables-Crud.js"></script>
      <script src="../../Scripts/Admin/Crud.js"></script>
+   <%-- <link rel="stylesheet" href="../../Content/mdb/mdb.min.css" />
+    <script src="../../Scripts/mdb/mdb.min.js"></script>--%>
 </asp:Content>

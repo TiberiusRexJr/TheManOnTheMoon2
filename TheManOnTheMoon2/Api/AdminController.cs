@@ -442,15 +442,16 @@ namespace TheManOnTheMoon2.Api
         #endregion
 
         #region Delete
+
         [HttpDelete]
-        public Response<bool> DeleteProduct(Product product)
+        public Response<bool> DeleteProducts( [FromBody] List<Product> products)
         {
 
             Response<bool> responseMessage = new Response<bool>();
 
             try
             {
-                var databaseResponse = db.DeleteProduct(product);
+                var databaseResponse = db.DeleteProduct(products);
                 if (databaseResponse == false)
                 {
                     responseMessage.returnData = false;
@@ -470,13 +471,14 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
+
         [HttpDelete]
-        public Response<bool> DeleteBrand(Brand brand)
+        public Response<bool> DeleteBrands([FromBody] List<Brand> brands)
         {
             Response<bool> responseMessage = new Response<bool>();
             try
             {
-                var databaseResponse = db.DeleteBrand(brand);
+                var databaseResponse = db.DeleteBrand(brands);
 
                 if (databaseResponse == false)
                 {
@@ -497,14 +499,15 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
+
         [HttpDelete]
-        public Response<bool> DeleteCategory(Category category)
+        public Response<bool> DeleteCategorys([FromBody] List<Category> categories)
         {
             Response<bool> responseMessage = new Response<bool>();
 
             try
             {
-                var databaseResponse = db.DeleteCategory(category);
+                var databaseResponse = db.DeleteCategory(categories);
 
                 if (databaseResponse == false)
                 {
@@ -525,6 +528,13 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
+
+        /*?[HttpDelete]
+        //public Response<bool> DelteUser([FromBody] List<User>   user) 
+        //{ 
+        
+        //}
+        */
         [HttpDelete]
         public Response<bool> DeleteProductImages(Product_Image product_Image)
         {

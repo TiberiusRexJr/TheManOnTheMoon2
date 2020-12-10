@@ -8,10 +8,10 @@ namespace TheManOnTheMoon2.Database
 {
     public class DbAdmin : DbQueryProducts
     {
-        
+
         #region Variables
         private DataBaseModelsDataContext db = new DataBaseModelsDataContext();
-     
+
         #endregion
 
         #region NestedClasses
@@ -47,7 +47,7 @@ namespace TheManOnTheMoon2.Database
             #endregion
         }
         #endregion
-        
+
         #region Methods
         //public new void Errorhead(Exception e)
         //{
@@ -63,7 +63,7 @@ namespace TheManOnTheMoon2.Database
         #endregion
 
         #region Create
-        public Product  CreateProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             Product returnProduct = null;
             if (product == null)
@@ -75,7 +75,7 @@ namespace TheManOnTheMoon2.Database
                 db.Products.InsertOnSubmit(product);
                 db.SubmitChanges();
                 returnProduct = product;
-                
+
             }
             catch (Exception e)
             {
@@ -116,25 +116,25 @@ namespace TheManOnTheMoon2.Database
             {
                 return responseBrand;
             }
-                try
-                {
-                    brand.Name = FormatString(brand.Name, DbAdmin.StringFormat.ForDatabase);
-                    db.Brands.InsertOnSubmit(brand);
-                    db.SubmitChanges();
-                    responseBrand = brand;
-                }
-                catch (Exception e)
-                {
-                    Errorhead(e);
+            try
+            {
+                brand.Name = FormatString(brand.Name, DbAdmin.StringFormat.ForDatabase);
+                db.Brands.InsertOnSubmit(brand);
+                db.SubmitChanges();
+                responseBrand = brand;
+            }
+            catch (Exception e)
+            {
+                Errorhead(e);
 
-                }
-            
+            }
+
             return responseBrand;
         }
         public Product_Image CreateProductImageRecord(Product_Image product_Images)
         {
             Product_Image product_Image2Response = null;
-            if(product_Images==null)
+            if (product_Images == null)
             {
                 return product_Image2Response;
             }
@@ -144,7 +144,7 @@ namespace TheManOnTheMoon2.Database
                 db.SubmitChanges();
                 product_Image2Response = product_Images;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Errorhead(e);
             }
@@ -152,13 +152,13 @@ namespace TheManOnTheMoon2.Database
         }
 
         #endregion
-        
+
         #region Update
-            public bool UpdateProduct(Product product)
-            {
+        public bool UpdateProduct(Product product)
+        {
             bool status = false;
 
-            if(product==null)
+            if (product == null)
             {
                 return status;
             }
@@ -182,16 +182,16 @@ namespace TheManOnTheMoon2.Database
                 currentProduct.Width = product.Width;
                 db.SubmitChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Errorhead(e);
             }
             return status;
-            }
-            public bool UpdateCategory(Category category)
-            {
+        }
+        public bool UpdateCategory(Category category)
+        {
             bool status = false;
-            if(category==null)
+            if (category == null)
             { return status; }
             try
             {
@@ -202,18 +202,18 @@ namespace TheManOnTheMoon2.Database
                 status = true;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Errorhead(e);
             }
             return status;
-            }
-            public bool UpdateBrand(Brand brand)
-            {
-                bool status = false;
-                if(brand==null)
+        }
+        public bool UpdateBrand(Brand brand)
+        {
+            bool status = false;
+            if (brand == null)
 
-                { return status; }
+            { return status; }
             try
             {
                 Brand oldBrand = db.Brands.Where(b => b.Id == brand.Id).FirstOrDefault();
@@ -222,17 +222,17 @@ namespace TheManOnTheMoon2.Database
                 db.SubmitChanges();
                 status = true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Errorhead(e);
             }
             return status;
-            }
-            public bool UpdateProductImages(Product_Image product_Images)
+        }
+        public bool UpdateProductImages(Product_Image product_Images)
+        {
+            bool status = false;
+            try
             {
-                bool status = false;
-                try
-                {
                 Product_Image currentImageRecord = db.Product_Images.Where(p => p.Id == product_Images.Id).FirstOrDefault();
                 currentImageRecord.Product_Id = product_Images.Product_Id;
                 currentImageRecord.Product_Image_1 = product_Images.Product_Image_1;
@@ -240,14 +240,14 @@ namespace TheManOnTheMoon2.Database
                 currentImageRecord.Product_Image_3 = product_Images.Product_Image_3;
                 db.SubmitChanges();
                 status = true;
-                }
-                catch(Exception e)
-                {
-                Errorhead(e);
-                }
-            return status;
             }
-        
+            catch (Exception e)
+            {
+                Errorhead(e);
+            }
+            return status;
+        }
+
         #endregion
 
         #region Retrieve
@@ -262,7 +262,7 @@ namespace TheManOnTheMoon2.Database
                 var query = db.Products.ToList();
                 product = query.Where(p => p.Id == id).FirstOrDefault();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Errorhead(e);
             }
@@ -271,19 +271,32 @@ namespace TheManOnTheMoon2.Database
         #endregion
 
         #region Delete
-            public bool DeleteProduct(Product p)
-            {
-                bool status = false;
+        public bool DeleteProduct(List<Product> products)
+        {
+            bool status = false;
 
-                if(p==null)
+            if (products == null||products.Count==0)
                 {
-                    status = false;
+                    
                     return status;
                 }   
                 try
                 {
-                db.Products.DeleteOnSubmit(p);
-                db.SubmitChanges();
+                foreach(Product product in products)
+                {
+                    Product oldProduct = db.Products.Where(p => p.Id == product.Id).FirstOrDefault();
+
+                    if(oldProduct==null)
+                    {
+                        return status;
+                    }
+                    else
+                    {
+                        db.Products.DeleteOnSubmit(oldProduct);
+                        db.SubmitChanges();
+                    }
+
+                }    
                 status = true;
                 }
                 catch(Exception e)
@@ -292,16 +305,30 @@ namespace TheManOnTheMoon2.Database
                 }
             return status;
             }
-            public bool DeleteBrand(Brand brand)
+            public bool DeleteBrand(List<Brand> brands)
             {
             bool status = false;
-            if(brand==null)
+            if(brands==null||brands.Count==0)
             { return status; }
             try
             {
-                Brand oldBrand = db.Brands.Where(b => b.Id == brand.Id).FirstOrDefault();
+                foreach(Brand brand in brands)
+                {
+                Brand oldBrand = db.Brands.Where(b => b.Id==brand.Id).FirstOrDefault();
+                    if(oldBrand==null)
+                    {
+                        return status;
+                    }
+                    else
+                    {
+                    db.Brands.DeleteOnSubmit(oldBrand);
+                        db.SubmitChanges();
 
+                    }
+                }
                 status = true;
+
+
             }
             catch(Exception e)
             {
@@ -309,17 +336,29 @@ namespace TheManOnTheMoon2.Database
             }
             return status;
             }
-            public bool DeleteCategory(Category category)
+            public bool DeleteCategory(List<Category> categories)
             {
             bool status = false;
-            if(category==null)
+            if(categories == null|| categories.Count==0)
             {
                 return status;
             }
             try
             {
-                db.Categories.DeleteOnSubmit(category);
-                db.SubmitChanges();
+                foreach(Category category in categories)
+                {
+                    Category oldCategory= db.Categories.Where(c => c.Id == category.Id).FirstOrDefault();
+                    if(oldCategory==null)
+                    {
+                        return status;
+                    }
+                    else
+                    {
+                        db.Categories.DeleteOnSubmit(oldCategory);
+                        db.SubmitChanges();
+                    }
+
+                }
                 status = true;
             }
             catch(Exception e)
