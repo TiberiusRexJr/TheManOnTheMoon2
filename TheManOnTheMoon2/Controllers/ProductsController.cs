@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ManOnTheMoon.Models;
+using TheManOnTheMoon2.Models;
 using TheManOnTheMoon2.Database;
 
 namespace TheManOnTheMoon2.Controllers

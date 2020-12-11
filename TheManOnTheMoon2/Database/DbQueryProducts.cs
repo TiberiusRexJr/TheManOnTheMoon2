@@ -4,7 +4,7 @@ using System.Linq;
 using System.Data.Linq;
 using System.Web;
 using System.Web.WebSockets;
-using ManOnTheMoon.Models;
+using TheManOnTheMoon2.Models;
 
 namespace TheManOnTheMoon2.Database
 {
@@ -63,10 +63,6 @@ namespace TheManOnTheMoon2.Database
                     Sub_Category=p.Sub_Category,
                     On_Sale_Status=p.On_Sale_Status,
 
-                    ProductImagesTableRecordId= (int)i.Product_Id,
-                    ProductImageUrl_1 = i.Product_Image_1
-                    ,ProductImageUrl_2=i.Product_Image_2, 
-                    ProductImageUrl_3=i.Product_Image_3
                 }) .ToList();
             }
             catch (Exception e)

@@ -3,12 +3,15 @@ $(document).ready(function ()
 {
     AjaxGetALL("link_Inventory_Brands");
 
-  
-    
+
+    $("#ButtonAddBrand").on('click', function () { $("#Modal_Add_Brand").modal("show") });
+    $("#ButtonAddProduct").on('click', function () {$("#Modal_Add_Product").modal("show") });
+    $("#ButtonAddCategory").on('click', function () { $("#Modal_Add_Category").modal("show") });
+
 });
 //#endregion
 
-//#region AjaxCRUD 
+//#region AjaxCrud 
 function AjaxGetALL(senderId) {
     const CRUD_TYPE = "Get";
 
@@ -201,6 +204,72 @@ function AjaxEditRecord(event, Id) {
 
 
 }
+
+function AjaxPost(senderId, data)
+{
+    const CRUD_TYPE = "Posted";
+
+    const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/product";
+    const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/category";
+    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/brand";
+
+    var sendToAdress = "";
+    var tableType = " ";
+
+    if (data == null || senderId == null) {
+        ModalMessenger(null, false, CRUD_TYPE, "null parameters provided");
+    }
+
+    else {
+        switch (senderId) {
+            case "ButtonPostProduct":
+                sendToAdress = API_POST_PRODUCT;
+                tableType = "Product";
+                break;
+            case "ButtonPostCategory":
+                sendToAdress = API_POST_CATEGORY;
+                tableType = "Cateogry"
+                break;
+            case "ButtonPostBrand":
+                sendToAdress = API_POST_BRAND;
+                tableType = "Brand";
+                break;
+            case "ButonPostProductImageUrls":
+                sendToAdress = API_POST_PRODUCT_IMAGES;
+                tableType = "ProductImagesUrl";
+                break;
+            default: ModalMessenger(data, false, CRUD_TYPE, "could not resolve api address to send data too");
+        }
+    }
+    //if (AjaxExistByName(data.Name, tableType)) {
+    //    ModalMessenger(data, false, CRUD_TYPE, data.Name + " Already Exist!");
+    //}
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: sendToAdress,
+        success: function (response, jqXHR, data) { },
+        statusCode:
+        {
+            400: function (response, jqXHR) {
+                ModalMessenger(data, false, CRUD_TYPE, "400-BadRequest");
+            },
+            500: function (response, jqXHR) {
+                var successStatus = false;
+                ModalMessenger(data, false, CRUD_TYPE, "500-Internal Server Error");
+            },
+            201: function (response, jqXHR) {
+                var successStatus = true;
+                ModalMessenger(data, successStatus, CRUD_TYPE, "201-SuccessFully Created");
+            }
+        },
+        error: function (response, jqXHR, data) {
+            ModalMessenger(data, false, CRUD_TYPE, "AjaxPost Errror");
+        }
+    })
+}
+
 //#endregion
 
 //#region AjaxUtilities
@@ -429,8 +498,9 @@ function GetSelectedRows(table) {
 //#endregion
 
 //#region Test & Expirimentals
-function TestData(data)
+function TestData(id,data)
 {
+    console.log(id);
     console.log(data);
     console.log(data.Name);
    

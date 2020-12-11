@@ -51,8 +51,17 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <button type="button" class="btn btn-primary btn-sm bg-success"><i class="fas fa-plus-circle"></i>Add</button>
-<button type="button" class="btn btn-secondary btn-sm bg-danger" onclick="AjaxDeleteRecords()"><i class="fas fa-skull-crossbones"></i>Mass Delete</button>
+                                    <div class="dropdown">
+  <button class="btn btn-primary btn-sm dropdown-toggle" style="display:inline-block;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fas fa-plus-circle"></i>Add
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2" >
+    <button class="dropdown-item" id="ButtonAddProduct" type="button"><i class="fas fa-box"></i>Product</button>
+    <button class="dropdown-item" id="ButtonAddBrand" type="button"><i class="fas fa-tag"></i>Brand</button>
+    <button class="dropdown-item" id="ButtonAddCategory" type="button"><i class="fas fa-list"></i>Category</button>
+  </div>
+</div>
+<button type="button" style="display:inline-block;" class="btn btn-secondary btn-sm bg-danger" onclick="AjaxDeleteRecords()"><i class="fas fa-skull-crossbones"></i>Mass Delete</button>
                                     <table id="dataTableInventory" class="display" style="width:100%">
         <thead>
             <tr>
@@ -127,10 +136,10 @@
 </div>
 </div>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal_Edit_Brand">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal_Add_Product">
   Launch demo modal
 </button>
-   <!--Modal_Edit_Products-->
+   <!--Modal_Edit_Brand-->
   <div class="modal fade" id="Modal_Edit_Brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         
@@ -175,7 +184,61 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
+            <a class="btn btn-primary" id="ButtonEditBrandSubmit" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
+          
+        </div>
+      </div>
+          
+    </div>
+  </div>
+    <!--Modal_Edit_Brand-->
+    
+    <!--Modal_Edit_Cateogry-->
+  <div class="modal fade" id="Modal_Edit_Category" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleEditCategory">Edit a Current Brand</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
+             <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
+          <div class="row justify-content-center" style="background-color:purple;">
+                
+              <div class="col-lg-6 col-md-6 bg-info">
+                 
+                  <form>
+                 
+                 </form>
+                  <form id="form_brand_name">
+                                           <div class="form-group">
+                     <i class="fas fa-hashtag"></i>
+                    <label class="small mb-1" for="Id ">Id</label>
+                    <input class="form-control py-4" readonly id="Id" name="Id" value="" type="number" />
+                 </div>
+                 <div class="form-group">
+                     <i class="fas fa-tag"></i>
+                    <label class="small mb-1" for="Name">Name</label>
+                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                 </div>
+                                            
+                                        </form>
+                  
+              </div>
+              
+
+        </div>
+
+         </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonEditBrandSubmit" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
           
         </div>
       </div>
@@ -183,7 +246,33 @@
     </div>
   </div>
 
+    <!--Modal_Edit_Cateogry-->
+
+
+
+
 <!--Modal_Add_Products-->
+    
+    <div class="modal fade" id="Modal_Add_Product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleAddProduct">Add Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
+             <h2><i class="fas fa-box mr-1"></i>New Product</h2>
+          
+                
+              
+                 
+                 
+              <form id="form_product_add">
+
     <div class="accordion" id="accordionAddProduct">
   
      <div class="card">
@@ -496,7 +585,159 @@
            </div>
           
  </div>
+    </form>
+                  
+             
+              
+
+        
+
+         </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostProduct" onclick="TestData($('#form_product_add').serializeToJSON())">SubmitProduct</a>
+          
+        </div>
+      </div>
+          
+    </div>
+  </div>
+            
 <!--Modal_Add_Products-->
+
+<!--Modal_Add_Brand--> 
+  <div class="modal fade" id="Modal_Add_Brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitleBrand"> <i class="fas fa-tag fa-2x"></i>Add Brand</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+           
+          
+              <div class="col-lg-6 col-md-6 ">
+                 
+                  <form>
+                 
+                 </form>
+                  <form id="formAddBrand">
+                                           
+                 <div class="form-group">
+                     
+                    <label class="col-form-label mb-1" for="Name">Brand Name</label>
+                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                 </div>
+                                            
+                                        </form>
+                  
+              </div>
+              
+
+        </div>
+
+         
+            
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostBrand" onclick="AjaxPost(this.id,$('#formAddBrand').serializeToJSON())">Save</a>
+          
+        </div>
+      </div>
+          
+    </div>
+ </div>
+<!--Modal_Add_Brand-->
+
+<!--Modal_Add_Category-->
+    <div class="modal fade" id="Modal_Add_Category" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitleCategory">Add A Product Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
+             <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
+          
+              <div class="col-lg-6 col-md-6 bg-info">
+                 
+                  <form>
+                 
+                 </form>
+                  <form id="formAddCategory">
+                                           
+                 <div class="form-group">
+                     <i class="fas fa-tag"></i>
+                    <label class="small mb-1" for="Name">Name</label>
+                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                 </div>
+                                            
+                                        </form>
+                   <!--Image_Upload_1-->
+            <form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Image </b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_1--End-->
+                  
+              </div>
+              
+
+        </div>
+
+         
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostCategory" onclick="TestData($('#formAddCategory').serializeToJSON())">Save</a>
+          
+        </div>
+      </div>
+          
+    </div>
+  </div>
+<!--Modal_Add_Category-->
+
+
+
 
 
 

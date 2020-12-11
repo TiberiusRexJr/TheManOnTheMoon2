@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ManOnTheMoon.Models;
+using TheManOnTheMoon2.Models;
 namespace TheManOnTheMoon2.Controllers
 {
     public class ViewModelMultipleModels

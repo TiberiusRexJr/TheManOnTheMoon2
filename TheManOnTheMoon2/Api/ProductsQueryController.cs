@@ -7,7 +7,7 @@ using System.Web.Http;
 
 using TheManOnTheMoon2.Utilities;
 using TheManOnTheMoon2.Database;
-using ManOnTheMoon.Models;
+using TheManOnTheMoon2.Models;
 
 namespace TheManOnTheMoon2.Api
 {
