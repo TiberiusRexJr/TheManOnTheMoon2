@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Admin/MasterPageAdmin.Master" AutoEventWireup="true" CodeBehind="Page_CrudMaster.aspx.cs" Inherits="TheManOnTheMoon2.WebForms.Admin.Page_CrudMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../Content/Admin/StylesAdminCustom.css" rel="stylesheet"/>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -17,7 +18,7 @@
       </h2>
     </div>
 
-    <div id="collpaseInventory" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collpaseInventory" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-sm-3 col-6">
@@ -181,13 +182,331 @@
           
     </div>
   </div>
-    
+
+<!--Modal_Add_Products-->
+    <div class="accordion" id="accordionAddProduct">
+  
+     <div class="card">
+ 
+       <div class="card-header" id="cardHeaderDescription">
+           <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductDescription" data-toggle="collapse" data-target="#collapseProductDescription">
+         <h2 class="mb-0">
+          <i class="fas fa-list-alt"></i> Description
+         </h2>
+               </a>
+       </div>
+ 
+       
+       <div id="collapseProductDescription" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
+         <div class="card-body">
+                 <div class="col-lg-6 col-md-6 ">
+                 <div class="form-group d-none">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_id ">Product_Id</label>
+                    <input class="form-control py-4" name="Id" value="" id="product_id " type="number" />
+                 </div>
+                <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_name ">Name</label>
+                    <input class="form-control py-4" value="" name="Name" id="product_name " type="text" />
+                 </div>
+                 <div class="form-group ">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_description ">Description</label>
+                    <input class="form-control py-4" id="product_description " name="Description" value="" type="text" />
+                 </div>
+                <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_upc ">UPC</label>
+                    <input class="form-control py-4" name="Upc" value="" id="product_upc " type="text" />
+                 </div>
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_brand ">Brand</label>
+                    <select name="Brand" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+            </div>
+         </div>
+       </div>
+     
+     </div>
+     <div class="card">
+     
+           <div class="card-header" id="cardHeadingCategory">
+               <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductCategory" data-toggle="collapse" data-target="#collapseProductCategory">
+             <h2 class="mb-0">
+              <i class="fas fa-list-alt"></i> Categories
+             </h2>
+ </a>
+           </div>
+     
+           
+           <div id="collapseProductCategory" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
+             <div class="card-body">
+                <div class="col-lg-6 col-md-6 ">
+               <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_category_select ">Category</label>
+                          <select name="Category" class="form-control selectpicker">
+                  <option value="">Select your Depatment/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sub_category ">Sub-Category</label>
+                      <select name="Sub_Category" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_type ">Type</label>
+                      <select name="Type" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sub_type ">Sub-Type</label>
+                      <select name="Sub_Type" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+           
+        </div>
+             </div>
+           </div>
+         </div>
+   
+       <div class="card">
+     
+         <div class="card-header" id="cardHeadingFinancial">
+             <a class="btn btn-block collapsed" type="button" id="alinkButtonProductFinancial" data-toggle="collapse" data-target="#collapseProductFinancial">
+           <h2 class="mb-0">
+             <i class="fas fa-hand-holding-usd"></i>Financial
+           </h2>
+             </a>
+         </div>
+   
+         
+         <div id="collapseProductFinancial" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
+           <div class="card-body">
+                <div class="col-lg-6 col-md-6 bg-light">
+                 
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_purchase_cost ">Purchase Cost</label>
+                    <input class="form-control py-4" id="product_purchase_cost" name="Cost" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_retail ">Retail</label>
+                    <input class="form-control py-4" id="product_retail " name="Retail_Price" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sale_price ">On Sale Price</label>
+                    <input class="form-control py-4" id="product_sale_price " name="Sale_Price" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sale_status ">On Sale Status</label>
+                    <label class="radio-inline d-block"><input type="radio" name="On_Sale_Status" value="True" checked>Yes</label>
+<label class="radio-inline"><input type="radio" name="On_Sale_Status" value="False">No</label>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_stock_quantity ">Stock Quantity</label>
+                    <input class="form-control py-4" id="product_stock_quantity " name="Stock_Quantity" value="" type="number" />
+                 </div>
+              </div>
+           </div>
+         </div>
+       </div>
+      
+       
+         <div class="card">
+     
+           <div class="card-header" id="cardHeadingPictures">
+               <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductImages" data-toggle="collapse" data-target="#collapseProductImages">
+             <h2 class="mb-0">
+              <i class="fas fa-images"></i> Pictures
+             </h2>
+ </a>
+           </div>
+     
+           
+           <div id="collapseProductImages" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
+             <div class="card-body">
+                <div class="col-lg-6 col-md-6 bg-info">
+               
+            <!--Image_Upload_1-->
+            <form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Image </b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_1--End-->
+          <!--Image_Upload_2-->
+            <form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Alternative Image 1</b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_2--End-->
+             <!--Image_Upload_3-->
+            <form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                       
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Alternative Image 2</b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_3--End-->
+        </div>
+             </div>
+           </div>
+         </div>
+       
+       
+           <div class="card">
+                
+             <div class="card-header" id="cardHeadingDimensions">
+                   <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductDimensions" data-toggle="collapse" data-target="#collapseProductDimensions">
+               <h2 class="mb-0">
+               <i class="fas fa-ruler-combined"></i>  Dimensions
+               </h2>
+                       </a>
+             </div>
+       
+             
+             <div id="collapseProductDimensions" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
+               <div class="card-body">
+                  <div class="col-lg-6 col-md-6 ">
+                 
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_length ">Length</label>
+                    <input class="form-control py-4" id="product_length " name="Length" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_width ">Width</label>
+                    <input class="form-control py-4" id="product_width " name="Width" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_height ">Height</label>
+                    <input class="form-control py-4" id="product_height " name="Height" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_weight ">Weight</label>
+                    <input class="form-control py-4" id="product_weight " name="Weight" value="" type="number" />
+                 </div>
+              </div>
+               </div>
+             </div>
+           </div>
+          
+ </div>
+<!--Modal_Add_Products-->
+
+
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterResources" runat="server">
         <script src="../../Scripts/Admin/datatables-Crud.js"></script>
      <script src="../../Scripts/Admin/Crud.js"></script>
+    <link href="../../Content/Admin/Drag&Drop.css" rel="stylesheet" />
+    <script src="../../Scripts/Admin/Drag&Drop.js"></script>
    <%-- <link rel="stylesheet" href="../../Content/mdb/mdb.min.css" />
     <script src="../../Scripts/mdb/mdb.min.js"></script>--%>
 </asp:Content>

@@ -190,6 +190,7 @@ function AjaxEditRecord(event, Id) {
 
     console.log(event.currentTarget.id);
     console.log(Id);
+
     var RowData = table.row('#' + Id).data();
     console.log(RowData.Id);
 
