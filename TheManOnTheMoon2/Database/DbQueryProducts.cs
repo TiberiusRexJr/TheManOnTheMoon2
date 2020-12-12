@@ -44,26 +44,7 @@ namespace TheManOnTheMoon2.Database
             try
             {
                 //get all ROWS from PRODUCTS and all ROWS from IMAGES JOIN ON Product_ID
-                Products = (from p in db.Products join i in db.Product_Images on p.Id equals i.Product_Id select new Product
-                {
-                    Id=p.Id,
-                    Name=p.Name,
-                    Description=p.Description,
-                    Upc=p.Upc,
-                    Brand=p.Brand,
-                    Length=p.Length,
-                    Width=p.Width,
-                    Weight=p.Weight,
-                    Height=p.Height,
-                    Cost=p.Cost,
-                    Retail_Price=p.Retail_Price,
-                    Sale_Price=p.Sale_Price,
-                    Stock_Quantity=p.Stock_Quantity,
-                    Category=p.Category,
-                    Sub_Category=p.Sub_Category,
-                    On_Sale_Status=p.On_Sale_Status,
-
-                }) .ToList();
+               Products=db.Products.ToList();
             }
             catch (Exception e)
             {

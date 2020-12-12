@@ -163,37 +163,6 @@ namespace TheManOnTheMoon2.Api
             return responseMessage;
         }
 
-        [HttpPost]
-        [Route("api/Admin/PostProductImageURLs/{product_Images}")]
-        public Response<Product_Image> PostProductImages([FromBody] Product_Image product_Images)
-        {
-
-            {
-                Response<Product_Image> responseMessage = new Response<Product_Image>();
-                try
-                {
-                    var DbResponse = db.CreateProductImageRecord(product_Images);
-
-                    if (DbResponse == null)
-                    {
-                        responseMessage.returnData = null;
-                        responseMessage.ReasonPhrase = "Database Responsed With Null";
-                        responseMessage.status = HttpStatusCode.Conflict;
-                    }
-                    else
-                    {
-                        responseMessage.returnData = DbResponse;
-                        responseMessage.ReasonPhrase = "SuccessFully Inserted";
-                        responseMessage.status = HttpStatusCode.Created;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Errorhead(e);
-                }
-                return responseMessage;
-            }
-        }
         #endregion
 
         #region Put
@@ -281,34 +250,7 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
-        [HttpPut]
-        public Response<Product_Image> PutProductImages(Product_Image images)
-        {
-            Response<Product_Image> responseMessage = new Response<Product_Image>();
-            var dbResponse = db.UpdateProductImages(images);
-            try
-            {
-
-                if (dbResponse == false)
-                {
-                    responseMessage.returnData = null;
-                    responseMessage.status = HttpStatusCode.Conflict;
-                    responseMessage.ReasonPhrase = "Update Failed";
-                }
-                else if (dbResponse == true)
-                {
-                    responseMessage.returnData = null;
-                    responseMessage.status = HttpStatusCode.NoContent;
-                    responseMessage.ReasonPhrase = "Update Succeded";
-                }
-
-            }
-            catch (Exception e)
-            {
-                Errorhead(e);
-            }
-            return responseMessage;
-        }
+       
 
 
 
@@ -536,34 +478,7 @@ namespace TheManOnTheMoon2.Api
         //}
         */
         [HttpDelete]
-        public Response<bool> DeleteProductImages(Product_Image product_Image)
-        {
 
-            Response<bool> responseMessage = new Response<bool>();
-
-            try
-            {
-                var databaseResponse = db.DeleteAllProductImages(product_Image);
-
-                if (databaseResponse == false)
-                {
-                    responseMessage.returnData = false;
-                    responseMessage.status = HttpStatusCode.Conflict;
-                    responseMessage.ReasonPhrase = "Failed To Delte";
-                }
-                else if (databaseResponse == true)
-                {
-                    responseMessage.returnData = true;
-                    responseMessage.status = HttpStatusCode.OK;
-                    responseMessage.ReasonPhrase = "Product Images Deleted";
-                }
-            }
-            catch (Exception e)
-            {
-                Errorhead(e);
-            }
-            return responseMessage;
-        }
 
         #endregion
 

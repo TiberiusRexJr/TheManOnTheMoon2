@@ -30,18 +30,15 @@ namespace TheManOnTheMoon2.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBrand(Brand instance);
-    partial void UpdateBrand(Brand instance);
-    partial void DeleteBrand(Brand instance);
-    partial void InsertProduct_Image(Product_Image instance);
-    partial void UpdateProduct_Image(Product_Image instance);
-    partial void DeleteProduct_Image(Product_Image instance);
-    partial void InsertCategory(Category instance);
-    partial void UpdateCategory(Category instance);
-    partial void DeleteCategory(Category instance);
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
+    partial void InsertCategory(Category instance);
+    partial void UpdateCategory(Category instance);
+    partial void DeleteCategory(Category instance);
+    partial void InsertBrand(Brand instance);
+    partial void UpdateBrand(Brand instance);
+    partial void DeleteBrand(Brand instance);
     #endregion
 		
 		public DataBaseModelsDataContext() : 
@@ -74,19 +71,11 @@ namespace TheManOnTheMoon2.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Brand> Brands
+		public System.Data.Linq.Table<Product> Products
 		{
 			get
 			{
-				return this.GetTable<Brand>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Product_Image> Product_Images
-		{
-			get
-			{
-				return this.GetTable<Product_Image>();
+				return this.GetTable<Product>();
 			}
 		}
 		
@@ -98,463 +87,12 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Product> Products
+		public System.Data.Linq.Table<Brand> Brands
 		{
 			get
 			{
-				return this.GetTable<Product>();
+				return this.GetTable<Brand>();
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Brands")]
-	public partial class Brand : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private EntitySet<Product> _Products;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Brand()
-		{
-			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brand_Product", Storage="_Products", ThisKey="Name", OtherKey="Brand")]
-		public EntitySet<Product> Products
-		{
-			get
-			{
-				return this._Products;
-			}
-			set
-			{
-				this._Products.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Brand1 = this;
-		}
-		
-		private void detach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Brand1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Product_Images")]
-	public partial class Product_Image : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Product_Id;
-		
-		private string _Product_Image_1;
-		
-		private string _Product_Image_2;
-		
-		private string _Product_Image_3;
-		
-		private EntityRef<Product> _Product;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnProduct_IdChanging(System.Nullable<int> value);
-    partial void OnProduct_IdChanged();
-    partial void OnProduct_Image_1Changing(string value);
-    partial void OnProduct_Image_1Changed();
-    partial void OnProduct_Image_2Changing(string value);
-    partial void OnProduct_Image_2Changed();
-    partial void OnProduct_Image_3Changing(string value);
-    partial void OnProduct_Image_3Changed();
-    #endregion
-		
-		public Product_Image()
-		{
-			this._Product = default(EntityRef<Product>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", DbType="Int")]
-		public System.Nullable<int> Product_Id
-		{
-			get
-			{
-				return this._Product_Id;
-			}
-			set
-			{
-				if ((this._Product_Id != value))
-				{
-					if (this._Product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProduct_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Product_Id = value;
-					this.SendPropertyChanged("Product_Id");
-					this.OnProduct_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_1", DbType="VarChar(MAX)")]
-		public string Product_Image_1
-		{
-			get
-			{
-				return this._Product_Image_1;
-			}
-			set
-			{
-				if ((this._Product_Image_1 != value))
-				{
-					this.OnProduct_Image_1Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_1 = value;
-					this.SendPropertyChanged("Product_Image_1");
-					this.OnProduct_Image_1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_2", DbType="VarChar(MAX)")]
-		public string Product_Image_2
-		{
-			get
-			{
-				return this._Product_Image_2;
-			}
-			set
-			{
-				if ((this._Product_Image_2 != value))
-				{
-					this.OnProduct_Image_2Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_2 = value;
-					this.SendPropertyChanged("Product_Image_2");
-					this.OnProduct_Image_2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_3", DbType="VarChar(MAX)")]
-		public string Product_Image_3
-		{
-			get
-			{
-				return this._Product_Image_3;
-			}
-			set
-			{
-				if ((this._Product_Image_3 != value))
-				{
-					this.OnProduct_Image_3Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_3 = value;
-					this.SendPropertyChanged("Product_Image_3");
-					this.OnProduct_Image_3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_Image", Storage="_Product", ThisKey="Product_Id", OtherKey="Id", IsForeignKey=true)]
-		public Product Product
-		{
-			get
-			{
-				return this._Product.Entity;
-			}
-			set
-			{
-				Product previousValue = this._Product.Entity;
-				if (((previousValue != value) 
-							|| (this._Product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Product.Entity = null;
-						previousValue.Product_Images.Remove(this);
-					}
-					this._Product.Entity = value;
-					if ((value != null))
-					{
-						value.Product_Images.Add(this);
-						this._Product_Id = value.Id;
-					}
-					else
-					{
-						this._Product_Id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Product");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
-	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _Category_Image_Url;
-		
-		private EntitySet<Product> _Products;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnCategory_Image_UrlChanging(string value);
-    partial void OnCategory_Image_UrlChanged();
-    #endregion
-		
-		public Category()
-		{
-			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category_Image_Url", DbType="VarChar(MAX)")]
-		public string Category_Image_Url
-		{
-			get
-			{
-				return this._Category_Image_Url;
-			}
-			set
-			{
-				if ((this._Category_Image_Url != value))
-				{
-					this.OnCategory_Image_UrlChanging(value);
-					this.SendPropertyChanging();
-					this._Category_Image_Url = value;
-					this.SendPropertyChanged("Category_Image_Url");
-					this.OnCategory_Image_UrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Product", Storage="_Products", ThisKey="Name", OtherKey="Category")]
-		public EntitySet<Product> Products
-		{
-			get
-			{
-				return this._Products;
-			}
-			set
-			{
-				this._Products.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category1 = this;
-		}
-		
-		private void detach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category1 = null;
 		}
 	}
 	
@@ -592,7 +130,7 @@ namespace TheManOnTheMoon2.Models
 		
 		private string _Sub_Category;
 		
-		private bool _On_Sale_Status;
+		private System.Nullable<bool> _On_Sale_Status;
 		
 		private System.Nullable<double> _Width;
 		
@@ -607,8 +145,6 @@ namespace TheManOnTheMoon2.Models
 		private string _Product_Picture_Alt_2_Url;
 		
 		private string _Product_Picture_Alt_3_Url;
-		
-		private EntitySet<Product_Image> _Product_Images;
 		
 		private EntityRef<Category> _Category1;
 		
@@ -646,7 +182,7 @@ namespace TheManOnTheMoon2.Models
     partial void OnCategoryChanged();
     partial void OnSub_CategoryChanging(string value);
     partial void OnSub_CategoryChanged();
-    partial void OnOn_Sale_StatusChanging(bool value);
+    partial void OnOn_Sale_StatusChanging(System.Nullable<bool> value);
     partial void OnOn_Sale_StatusChanged();
     partial void OnWidthChanging(System.Nullable<double> value);
     partial void OnWidthChanged();
@@ -666,7 +202,6 @@ namespace TheManOnTheMoon2.Models
 		
 		public Product()
 		{
-			this._Product_Images = new EntitySet<Product_Image>(new Action<Product_Image>(this.attach_Product_Images), new Action<Product_Image>(this.detach_Product_Images));
 			this._Category1 = default(EntityRef<Category>);
 			this._Brand1 = default(EntityRef<Brand>);
 			OnCreated();
@@ -692,7 +227,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -712,7 +247,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
 		public string Description
 		{
 			get
@@ -752,7 +287,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(256)")]
 		public string Brand
 		{
 			get
@@ -916,7 +451,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="NVarChar(256)")]
 		public string Category
 		{
 			get
@@ -940,7 +475,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sub_Category", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sub_Category", DbType="NVarChar(256)")]
 		public string Sub_Category
 		{
 			get
@@ -960,8 +495,8 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_On_Sale_Status", DbType="Bit NOT NULL")]
-		public bool On_Sale_Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_On_Sale_Status", DbType="Bit")]
+		public System.Nullable<bool> On_Sale_Status
 		{
 			get
 			{
@@ -1000,7 +535,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(256)")]
 		public string Type
 		{
 			get
@@ -1020,7 +555,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sub_Type", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sub_Type", DbType="NVarChar(256)")]
 		public string Sub_Type
 		{
 			get
@@ -1040,7 +575,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Url", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Url", DbType="NVarChar(256)")]
 		public string Product_Picture_Url
 		{
 			get
@@ -1060,7 +595,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_1_Url", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_1_Url", DbType="NVarChar(256)")]
 		public string Product_Picture_Alt_1_Url
 		{
 			get
@@ -1080,7 +615,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_2_Url", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_2_Url", DbType="NVarChar(256)")]
 		public string Product_Picture_Alt_2_Url
 		{
 			get
@@ -1100,7 +635,7 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_3_Url", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Picture_Alt_3_Url", DbType="NVarChar(256)")]
 		public string Product_Picture_Alt_3_Url
 		{
 			get
@@ -1117,19 +652,6 @@ namespace TheManOnTheMoon2.Models
 					this.SendPropertyChanged("Product_Picture_Alt_3_Url");
 					this.OnProduct_Picture_Alt_3_UrlChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_Image", Storage="_Product_Images", ThisKey="Id", OtherKey="Product_Id")]
-		public EntitySet<Product_Image> Product_Images
-		{
-			get
-			{
-				return this._Product_Images;
-			}
-			set
-			{
-				this._Product_Images.Assign(value);
 			}
 		}
 		
@@ -1220,17 +742,281 @@ namespace TheManOnTheMoon2.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
+	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Product_Images(Product_Image entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Category_Image_Url;
+		
+		private EntitySet<Product> _Products;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCategory_Image_UrlChanging(string value);
+    partial void OnCategory_Image_UrlChanged();
+    #endregion
+		
+		public Category()
 		{
-			this.SendPropertyChanging();
-			entity.Product = this;
+			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
+			OnCreated();
 		}
 		
-		private void detach_Product_Images(Product_Image entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category_Image_Url", DbType="NVarChar(256)")]
+		public string Category_Image_Url
+		{
+			get
+			{
+				return this._Category_Image_Url;
+			}
+			set
+			{
+				if ((this._Category_Image_Url != value))
+				{
+					this.OnCategory_Image_UrlChanging(value);
+					this.SendPropertyChanging();
+					this._Category_Image_Url = value;
+					this.SendPropertyChanged("Category_Image_Url");
+					this.OnCategory_Image_UrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Product", Storage="_Products", ThisKey="Name", OtherKey="Category")]
+		public EntitySet<Product> Products
+		{
+			get
+			{
+				return this._Products;
+			}
+			set
+			{
+				this._Products.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Products(Product entity)
 		{
 			this.SendPropertyChanging();
-			entity.Product = null;
+			entity.Category1 = this;
+		}
+		
+		private void detach_Products(Product entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Brands")]
+	public partial class Brand : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Brand_Image_Url;
+		
+		private EntitySet<Product> _Products;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnBrand_Image_UrlChanging(string value);
+    partial void OnBrand_Image_UrlChanged();
+    #endregion
+		
+		public Brand()
+		{
+			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand_Image_Url", DbType="NVarChar(256)")]
+		public string Brand_Image_Url
+		{
+			get
+			{
+				return this._Brand_Image_Url;
+			}
+			set
+			{
+				if ((this._Brand_Image_Url != value))
+				{
+					this.OnBrand_Image_UrlChanging(value);
+					this.SendPropertyChanging();
+					this._Brand_Image_Url = value;
+					this.SendPropertyChanged("Brand_Image_Url");
+					this.OnBrand_Image_UrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brand_Product", Storage="_Products", ThisKey="Name", OtherKey="Brand")]
+		public EntitySet<Product> Products
+		{
+			get
+			{
+				return this._Products;
+			}
+			set
+			{
+				this._Products.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Products(Product entity)
+		{
+			this.SendPropertyChanging();
+			entity.Brand1 = this;
+		}
+		
+		private void detach_Products(Product entity)
+		{
+			this.SendPropertyChanging();
+			entity.Brand1 = null;
 		}
 	}
 }

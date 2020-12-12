@@ -132,25 +132,7 @@ namespace TheManOnTheMoon2.Database
 
             return responseBrand;
         }
-        public Product_Image CreateProductImageRecord(Product_Image product_Images)
-        {
-            Product_Image product_Image2Response = null;
-            if (product_Images == null)
-            {
-                return product_Image2Response;
-            }
-            try
-            {
-                db.Product_Images.InsertOnSubmit(product_Images);
-                db.SubmitChanges();
-                product_Image2Response = product_Images;
-            }
-            catch (Exception e)
-            {
-                Errorhead(e);
-            }
-            return product_Image2Response;
-        }
+        
 
         #endregion
 
@@ -229,26 +211,7 @@ namespace TheManOnTheMoon2.Database
             }
             return status;
         }
-        public bool UpdateProductImages(Product_Image product_Images)
-        {
-            bool status = false;
-            try
-            {
-                Product_Image currentImageRecord = db.Product_Images.Where(p => p.Id == product_Images.Id).FirstOrDefault();
-                currentImageRecord.Product_Id = product_Images.Product_Id;
-                currentImageRecord.Product_Image_1 = product_Images.Product_Image_1;
-                currentImageRecord.Product_Image_2 = product_Images.Product_Image_2;
-                currentImageRecord.Product_Image_3 = product_Images.Product_Image_3;
-                db.SubmitChanges();
-                status = true;
-            }
-            catch (Exception e)
-            {
-                Errorhead(e);
-            }
-            return status;
-        }
-
+        
         #endregion
 
         #region Retrieve
@@ -368,21 +331,7 @@ namespace TheManOnTheMoon2.Database
             }
             return status;
             }
-            public bool DeleteAllProductImages(Product_Image product_Images)
-            {
-            bool status = false;
-            try
-            {
-                db.Product_Images.DeleteOnSubmit(product_Images);
-                db.SubmitChanges();
-                status = true;
-            }
-            catch (Exception e)
-            {
-                Errorhead(e);
-            }
-            return status;
-            }
+       
         #endregion
 
         #region Search
