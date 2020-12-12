@@ -1,16 +1,20 @@
 ﻿// Code By Webdevtrick ( https://webdevtrick.com )
 function readFile(input) {
     if (input.files && input.files[0]) {
+        console.log("hi from input:")
+        console.log(input);
         var reader = new FileReader();
 
         reader.onload = function (e) {
+           
             var htmlPreview =
                 '<img width="200" src="' + e.target.result + '" />' +
                 '<p>' + input.files[0].name + '</p>';
+
             var wrapperZone = $(input).parent();
             var previewZone = $(input).parent().parent().find('.preview-zone');
             var boxZone = $(input).parent().parent().find('.preview-zone').find('.box').find('.box-body');
-
+            console.log(input);
             wrapperZone.removeClass('dragover');
             previewZone.removeClass('hidden');
             boxZone.empty();
@@ -27,6 +31,9 @@ function reset(e) {
 }
 
 $(".dropzone").change(function () {
+    console.log("dropzone change:");
+
+    console.log(this);
     readFile(this);
 });
 

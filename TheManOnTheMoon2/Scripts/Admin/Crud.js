@@ -56,7 +56,8 @@ function AjaxGetALL(senderId) {
 
         url: sendToAdress,
         success: function (response, jqXHR, data) {
-
+            console.log("fuck you");
+            console.log(data.responseJSON);
             IntializeDatatable(data.responseJSON, tableType);
         },
         statusCode:
@@ -442,51 +443,83 @@ function IntializeDatatable(data, tableType)
         },
     ];
 
-    //todo Individual Objects
-    var indiviaulObj = data[0];
-   
-    //todo Keys
-    var keys = Object.keys(indiviaulObj);
-   
-    //todo columnArrays
-    var columnsArray = new Array(keys.length);
-
-
-    $.each(keys, function (index, key) {
-        columnsArray[index] = { data: key, title: key };
-    })
-
-    var table = $('#dataTableInventory').DataTable(
+    if (data.length > 0)
+    {
+        if ($.fn.DataTable.isDataTable('#dataTableInventory'))
         {
-            responsive: true,
-            columns: columnsArray,
-            columnDefs: [
+            console.log("hi from IS");
+            $('#dataTableInventory').DataTable().destroy();
+        }
+        
+            console.log("hi from ELSE");
+
+            //todo Individual Objects
+            var indiviaulObj = data[0];
+
+            //todo Keys
+            var keys = Object.keys(indiviaulObj);
+
+            //todo columnArrays
+            var columnsArray = new Array(keys.length);
+
+            $("#dataTableInventoryThead_Tr").empty();
+            $.each(keys, function (index, key) {
+                columnsArray[index] = {
+                    data: key, title: key
+                };
+                console.log('<th></th>');
+                $("#dataTableInventoryThead_Tr").append('<th> </th>');
+            })
+
+
+
+            var table = $('#dataTableInventory').DataTable(
                 {
-                    'targets': 0,
-                    "render": function (Id, type, row) {
-                        return '<a class="btn btn-primary bg-warning" href="#" id="' + tableType + '" role="button"  onclick="AjaxEditRecord(event,' + Id + ')"><i class="fas fa-edit"></i></a>' + Id;
+                    responsive: true,
+                    columns: columnsArray,
+                    columnDefs: [
+                        {
+                            'targets': 0,
+                            "render": function (Id, type, row) {
+                                return '<a class="btn btn-primary bg-warning" href="#" id="' + tableType + '" role="button"  onclick="AjaxEditRecord(event,' + Id + ')"><i class="fas fa-edit"></i></a>' + Id;
+                            },
+                        }
+                    ],
+                    rowId: function (data) { return data.Id },
+                    createdRow: function (row, data, dataIndex) {
+                        $(row).addClass('dataTableInventoryRow');
+
                     },
-                }
-            ],
-            rowId: function (data) { return data.Id },
-            createdRow: function (row, data, dataIndex) {
-                $(row).addClass('dataTableInventoryRow');
+                    select: {
+                        'style': 'multi'
+                    },
+                    retrieve: true,
+                    data: data,
+                    select: "multi",
+                    autoWidth: true,
+                    pageLength: data.length,
 
-            },
-            select: {
-                'style': 'multi'
-            },
-            retrieve: true,
-            data: data,
-            select: "multi",
-            autoWidth: true,
-            pageLength: data.length,
+                });
 
-        });
+            $('.dataTableInventoryRow').on('click', this, function () {
+                $("#" + this.id).toggleClass('selected');
+            });
+        
+        
+    }
+    else
+    {
+        var table = $('#dataTableInventory').DataTable();
+        table.clear();
+        table.destroy();
+        $('#dataTableInventoryThead_Tr').empty();
+        $("#dataTableInventoryThead_Tr").append('<th> </th>');
 
-    $('.dataTableInventoryRow').on('click', this, function () {
-        $("#" + this.id).toggleClass('selected');
-    });
+        var table2 = $('#dataTableInventory').DataTable();
+        
+        console.log("hi from empty");
+    }
+ 
 
 };
 
@@ -504,6 +537,17 @@ function TestData(id,data)
     console.log(data);
     console.log(data.Name);
    
+}
+
+function getBase64Image(img)
+{
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 //#endregion
 

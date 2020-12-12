@@ -22,7 +22,7 @@
       <div class="card-body">
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-sm-3 col-6">
-                        <a href="#" id="link_Inventory_Products" onclick="AjaxGetALL(this.id)" class="custom-card"> <div class="card bg-primary text-white mb-4 ">
+                        <a href="#"  id="link_Inventory_Products" onclick="AjaxGetALL(this.id)" class="custom-card"> <div class="card bg-primary text-white mb-4 ">
                                 <h5 class="card-title"><i class="fas fa-box fa-1x mr-1"></i>Products</h5>
                                     
                                     
@@ -64,10 +64,8 @@
 <button type="button" style="display:inline-block;" class="btn btn-secondary btn-sm bg-danger" onclick="AjaxDeleteRecords()"><i class="fas fa-skull-crossbones"></i>Mass Delete</button>
                                     <table id="dataTableInventory" class="display" style="width:100%">
         <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
+            <tr id="dataTableInventoryThead_Tr">
+                
                 
                
 
@@ -258,18 +256,14 @@
         
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalTitleAddProduct">Add Product</h5>
+          <h5 class="modal-title" id="modalTitleAddProduct"><i class="fas fa-box mr-1"></i>New Product</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
-             <h2><i class="fas fa-box mr-1"></i>New Product</h2>
-          
-                
-              
-                 
+         <div class="container">
+            
                  
               <form id="form_product_add">
 
@@ -452,7 +446,7 @@
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
                         <label class="control-label">Upload File</label>
-                        <div class="preview-zone hidden">
+                        <div class="preview-zone hidden" id="preview-zone">
                           <div class="box box-solid">
                             <div class="box-header with-border">
                               <div><b>Image </b></div>
@@ -634,58 +628,8 @@
                     <label class="col-form-label mb-1" for="Name">Brand Name</label>
                     <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
                  </div>
-                                            
-                                        </form>
-                  
-              </div>
-              
-
-        </div>
-
-         
-            
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostBrand" onclick="AjaxPost(this.id,$('#formAddBrand').serializeToJSON())">Save</a>
-          
-        </div>
-      </div>
-          
-    </div>
- </div>
-<!--Modal_Add_Brand-->
-
-<!--Modal_Add_Category-->
-    <div class="modal fade" id="Modal_Add_Category" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalTitleCategory">Add A Product Category</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
-             <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
-          
-              <div class="col-lg-6 col-md-6 bg-info">
-                 
-                  <form>
-                 
-                 </form>
-                  <form id="formAddCategory">
-                                           
-                 <div class="form-group">
-                     <i class="fas fa-tag"></i>
-                    <label class="small mb-1" for="Name">Name</label>
-                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
-                 </div>
-                                            
-                                        </form>
-                   <!--Image_Upload_1-->
+                <div class="form-group">
+                       <!--Image_Upload_1-->
             <form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -716,6 +660,92 @@
              </div>
             </form>
             <!--Image_Upload_1--End-->
+                    </div>
+                                            
+                                        </form>
+                  
+              </div>
+              
+
+        </div>
+
+         
+            
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData(this.id,$('#formAddBrand').serializeToJSON())">Save</a>
+          
+        </div>
+      </div>
+          
+    </div>
+ </div>
+<!--Modal_Add_Brand-->
+
+<!--Modal_Add_Category-->
+    <div class="modal fade" id="Modal_Add_Category" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitleCategory"><i class="fas fa-list mr-1"></i>Add A Product Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container">
+             
+          
+              <div class="col-lg-6 col-md-6">
+                 
+                  <form>
+                 
+                 </form>
+                  <form id="formAddCategory">
+                                           
+                 <div class="form-group">
+                     <i class="fas fa-tag"></i>
+                    <label class="col-form-label mb-1" for="Name">Name</label>
+                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                 </div>
+                <div class="form-group">
+                       <!--Image_Upload_1-->
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                  <div class="form-group">
+                                    <label class="control-label">Upload File</label>
+                                    <div class="preview-zone hidden">
+                                      <div class="box box-solid">
+                                        <div class="box-header with-border">
+                                          <div><b>Image </b></div>
+                                          <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                             <i class="fas fa-sync-alt"></i> Reset 
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div class="box-body"></div>
+                                      </div>
+                                    </div>
+                                    <div class="dropzone-wrapper">
+                                      <div class="dropzone-desc">
+                                        <i class="fas fa-sync-alt"></i>
+                                        <p>Choose an image file or drag it here.</p>
+                                      </div>
+                                      <input type="file" name="img_logo" class="dropzone">
+                                    </div>
+                                  </div>
+                            </div>
+                         </div>
+                        </form>
+                        <!--Image_Upload_1--End-->
+                </div>
+                                            
+                                        </form>
+                
                   
               </div>
               
