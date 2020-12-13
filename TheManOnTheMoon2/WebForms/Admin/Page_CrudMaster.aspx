@@ -635,17 +635,17 @@
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
                         <label class="control-label">Upload File</label>
-                        <div class="preview-zone hidden">
+                        <div class="preview-zone hidden" id="previewZoneAddBrand">
                           <div class="box box-solid">
                             <div class="box-header with-border">
-                              <div><b>Image </b></div>
+                              <div id="ImageHolder-AddBrand"><b>Image </b></div>
                               <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-danger btn-xs remove-preview">
                                  <i class="fas fa-sync-alt"></i> Reset 
                                 </button>
                               </div>
                             </div>
-                            <div class="box-body"></div>
+                            <div class="box-body" id="boxBodyAddBrand"></div>
                           </div>
                         </div>
                         <div class="dropzone-wrapper">

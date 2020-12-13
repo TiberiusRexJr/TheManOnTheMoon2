@@ -3,13 +3,59 @@ $(document).ready(function ()
 {
     AjaxGetALL("link_Inventory_Brands");
 
-
+//#region Add "new" Buttons
     $("#ButtonAddBrand").on('click', function () { $("#Modal_Add_Brand").modal("show") });
     $("#ButtonAddProduct").on('click', function () {$("#Modal_Add_Product").modal("show") });
     $("#ButtonAddCategory").on('click', function () { $("#Modal_Add_Category").modal("show") });
+    //#endregion
 
+    //#region GetImages
+    $("#ButtonPostBrand").on('click', function ()
+    {
+        var imageElement = null;
+
+        var ImageDataBase64 = null;
+        var ImageFile = null;
+
+        if (!$("previewZoneAddBrand").hasClass("hidden"))
+        {
+            imageElement = $("#boxBodyAddBrand").children()[0];
+            ImageFile = $("#boxBodyAddBrand").children()[2].textContent();
+
+            ImageDataBase64 = $(imageElement).attr('src');
+
+            try {
+
+                GetImageData(ImageDataBase64);
+            }
+            catch(err)
+            {
+                ModalMessenger(err, false, "Image Upload", "failed to upload");
+            }
+            
+        }
+        else
+        {
+            console.log("Nope no image data hoe");
+        }
+        
+    })
+    //#endregion
 });
 //#endregion
+
+function GetImageData(imageData)
+{
+    
+              
+}
+
+
+
+    
+
+   
+
 
 //#region AjaxCrud 
 function AjaxGetALL(senderId) {
@@ -56,8 +102,7 @@ function AjaxGetALL(senderId) {
 
         url: sendToAdress,
         success: function (response, jqXHR, data) {
-            console.log("fuck you");
-            console.log(data.responseJSON);
+            
             IntializeDatatable(data.responseJSON, tableType);
         },
         statusCode:
@@ -447,11 +492,11 @@ function IntializeDatatable(data, tableType)
     {
         if ($.fn.DataTable.isDataTable('#dataTableInventory'))
         {
-            console.log("hi from IS");
+            
             $('#dataTableInventory').DataTable().destroy();
         }
         
-            console.log("hi from ELSE");
+            
 
             //todo Individual Objects
             var indiviaulObj = data[0];
@@ -467,7 +512,7 @@ function IntializeDatatable(data, tableType)
                 columnsArray[index] = {
                     data: key, title: key
                 };
-                console.log('<th></th>');
+               
                 $("#dataTableInventoryThead_Tr").append('<th> </th>');
             })
 
@@ -547,6 +592,7 @@ function getBase64Image(img)
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
     var dataURL = canvas.toDataURL("image/png");
+    console.log("Datar from dataURl inside GEtbase: " + dataURL);
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 //#endregion
