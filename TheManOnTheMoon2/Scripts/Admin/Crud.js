@@ -10,23 +10,39 @@ $(document).ready(function ()
     //#endregion
 
     //#region GetImages
-    $("#ButtonPostBrand").on('click', function ()
-    {
+    $("#ButtonPostBrand").on('click', function () {
         var imageElement = null;
 
         var ImageDataBase64 = null;
-        var ImageFile = null;
+        var ImageMimeType = null;
 
-        if (!$("previewZoneAddBrand").hasClass("hidden"))
-        {
+        var FormToSend = new FormData();
+
+        if (!$("previewZoneAddBrand").hasClass("hidden")) {
             imageElement = $("#boxBodyAddBrand").children()[0];
-            ImageFile = $("#boxBodyAddBrand").children()[2].textContent();
-
             ImageDataBase64 = $(imageElement).attr('src');
+
+            ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
+
+
+            var baseformated = getBase64Image(imageElement);
+
+
+            var brandImage = base64ToBlob(baseformated, ImageMimeType);
+            console.log(brandImage);
+
+            var brandData = $('#formAddBrand').serializeToJSON();
+
+            FormToSend.append("BrandImage", brandImage);
+            FormToSend.append("BrandData", brandData)
+
+            console.log(FormToSend);
+
+
 
             try {
 
-                GetImageData(ImageDataBase64);
+                //GetImageData(ImageDataBase64);
             }
             catch(err)
             {
@@ -44,17 +60,6 @@ $(document).ready(function ()
 });
 //#endregion
 
-function GetImageData(imageData)
-{
-    
-              
-}
-
-
-
-    
-
-   
 
 
 //#region AjaxCrud 
@@ -268,15 +273,15 @@ function AjaxPost(senderId, data)
 
     else {
         switch (senderId) {
-            case "ButtonPostProduct":
+            case "Product":
                 sendToAdress = API_POST_PRODUCT;
                 tableType = "Product";
                 break;
-            case "ButtonPostCategory":
+            case "Category":
                 sendToAdress = API_POST_CATEGORY;
                 tableType = "Cateogry"
                 break;
-            case "ButtonPostBrand":
+            case "Brand":
                 sendToAdress = API_POST_BRAND;
                 tableType = "Brand";
                 break;
@@ -295,6 +300,8 @@ function AjaxPost(senderId, data)
         type: "POST",
         data: data,
         url: sendToAdress,
+        contentType: false,
+        processData: false,
         success: function (response, jqXHR, data) { },
         statusCode:
         {
@@ -592,8 +599,34 @@ function getBase64Image(img)
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
     var dataURL = canvas.toDataURL("image/png");
-    console.log("Datar from dataURl inside GEtbase: " + dataURL);
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+function GetImageData(imageData) {
+
+
+}
+
+function base64ToBlob(base64, mime) {
+    mime = mime || '';
+    var sliceSize = 1024;
+    var byteChars = window.atob(base64);
+    var byteArrays = [];
+
+    for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+        var slice = byteChars.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, { type: mime });
 }
 //#endregion
 

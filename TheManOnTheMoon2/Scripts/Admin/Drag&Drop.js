@@ -8,8 +8,10 @@ function readFile(input) {
             
             var htmlPreview =
                 '<img width="200" src="' + e.target.result + '" />' +
-                '<p>' + input.files[0].name + '</p>';
-                
+                '<p>' + input.files[0].name + '</p>'+
+                '<p>' + input.files[0].type + '</p>';
+            ;
+            console.log(input.files[0]);
             
             var wrapperZone = $(input).parent();
             var previewZone = $(input).parent().parent().find('.preview-zone');
