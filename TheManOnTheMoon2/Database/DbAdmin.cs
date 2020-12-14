@@ -112,14 +112,13 @@ namespace TheManOnTheMoon2.Database
             {
                 return responseBrand;
             }
-            //if (ExistByName(brand.Name, DbAdmin.TableType.Brand))
-            //{
-            //    return responseBrand;
-            //}
+            if (ExistByName(brand.Name, DbAdmin.TableType.Brand))
+            {
+                return responseBrand;
+            }
             try
             {
-                //brand.Name = FormatString(brand.Name, DbAdmin.StringFormat.ForDatabase);
-                
+
                 db.Brands.InsertOnSubmit(brand);
                 db.SubmitChanges();
                 responseBrand = brand;
@@ -373,31 +372,26 @@ namespace TheManOnTheMoon2.Database
         public bool ExistByName(string itemName, DbAdmin.TableType tableType)
         {
             bool statusExist = false;
-            string formattedSearchItem = string.Empty;
+ 
 
 
             if (string.IsNullOrEmpty(itemName) || tableType == null)
             {
                 return statusExist;
             }
-            else
-            {
-                formattedSearchItem = FormatString(itemName, DbAdmin.StringFormat.ForDatabase);
-            }
-
             switch (tableType.Value)
             {
                 case "Brand":
-                    var queryBrand = db.Brands.Where(b => b.Name == formattedSearchItem).FirstOrDefault();
+                    var queryBrand = db.Brands.Where(b => b.Name == itemName).FirstOrDefault();
                     if (queryBrand != null) { statusExist = true; };
                     break;
                 case "Category":
-                    var queryCategory = db.Categories.Where(c => c.Name == formattedSearchItem).FirstOrDefault();
+                    var queryCategory = db.Categories.Where(c => c.Name == itemName).FirstOrDefault();
                     if (queryCategory != null) { statusExist = true; };
 
                     break;
                 case "Product":
-                    var queryProducts = db.Products.Where(p => p.Name == formattedSearchItem).FirstOrDefault();
+                    var queryProducts = db.Products.Where(p => p.Name == itemName).FirstOrDefault();
                     if (queryProducts != null) { statusExist = true; };
 
                     break;

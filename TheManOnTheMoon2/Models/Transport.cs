@@ -5,14 +5,15 @@ using System.Web;
 
 namespace TheManOnTheMoon2.Models
 {
-    public partial class Brand
+    public class Transport<T>:HttpPostedFileBase
     {
         #region Variables
 
         #endregion
 
         #region Properties
-
+        public T ObjectData { get; set; }
+        HttpPostedFileBase ImageData { get; set; }
         #endregion
 
         #region Constructor

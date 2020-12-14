@@ -124,13 +124,52 @@ namespace TheManOnTheMoon2.Api
 
         }
 
+        //[HttpPost]
+        //[Route("api/Admin/PostBrand/{brand}")]
+        //public Response<Brand> PostBrand([FromBody] Brand brand)
+        //{
+        //    Response<Brand> responseMessage = new Response<Brand>();
+
+        //    if (brand == null)
+        //    {
+        //        responseMessage.status = HttpStatusCode.BadRequest;
+        //        responseMessage.returnData = null;
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+
+        //            var DbResponse = db.CreateBrand(brand);
+
+        //            if (DbResponse == null)
+        //            {
+        //                responseMessage.returnData = null;
+        //                responseMessage.status = HttpStatusCode.InternalServerError;
+        //            }
+        //            else
+        //            {
+        //                responseMessage.returnData = DbResponse;
+
+        //                responseMessage.status = HttpStatusCode.Created;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Errorhead(e);
+        //        }
+        //    }
+
+        //    return responseMessage;
+        //}
+
         [HttpPost]
-        [Route("api/Admin/PostBrand/{brand}")]
-        public Response<Brand> PostBrand([FromBody] Brand brand)
+        [Route("api/Admin/PostBrand/{data}")]
+        public Response<Brand> PostBrand([FromBody] Transport<Brand> data)
         {
             Response<Brand> responseMessage = new Response<Brand>();
 
-            if (brand == null)
+            if (data == null)
             {
                 responseMessage.status = HttpStatusCode.BadRequest;
                 responseMessage.returnData = null;
@@ -140,7 +179,7 @@ namespace TheManOnTheMoon2.Api
                 try
                 {
 
-                    var DbResponse = db.CreateBrand(brand);
+                    var DbResponse = db.CreateBrand(data.ObjectData);
 
                     if (DbResponse == null)
                     {

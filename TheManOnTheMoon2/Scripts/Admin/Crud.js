@@ -33,10 +33,10 @@ $(document).ready(function ()
 
             var brandData = $('#formAddBrand').serializeToJSON();
 
-            FormToSend.append("BrandImage", brandImage);
-            FormToSend.append("BrandData", brandData)
+            FormToSend.append("ImageData", brandImage);
+            FormToSend.append("ObjectData", brandData)
 
-            console.log(FormToSend);
+            AjaxPost("Brand", FormToSend);
 
 
 
@@ -259,10 +259,12 @@ function AjaxEditRecord(event, Id) {
 function AjaxPost(senderId, data)
 {
     const CRUD_TYPE = "Posted";
+    console.log(senderId);
+    console.log(data);
 
     const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/product";
     const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/category";
-    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/brand";
+    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/data";
 
     var sendToAdress = "";
     var tableType = " ";
@@ -279,7 +281,7 @@ function AjaxPost(senderId, data)
                 break;
             case "Category":
                 sendToAdress = API_POST_CATEGORY;
-                tableType = "Cateogry"
+                tableType = "Category"
                 break;
             case "Brand":
                 sendToAdress = API_POST_BRAND;
