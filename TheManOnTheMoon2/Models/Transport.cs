@@ -13,7 +13,7 @@ namespace TheManOnTheMoon2.Models
 
         #region Properties
         public T ObjectData { get; set; }
-        HttpPostedFileBase ImageData { get; set; }
+        public byte[] ImageData { get; set; }
         #endregion
 
         #region Constructor

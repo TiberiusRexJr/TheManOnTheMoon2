@@ -29,7 +29,7 @@ $(document).ready(function ()
 
 
             var brandImage = base64ToBlob(baseformated, ImageMimeType);
-            console.log(brandImage);
+            //console.log(brandImage);
 
             var brandData = $('#formAddBrand').serializeToJSON();
 
@@ -158,7 +158,7 @@ function AjaxDeleteRecords()
         ModalMessenger("Delete Failed!", false, "Delete", "Failed to get TableType");
 
     }
-    console.log(tableTypeSelected);
+    
 
     if (table == null) {
         ModalMessenger("Get DataTable to Get Selected Rows", false, "GET", "Unable to retrieve Datatable instance");
@@ -178,7 +178,7 @@ function AjaxDeleteRecords()
             $.each(rowsSelected, function (index, record) {
                 idsToDelete[index] = record;
             });
-            console.log(idsToDelete);
+            
            
         }
 
@@ -256,11 +256,10 @@ function AjaxEditRecord(event, Id) {
 
 }
 
-function AjaxPost(senderId, data)
+function AjaxPost(senderId, FormToSend)
 {
     const CRUD_TYPE = "Posted";
-    console.log(senderId);
-    console.log(data);
+  
 
     const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/product";
     const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/category";
@@ -269,7 +268,7 @@ function AjaxPost(senderId, data)
     var sendToAdress = "";
     var tableType = " ";
 
-    if (data == null || senderId == null) {
+    if (FormToSend == null || senderId == null) {
         ModalMessenger(null, false, CRUD_TYPE, "null parameters provided");
     }
 
@@ -291,20 +290,24 @@ function AjaxPost(senderId, data)
                 sendToAdress = API_POST_PRODUCT_IMAGES;
                 tableType = "ProductImagesUrl";
                 break;
-            default: ModalMessenger(data, false, CRUD_TYPE, "could not resolve api address to send data too");
+            default: ModalMessenger(FormToSend, false, CRUD_TYPE, "could not resolve api address to send data too");
         }
     }
     //if (AjaxExistByName(data.Name, tableType)) {
     //    ModalMessenger(data, false, CRUD_TYPE, data.Name + " Already Exist!");
     //}
-
+    console.log(FormToSend);
+    console.log(FormToSend.ImageData);
     $.ajax({
         type: "POST",
-        data: data,
+        data: FormToSend,
         url: sendToAdress,
         contentType: false,
         processData: false,
-        success: function (response, jqXHR, data) { },
+        success: function (response, jqXHR, data)
+        {
+            
+        },
         statusCode:
         {
             400: function (response, jqXHR) {
@@ -317,6 +320,10 @@ function AjaxPost(senderId, data)
             201: function (response, jqXHR) {
                 var successStatus = true;
                 ModalMessenger(data, successStatus, CRUD_TYPE, "201-SuccessFully Created");
+            },
+            415: function (response, jqXHR) {
+                var successStatus = false;
+                ModalMessenger("Invalid Media Type" , successStatus, CRUD_TYPE, "415-Invalid medai type");
             }
         },
         error: function (response, jqXHR, data) {
@@ -587,9 +594,9 @@ function GetSelectedRows(table) {
 //#region Test & Expirimentals
 function TestData(id,data)
 {
-    console.log(id);
-    console.log(data);
-    console.log(data.Name);
+    //console.log(id);
+    //console.log(data);
+    //console.log(data.Name);
    
 }
 

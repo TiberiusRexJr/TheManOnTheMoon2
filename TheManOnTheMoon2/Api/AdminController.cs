@@ -1,6 +1,8 @@
 ﻿using TheManOnTheMoon2.Database;
 using TheManOnTheMoon2.Models;
 using System;
+using System.Diagnostics;
+using System.Web;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -164,40 +166,50 @@ namespace TheManOnTheMoon2.Api
         //}
 
         [HttpPost]
-        [Route("api/Admin/PostBrand/{data}")]
-        public Response<Brand> PostBrand([FromBody] Transport<Brand> data)
+        [Route("api/Admin/PostBrand/{objData}")]
+        public async Task<Response<Brand>> PostBrand( )
         {
+            Transport<Brand> dataSent = new Transport<Brand>();
             Response<Brand> responseMessage = new Response<Brand>();
 
-            if (data == null)
+
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                responseMessage.status = HttpStatusCode.BadRequest;
                 responseMessage.returnData = null;
+                responseMessage.status = HttpStatusCode.UnsupportedMediaType;
             }
             else
             {
+                string root = HttpContext.Current.Server.MapPath("~/App_Data");
+                Console.WriteLine(root);
+
+                var provider = new MultipartFormDataStreamProvider(root);
+
+
                 try
                 {
+                    await Request.Content.ReadAsMultipartAsync(provider);
 
-                    var DbResponse = db.CreateBrand(data.ObjectData);
-
-                    if (DbResponse == null)
+                    foreach (var key in provider.FormData.AllKeys)
                     {
-                        responseMessage.returnData = null;
-                        responseMessage.status = HttpStatusCode.InternalServerError;
+                        foreach (var val in provider.FormData.GetValues(key))
+                        {
+                            Trace.WriteLine(string.Format("{0}: {1}", key, val));
+                        }
                     }
-                    else
+                    foreach (MultipartFileData file in provider.FileData)
                     {
-                        responseMessage.returnData = DbResponse;
-
-                        responseMessage.status = HttpStatusCode.Created;
+                        Trace.WriteLine(file.Headers.ContentDisposition.FileName);
+                        Trace.WriteLine("Server file path: " + file.LocalFileName);
                     }
+
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
                     Errorhead(e);
                 }
             }
+
 
             return responseMessage;
         }
