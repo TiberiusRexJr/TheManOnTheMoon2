@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Collections;
+using System.Web.Script.Serialization;
 using System.Collections.Generic;
 
 namespace TheManOnTheMoon2.Api
@@ -169,45 +170,48 @@ namespace TheManOnTheMoon2.Api
         [Route("api/Admin/PostBrand/{objData}")]
         public async Task<Response<Brand>> PostBrand( )
         {
-            Transport<Brand> dataSent = new Transport<Brand>();
+            
             Response<Brand> responseMessage = new Response<Brand>();
 
+            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(root);
 
-            if (!Request.Content.IsMimeMultipartContent())
+            Brand brand = default;
+
+
+            var dataList = provider.FormData.GetValues("ObjectData");
+            brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
+            Console.WriteLine(brand.Name);
+
+            
+
+            if (Request.Content.IsMimeMultipartContent())
             {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
+                    Trace.WriteLine("Server file path: " + file.LocalFileName);
+                }
                 responseMessage.returnData = null;
                 responseMessage.status = HttpStatusCode.UnsupportedMediaType;
-            }
-            else
-            {
-                string root = HttpContext.Current.Server.MapPath("~/App_Data");
-                Console.WriteLine(root);
-
-                var provider = new MultipartFormDataStreamProvider(root);
 
 
                 try
                 {
-                    await Request.Content.ReadAsMultipartAsync(provider);
-
-                    foreach (var key in provider.FormData.AllKeys)
-                    {
-                        foreach (var val in provider.FormData.GetValues(key))
-                        {
-                            Trace.WriteLine(string.Format("{0}: {1}", key, val));
-                        }
-                    }
-                    foreach (MultipartFileData file in provider.FileData)
-                    {
-                        Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                        Trace.WriteLine("Server file path: " + file.LocalFileName);
-                    }
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Errorhead(e);
                 }
+            }
+            else
+            {
+               
+                
+
+
             }
 
 

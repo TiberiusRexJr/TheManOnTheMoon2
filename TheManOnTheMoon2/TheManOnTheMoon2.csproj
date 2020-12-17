@@ -216,9 +216,12 @@
     <Compile Include="Controllers\ViewModelMultipleModels.cs" />
     <Compile Include="Database\DbAdmin.cs" />
     <Compile Include="Database\DbQueryProducts.cs" />
+    <Compile Include="Database\TableType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IO\FileOps.cs" />
+    <Compile Include="Models\dumm2.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DataBaseModels.designer.cs" />

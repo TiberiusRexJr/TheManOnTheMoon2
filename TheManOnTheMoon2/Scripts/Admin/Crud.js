@@ -10,7 +10,7 @@ $(document).ready(function ()
     //#endregion
 
     //#region GetImages
-    $("#ButtonPostBrand").on('click', function () {
+    $("ButtonPostBrand").on('click', function () {
         var imageElement = null;
 
         var ImageDataBase64 = null;
@@ -29,10 +29,10 @@ $(document).ready(function ()
 
 
             var brandImage = base64ToBlob(baseformated, ImageMimeType);
-            //console.log(brandImage);
+            console.log(brandImage);
 
             var brandData = $('#formAddBrand').serializeToJSON();
-
+            console.log("BRandData: " + brandData);
             FormToSend.append("ImageData", brandImage);
             FormToSend.append("ObjectData", brandData)
 
@@ -296,7 +296,7 @@ function AjaxPost(senderId, FormToSend)
     //if (AjaxExistByName(data.Name, tableType)) {
     //    ModalMessenger(data, false, CRUD_TYPE, data.Name + " Already Exist!");
     //}
-    console.log(FormToSend);
+    console.log(FormToSend.ObjectData);
     console.log(FormToSend.ImageData);
     $.ajax({
         type: "POST",
@@ -592,11 +592,52 @@ function GetSelectedRows(table) {
 //#endregion
 
 //#region Test & Expirimentals
-function TestData(id,data)
+function TestData(id,ObjData)
 {
-    //console.log(id);
-    //console.log(data);
-    //console.log(data.Name);
+    console.log(ObjData);
+     
+    var imageElement = null;
+
+    var ImageDataBase64 = null;
+    var ImageMimeType = null;
+
+    var FormToSend = new FormData();
+
+    if (!$("previewZoneAddBrand").hasClass("hidden")) {
+        imageElement = $("#boxBodyAddBrand").children()[0];
+        ImageDataBase64 = $(imageElement).attr('src');
+
+        ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
+
+
+        var baseformated = getBase64Image(imageElement);
+
+
+        var brandImage = base64ToBlob(baseformated, ImageMimeType);
+        console.log(brandImage);
+        var dumm2 = {Name: "eli"};
+        console.log(ObjData);
+        FormToSend.append("ImageData", brandImage);
+        FormToSend.append("ObjectData", JSON.stringify(dumm2));
+        console.log(FormToSend);
+        AjaxPost("Brand", FormToSend);
+
+
+
+        try {
+
+            //GetImageData(ImageDataBase64);
+        }
+        catch (err) {
+            ModalMessenger(err, false, "Image Upload", "failed to upload");
+        }
+
+    }
+    else {
+        console.log("Nope no image data hoe");
+    }
+
+
    
 }
 
