@@ -311,15 +311,15 @@ function AjaxPost(senderId, FormToSend)
         statusCode:
         {
             400: function (response, jqXHR) {
-                ModalMessenger(data, false, CRUD_TYPE, "400-BadRequest");
+                ModalMessenger("400", false, CRUD_TYPE, "400-BadRequest");
             },
             500: function (response, jqXHR) {
                 var successStatus = false;
-                ModalMessenger(data, false, CRUD_TYPE, "500-Internal Server Error");
+                ModalMessenger("400", false, CRUD_TYPE, "500-Internal Server Error");
             },
             201: function (response, jqXHR) {
                 var successStatus = true;
-                ModalMessenger(data, successStatus, CRUD_TYPE, "201-SuccessFully Created");
+                ModalMessenger("400", successStatus, CRUD_TYPE, "201-SuccessFully Created");
             },
             415: function (response, jqXHR) {
                 var successStatus = false;
@@ -327,7 +327,7 @@ function AjaxPost(senderId, FormToSend)
             }
         },
         error: function (response, jqXHR, data) {
-            ModalMessenger(data, false, CRUD_TYPE, "AjaxPost Errror");
+            ModalMessenger("error", false, CRUD_TYPE, "AjaxPost Errror");
         }
     })
 }
@@ -611,18 +611,20 @@ function TestData(id,ObjData)
 
 
         var baseformated = getBase64Image(imageElement);
-
+        var data3 = $("#form_brand_name").serializeToJSON();
+        console.log("this is data3: "+data3);
 
         var brandImage = base64ToBlob(baseformated, ImageMimeType);
         console.log(brandImage);
         var dumm2 = {Name: "eli"};
-        console.log(ObjData);
+        console.log("this is object data comprad: " + ObjData);
+        console.log("this is eli: +", dumm2);
         FormToSend.append("ImageData", brandImage);
         FormToSend.append("ObjectData", JSON.stringify(dumm2));
         console.log(FormToSend);
         AjaxPost("Brand", FormToSend);
 
-
+        
 
         try {
 
@@ -636,6 +638,7 @@ function TestData(id,ObjData)
     else {
         console.log("Nope no image data hoe");
     }
+
 
 
    

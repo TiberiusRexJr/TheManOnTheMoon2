@@ -396,6 +396,7 @@
     <Content Include="Scripts\Admin\datatables-Crud.js" />
     <Content Include="Scripts\Admin\Drag&amp;Drop.js" />
     <Content Include="Scripts\Admin\jquery.serializeToJSON.js" />
+    <Content Include="Scripts\Admin\Models.js" />
     <Content Include="Scripts\Admin\ScriptsAdmin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

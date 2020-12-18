@@ -1,5 +1,6 @@
 ﻿using TheManOnTheMoon2.Database;
 using TheManOnTheMoon2.Models;
+using TheManOnTheMoon2.IO;
 using System;
 using System.Diagnostics;
 using System.Web;
@@ -13,13 +14,15 @@ using System.Web.Http;
 using System.Collections;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
-
+using System.IO;
 namespace TheManOnTheMoon2.Api
 {
     public class AdminController : ApiController
     {
         #region Variables
         DbAdmin db = new DbAdmin();
+        FileOps fops = new FileOps();
+       
         #endregion
 
         #region Errorhandlers
@@ -168,48 +171,72 @@ namespace TheManOnTheMoon2.Api
 
         [HttpPost]
         [Route("api/Admin/PostBrand/{objData}")]
-        public async Task<Response<Brand>> PostBrand( )
+        public async Task<Response<Brand>> PostBrand()
         {
             
             Response<Brand> responseMessage = new Response<Brand>();
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(root);
-
             Brand brand = default;
+            List<byte[]> ImageFiles = default;
+            string root = HttpContext.Current.Server.MapPath("~/App_Data");
 
+        MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
 
-            var dataList = provider.FormData.GetValues("ObjectData");
-            brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
-            Console.WriteLine(brand.Name);
-
-            
+        
 
             if (Request.Content.IsMimeMultipartContent())
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
-                foreach (MultipartFileData file in provider.FileData)
-                {
-                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server file path: " + file.LocalFileName);
-                }
-                responseMessage.returnData = null;
-                responseMessage.status = HttpStatusCode.UnsupportedMediaType;
 
+                var dataList = provider.FormData.GetValues("ObjectData");
+                brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
 
-                try
+                Console.WriteLine(brand.Name);
+
+                var provider2 = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider2);
+
+                for (int i =0; i <= provider.FileData.Count; i++)
                 {
+                    var filedata = provider.FileData[i].LocalFileName;
+                    var data = provider.FileData[i];
+                    Console.WriteLine(data);
+                    ImageFiles.Add(File.ReadAllBytes(filedata));
+                }    
+                
+                
+                Brand returnObj = fops.SaveImages(brand, ImageFiles, TableType.Brand);
+                if (returnObj == null)
+                {
+                    responseMessage.status = HttpStatusCode.InternalServerError;
+                    responseMessage.returnData = null;
+                }
+                else
+                {
+                    Brand result = db.CreateBrand(returnObj);
+                    if (result == null)
+                    {
+                        responseMessage.status = HttpStatusCode.InternalServerError;
+                        responseMessage.returnData = null;
+                    }
+                    else
+                    {
+                        responseMessage.status = HttpStatusCode.Created;
+                        responseMessage.returnData = result;
+                    }
 
                 }
-                catch (Exception e)
-                {
-                    Errorhead(e);
-                }
+
             }
             else
             {
-               
-                
+
+                var _=db.CreateBrand(brand);
+                if(_==null)
+                {
+                    responseMessage.status = HttpStatusCode.InternalServerError;
+                    responseMessage.returnData = null;
+                }
 
 
             }

@@ -20,28 +20,27 @@
       <Column Name="Width" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Type" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="Sub_Type" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="Product_Picture_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="Product_Picture_Alt_1_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="Product_Picture_Alt_2_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="Product_Picture_Alt_3_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="Category_Product" Member="Category1" ThisKey="Category" OtherKey="Name" Type="Category" IsForeignKey="true" />
+      <Column Name="Image_Main" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Image_Alt_1" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Image_Alt_2" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Association Name="Brand_Product" Member="Brand1" ThisKey="Brand" OtherKey="Name" Type="Brand" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Categories" Member="Categories">
-    <Type Name="Category">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="Category_Image_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="Category_Product" Member="Products" ThisKey="Name" OtherKey="Category" Type="Product" />
+      <Association Name="Category_Product" Member="Category1" ThisKey="Category" OtherKey="Name" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Brands" Member="Brands">
     <Type Name="Brand">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="Brand_Image_Url" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Image_Main" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Association Name="Brand_Product" Member="Products" ThisKey="Name" OtherKey="Brand" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Image_Main" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Products" ThisKey="Name" OtherKey="Category" Type="Product" />
     </Type>
   </Table>
 </Database>
