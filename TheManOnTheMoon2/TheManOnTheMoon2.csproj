@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="IO\book.cs" />
     <Compile Include="IO\FileOps.cs" />
+    <Compile Include="IO\ImageData.cs" />
     <Compile Include="Models\dumm2.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\Category.cs" />
@@ -397,6 +398,7 @@
     <Content Include="Scripts\Admin\datatables-Crud.js" />
     <Content Include="Scripts\Admin\Drag&amp;Drop.js" />
     <Content Include="Scripts\Admin\jquery.serializeToJSON.js" />
+    <Content Include="Scripts\Admin\Models.js" />
     <Content Include="Scripts\Admin\ScriptsAdmin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

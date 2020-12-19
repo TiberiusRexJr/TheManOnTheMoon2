@@ -20,7 +20,7 @@ $(document).ready(function ()
 
         if (!$("previewZoneAddBrand").hasClass("hidden")) {
             imageElement = $("#boxBodyAddBrand").children()[0];
-            ImageDataBase64 = $(imageElement).attr('src');
+            ImageDataBase64 = $(imageElement).attr('data-src');
 
             ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
 
@@ -31,12 +31,18 @@ $(document).ready(function ()
             var brandImage = base64ToBlob(baseformated, ImageMimeType);
             console.log(brandImage);
 
+
+
+            var imageElement = $("#formAddBrand").find("img");
+            console.log("imageElemtn nigga:" +imageElement);
+
+
             var brandData = $('#formAddBrand').serializeToJSON();
             console.log("BRandData: " + brandData);
-            FormToSend.append("ImageData", brandImage);
-            FormToSend.append("ObjectData", brandData)
+            FormToSend.append("ImageData", ImageDataBase64);
+            //FormToSend.append("ObjectData", brandData)
 
-            AjaxPost("Brand", FormToSend);
+            AjaxPost("Brand", FormToSend,objData);
 
 
 
@@ -261,9 +267,9 @@ function AjaxPost(senderId, FormToSend)
     const CRUD_TYPE = "Posted";
   
 
-    const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/product";
-    const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/category";
-    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/data";
+    const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/objData";
+    const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/objData";
+    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/objData";
 
     var sendToAdress = "";
     var tableType = " ";
@@ -296,8 +302,7 @@ function AjaxPost(senderId, FormToSend)
     //if (AjaxExistByName(data.Name, tableType)) {
     //    ModalMessenger(data, false, CRUD_TYPE, data.Name + " Already Exist!");
     //}
-    console.log(FormToSend.ObjectData);
-    console.log(FormToSend.ImageData);
+
     $.ajax({
         type: "POST",
         data: FormToSend,
@@ -311,24 +316,29 @@ function AjaxPost(senderId, FormToSend)
         statusCode:
         {
             400: function (response, jqXHR) {
-                ModalMessenger(data, false, CRUD_TYPE, "400-BadRequest");
+                ModalMessenger("400", false, CRUD_TYPE, "400-BadRequest");
             },
             500: function (response, jqXHR) {
                 var successStatus = false;
-                ModalMessenger(data, false, CRUD_TYPE, "500-Internal Server Error");
+                ModalMessenger("500", false, CRUD_TYPE, "500-Internal Server Error");
             },
             201: function (response, jqXHR) {
                 var successStatus = true;
-                ModalMessenger(data, successStatus, CRUD_TYPE, "201-SuccessFully Created");
+                ModalMessenger("201", successStatus, CRUD_TYPE, "201-SuccessFully Created");
             },
             415: function (response, jqXHR) {
                 var successStatus = false;
-                ModalMessenger("Invalid Media Type" , successStatus, CRUD_TYPE, "415-Invalid medai type");
+                ModalMessenger("Invalid Media Type", successStatus, CRUD_TYPE, "415-Invalid medai type");
+
+            },
+            302: function (response, jqXHR) {
+                var successStatus = false;
+                ModalMessenger("Already Exist!", successStatus, CRUD_TYPE, "302 Resource Found");
             }
         },
         error: function (response, jqXHR, data) {
-            ModalMessenger(data, false, CRUD_TYPE, "AjaxPost Errror");
-        }
+            ModalMessenger("error", false, CRUD_TYPE, "AjaxPost Errror");
+            }
     })
 }
 
@@ -609,20 +619,22 @@ function TestData(id,ObjData)
 
         ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
 
-
+       
         var baseformated = getBase64Image(imageElement);
-
+        var data3 = $("#form_brand_name").serializeToJSON();
+        console.log("this is data3: "+data3);
 
         var brandImage = base64ToBlob(baseformated, ImageMimeType);
-        console.log(brandImage);
+        console.log("brandIMage: "+brandImage);
         var dumm2 = {Name: "eli"};
-        console.log(ObjData);
+        console.log("this is object data comprad: " + ObjData);
+        console.log("this is eli: +", dumm2);
         FormToSend.append("ImageData", brandImage);
         FormToSend.append("ObjectData", JSON.stringify(dumm2));
-        console.log(FormToSend);
+        
         AjaxPost("Brand", FormToSend);
 
-
+        
 
         try {
 
@@ -636,6 +648,7 @@ function TestData(id,ObjData)
     else {
         console.log("Nope no image data hoe");
     }
+
 
 
    

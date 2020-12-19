@@ -1,5 +1,6 @@
 ﻿using TheManOnTheMoon2.Database;
 using TheManOnTheMoon2.Models;
+using TheManOnTheMoon2.IO;
 using System;
 using System.Diagnostics;
 using System.Web;
@@ -13,6 +14,8 @@ using System.Web.Http;
 using System.Collections;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using System.IO;
+
 
 namespace TheManOnTheMoon2.Api
 {
@@ -20,6 +23,21 @@ namespace TheManOnTheMoon2.Api
     {
         #region Variables
         DbAdmin db = new DbAdmin();
+        FileOps fops = new FileOps();
+
+       private readonly string root = HttpContext.Current.Server.MapPath("~/App_Data");
+
+        private class FormItem
+        {
+            public FormItem() { }
+            public string name { get; set; }
+            public byte[] data { get; set; }
+            public string fileName { get; set; }
+            public string mediaType { get; set; }
+            public string value { get { return Encoding.Default.GetString(data); } }
+            public bool isAFileUpload { get { return !String.IsNullOrEmpty(fileName); } }
+        }
+
         #endregion
 
         #region Errorhandlers
@@ -63,6 +81,14 @@ namespace TheManOnTheMoon2.Api
                 return Task.FromResult(response);
             }
             #endregion
+        }
+        #endregion
+
+        #region HelperClasses
+        public class MultiFormData
+        {
+            public string Obj { get; set; }
+            public string Age { get; set; }
         }
         #endregion
 
@@ -168,56 +194,127 @@ namespace TheManOnTheMoon2.Api
 
         [HttpPost]
         [Route("api/Admin/PostBrand/{objData}")]
-        public async Task<Response<Brand>> PostBrand( )
+        public async Task<Response<Brand>> PostBrand()
         {
-            
-            Response<Brand> responseMessage = new Response<Brand>();
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(root);
+        Response<Brand> responseMessage = new Response<Brand>();
+
+            
 
             Brand brand = default;
+            List<ImageData> ImageFiles = new List<ImageData>();
 
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
 
+            await Request.Content.ReadAsMultipartAsync(provider);
             var dataList = provider.FormData.GetValues("ObjectData");
             brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
-            Console.WriteLine(brand.Name);
 
-            
-
-            if (Request.Content.IsMimeMultipartContent())
+            if(brand==null)
             {
-                await Request.Content.ReadAsMultipartAsync(provider);
-                foreach (MultipartFileData file in provider.FileData)
+                responseMessage.status = HttpStatusCode.BadRequest;
+                responseMessage.returnData = brand;
+                return responseMessage;
+            }
+
+            if(db.ExistByName(brand.Name, TableType.Brand))
+            {
+                responseMessage.status = HttpStatusCode.Found;
+                responseMessage.returnData = brand;
+                return responseMessage;
+            }
+            
+            if (provider.FileData.Count>0)
+            {
+
+            for (int i = 0; i <= provider.FileData.Count-1; i++)
+            {
+                ImageData imageData = new ImageData();
+                var fileupload = provider.FileData[i];
+                var temppath = fileupload.LocalFileName;
+                var bytes = File.ReadAllBytes(temppath);
+                imageData.Data = bytes;
+                imageData.MimeType = provider.FileData[i].Headers.ContentType.ToString();
+
+                ImageFiles.Add(imageData);
+            }
+            System.Console.WriteLine(ImageFiles.Count);
+
+            brand= fops.SaveImages(brand,ImageFiles, TableType.Brand);
+
+                if (brand == null)
                 {
-                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server file path: " + file.LocalFileName);
+                    responseMessage.status = HttpStatusCode.InternalServerError;
+                    responseMessage.returnData = null;
+                    return responseMessage;
                 }
+                else
+                {
+
+                    var _ = db.CreateBrand(brand);
+                    if (_ == null)
+                    {
+                        responseMessage.returnData = null;
+                        responseMessage.status = HttpStatusCode.BadRequest;
+                        return responseMessage;
+                    }
+                    else
+                    {
+                        responseMessage.returnData = brand;
+                        responseMessage.status = HttpStatusCode.Created;
+                        return responseMessage;
+                    }
+                }
+
+            }
+            var result = db.CreateBrand(brand);
+            if (result == null)
+            {
                 responseMessage.returnData = null;
-                responseMessage.status = HttpStatusCode.UnsupportedMediaType;
-
-
-                try
-                {
-
-                }
-                catch (Exception e)
-                {
-                    Errorhead(e);
-                }
+                responseMessage.status = HttpStatusCode.BadRequest;
+                
             }
             else
             {
-               
+                responseMessage.returnData = brand;
+                responseMessage.status = HttpStatusCode.Created;
                 
-
-
             }
+
+
+
+
+
+
 
 
             return responseMessage;
         }
 
+        private async Task<(string obj,List<byte[]> imageData)> GetMultiFormData()
+        {
+            string obj = default;
+            List<byte[]> imageData = default;
+
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            var dataList = provider.FormData.GetValues("ObjectData");
+            obj= dataList[0];
+
+
+            for (int i = 0; i <= provider.FileData.Count; i++)
+            {
+                var fileupload = provider.FileData[i];
+                var temppath = fileupload.LocalFileName;
+                var bytes = File.ReadAllBytes(temppath);
+
+                imageData.Add(bytes);
+            }
+
+            return (obj, imageData);
+        }
         #endregion
 
         #region Put
@@ -554,7 +651,7 @@ namespace TheManOnTheMoon2.Api
                 return responseMessage;
             }
 
-            DbAdmin.TableType tabletoSearch = ReturnTableType(tableType);
+            TableType tabletoSearch = ReturnTableType(tableType);
 
             if (tabletoSearch == null)
             {
@@ -583,20 +680,20 @@ namespace TheManOnTheMoon2.Api
         #endregion
 
         #region Utilities
-        public DbAdmin.TableType ReturnTableType(string tableType)
+        public TableType ReturnTableType(string tableType)
         {
-            DbAdmin.TableType returnTable = null;
+            TableType returnTable = null;
 
             switch(tableType)
             {
                 case "Brand":
-                     returnTable= DbAdmin.TableType.Brand;
+                     returnTable= TableType.Brand;
                     break;
                 case "Category":
-                    returnTable= DbAdmin.TableType.Category;
+                    returnTable= TableType.Category;
                     break;
                 case "Product":
-                    returnTable= DbAdmin.TableType.Product;
+                    returnTable= TableType.Product;
                     break;
                 default:
                     returnTable = null;
