@@ -43,5 +43,10 @@ namespace TheManOnTheMoon2.IO
 
             return returnObj;
         }
+
+        public book GetBook(string author,int year,string Title)
+        {
+            
+        }
     }
 }
