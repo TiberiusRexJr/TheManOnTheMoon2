@@ -20,7 +20,7 @@ $(document).ready(function ()
 
         if (!$("previewZoneAddBrand").hasClass("hidden")) {
             imageElement = $("#boxBodyAddBrand").children()[0];
-            ImageDataBase64 = $(imageElement).attr('src');
+            ImageDataBase64 = $(imageElement).attr('data-src');
 
             ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
 
@@ -31,9 +31,15 @@ $(document).ready(function ()
             var brandImage = base64ToBlob(baseformated, ImageMimeType);
             console.log(brandImage);
 
+
+
+            var imageElement = $("#formAddBrand").find("img");
+            console.log("imageElemtn nigga:" +imageElement);
+
+
             var brandData = $('#formAddBrand').serializeToJSON();
             console.log("BRandData: " + brandData);
-            FormToSend.append("ImageData", brandImage);
+            FormToSend.append("ImageData", ImageDataBase64);
             //FormToSend.append("ObjectData", brandData)
 
             AjaxPost("Brand", FormToSend,objData);
@@ -314,20 +320,25 @@ function AjaxPost(senderId, FormToSend)
             },
             500: function (response, jqXHR) {
                 var successStatus = false;
-                ModalMessenger("400", false, CRUD_TYPE, "500-Internal Server Error");
+                ModalMessenger("500", false, CRUD_TYPE, "500-Internal Server Error");
             },
             201: function (response, jqXHR) {
                 var successStatus = true;
-                ModalMessenger("400", successStatus, CRUD_TYPE, "201-SuccessFully Created");
+                ModalMessenger("201", successStatus, CRUD_TYPE, "201-SuccessFully Created");
             },
             415: function (response, jqXHR) {
                 var successStatus = false;
-                ModalMessenger("Invalid Media Type" , successStatus, CRUD_TYPE, "415-Invalid medai type");
+                ModalMessenger("Invalid Media Type", successStatus, CRUD_TYPE, "415-Invalid medai type");
+
+            },
+            302: function (response, jqXHR) {
+                var successStatus = false;
+                ModalMessenger("Already Exist!", successStatus, CRUD_TYPE, "302 Resource Found");
             }
         },
         error: function (response, jqXHR, data) {
             ModalMessenger("error", false, CRUD_TYPE, "AjaxPost Errror");
-        }
+            }
     })
 }
 
@@ -608,13 +619,13 @@ function TestData(id,ObjData)
 
         ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
 
-
+       
         var baseformated = getBase64Image(imageElement);
         var data3 = $("#form_brand_name").serializeToJSON();
         console.log("this is data3: "+data3);
 
         var brandImage = base64ToBlob(baseformated, ImageMimeType);
-        console.log(brandImage);
+        console.log("brandIMage: "+brandImage);
         var dumm2 = {Name: "eli"};
         console.log("this is object data comprad: " + ObjData);
         console.log("this is eli: +", dumm2);

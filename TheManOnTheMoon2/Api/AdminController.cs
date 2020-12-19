@@ -15,6 +15,8 @@ using System.Collections;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using System.IO;
+
+
 namespace TheManOnTheMoon2.Api
 {
     public class AdminController : ApiController
@@ -22,6 +24,8 @@ namespace TheManOnTheMoon2.Api
         #region Variables
         DbAdmin db = new DbAdmin();
         FileOps fops = new FileOps();
+
+       private readonly string root = HttpContext.Current.Server.MapPath("~/App_Data");
 
         private class FormItem
         {
@@ -77,6 +81,14 @@ namespace TheManOnTheMoon2.Api
                 return Task.FromResult(response);
             }
             #endregion
+        }
+        #endregion
+
+        #region HelperClasses
+        public class MultiFormData
+        {
+            public string Obj { get; set; }
+            public string Age { get; set; }
         }
         #endregion
 
@@ -187,82 +199,122 @@ namespace TheManOnTheMoon2.Api
 
         Response<Brand> responseMessage = new Response<Brand>();
 
+            
 
             Brand brand = default;
-            List<byte[]> ImageFiles = default;
+            List<ImageData> ImageFiles = new List<ImageData>();
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
 
-            MultipartFormDataStreamProvider provider1 = new MultipartFormDataStreamProvider(root);
-
-            await Request.Content.ReadAsMultipartAsync(provider1);
-
-            var dataList = provider1.FormData.GetValues("ObjectData");
+            await Request.Content.ReadAsMultipartAsync(provider);
+            var dataList = provider.FormData.GetValues("ObjectData");
             brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
 
-         
-
-            Console.WriteLine(brand.Name);
-
-            // Read the first file from the file data collection:
-            var fileupload = provider1.FileData[0];
-
-            // Get the temp name and path that MultipartFormDataStreamProvider used to save the file as:
-            var temppath = fileupload.LocalFileName;
-
-            // Now read the file's data from the temp location.
-            var bytes = File.ReadAllBytes(temppath);
-            System.Console.WriteLine(bytes);
-
-            var provider = new MultipartMemoryStreamProvider();
-            await Request.Content.ReadAsMultipartAsync(provider);
-            var formItems = new List<FormItem>();
-
-            
-            // Scan the Multiple Parts 
-            foreach (HttpContent contentPart in provider.Contents)
+            if(brand==null)
             {
-                var formItem = new FormItem();
-                var contentDisposition = contentPart.Headers.ContentDisposition;
-                formItem.name = contentDisposition.Name.Trim('"');
-                formItem.data = await contentPart.ReadAsByteArrayAsync();
-                formItem.fileName = String.IsNullOrEmpty(contentDisposition.FileName) ? "" : contentDisposition.FileName.Trim('"');
-                formItem.mediaType = contentPart.Headers.ContentType == null ? "" : String.IsNullOrEmpty(contentPart.Headers.ContentType.MediaType) ? "" : contentPart.Headers.ContentType.MediaType;
-                formItems.Add(formItem);
+                responseMessage.status = HttpStatusCode.BadRequest;
+                responseMessage.returnData = brand;
+                return responseMessage;
             }
-            foreach (FormItem formItemToProcess in formItems)
+
+            if(db.ExistByName(brand.Name, TableType.Brand))
             {
-                if (formItemToProcess.isAFileUpload)
+                responseMessage.status = HttpStatusCode.Found;
+                responseMessage.returnData = brand;
+                return responseMessage;
+            }
+            
+            if (provider.FileData.Count>0)
+            {
+
+            for (int i = 0; i <= provider.FileData.Count-1; i++)
+            {
+                ImageData imageData = new ImageData();
+                var fileupload = provider.FileData[i];
+                var temppath = fileupload.LocalFileName;
+                var bytes = File.ReadAllBytes(temppath);
+                imageData.Data = bytes;
+                imageData.MimeType = provider.FileData[i].Headers.ContentType.ToString();
+
+                ImageFiles.Add(imageData);
+            }
+            System.Console.WriteLine(ImageFiles.Count);
+
+            brand= fops.SaveImages(brand,ImageFiles, TableType.Brand);
+
+                if (brand == null)
                 {
-                    System.Console.WriteLine(formItemToProcess.isAFileUpload);
-
-                    System.Console.WriteLine(formItemToProcess.name);
-                    System.Console.WriteLine(formItemToProcess.data);
-
-
-                    // This is a file. Do something with the file.  Write it to disk, store in a database.  Whatever you want to do.
-
-                    // The name the client used to identify the *file* input element of the *form post* is stored in formItem.name.
-                    // The *suggested* file name from the client is stored in formItemToProcess.fileName
-                    // The media type (MimeType) of file (as far as the client knew) if available, is stored in formItemToProcess.mediaType
-                    // The file data is stored in the byte[] formItemToProcess.data
-
+                    responseMessage.status = HttpStatusCode.InternalServerError;
+                    responseMessage.returnData = null;
+                    return responseMessage;
                 }
                 else
                 {
-                    // This is a form variable.  Do something with the form variable.  Update a DB table, whatever you want to do.
 
-                    // The name the client used to identify the input element of the *form post* is stored in formItem.name.
-                    // The value the client input element is stored in formItem.value.
-
+                    var _ = db.CreateBrand(brand);
+                    if (_ == null)
+                    {
+                        responseMessage.returnData = null;
+                        responseMessage.status = HttpStatusCode.BadRequest;
+                        return responseMessage;
+                    }
+                    else
+                    {
+                        responseMessage.returnData = brand;
+                        responseMessage.status = HttpStatusCode.Created;
+                        return responseMessage;
+                    }
                 }
+
+            }
+            var result = db.CreateBrand(brand);
+            if (result == null)
+            {
+                responseMessage.returnData = null;
+                responseMessage.status = HttpStatusCode.BadRequest;
+                
+            }
+            else
+            {
+                responseMessage.returnData = brand;
+                responseMessage.status = HttpStatusCode.Created;
+                
             }
 
-            
+
+
+
+
+
+
 
             return responseMessage;
         }
 
+        private async Task<(string obj,List<byte[]> imageData)> GetMultiFormData()
+        {
+            string obj = default;
+            List<byte[]> imageData = default;
+
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            var dataList = provider.FormData.GetValues("ObjectData");
+            obj= dataList[0];
+
+
+            for (int i = 0; i <= provider.FileData.Count; i++)
+            {
+                var fileupload = provider.FileData[i];
+                var temppath = fileupload.LocalFileName;
+                var bytes = File.ReadAllBytes(temppath);
+
+                imageData.Add(bytes);
+            }
+
+            return (obj, imageData);
+        }
         #endregion
 
         #region Put
@@ -599,7 +651,7 @@ namespace TheManOnTheMoon2.Api
                 return responseMessage;
             }
 
-            DbAdmin.TableType tabletoSearch = ReturnTableType(tableType);
+            TableType tabletoSearch = ReturnTableType(tableType);
 
             if (tabletoSearch == null)
             {
@@ -628,20 +680,20 @@ namespace TheManOnTheMoon2.Api
         #endregion
 
         #region Utilities
-        public DbAdmin.TableType ReturnTableType(string tableType)
+        public TableType ReturnTableType(string tableType)
         {
-            DbAdmin.TableType returnTable = null;
+            TableType returnTable = null;
 
             switch(tableType)
             {
                 case "Brand":
-                     returnTable= DbAdmin.TableType.Brand;
+                     returnTable= TableType.Brand;
                     break;
                 case "Category":
-                    returnTable= DbAdmin.TableType.Category;
+                    returnTable= TableType.Category;
                     break;
                 case "Product":
-                    returnTable= DbAdmin.TableType.Product;
+                    returnTable= TableType.Product;
                     break;
                 default:
                     returnTable = null;

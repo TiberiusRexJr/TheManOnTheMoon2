@@ -8,7 +8,7 @@ namespace TheManOnTheMoon2.Database
 {
     public class DbAdmin : DbQueryProducts
     {
-
+        
         #region Variables
         private DataBaseModelsDataContext db = new DataBaseModelsDataContext();
 
@@ -30,22 +30,7 @@ namespace TheManOnTheMoon2.Database
 
             #endregion
         }
-        public class TableType
-        {
-            #region Constructor
-            private TableType(string value) { Value = value; }
-            #endregion
-            #region Variables
-            public string Value { get; set; }
-            #endregion
-
-            #region Properties
-            public static TableType Brand { get { return new TableType("Brand"); } }
-            public static TableType Category { get { return new TableType("Category"); } }
-            public static TableType Product { get { return new TableType("Product"); } }
-
-            #endregion
-        }
+       
         #endregion
 
         #region Methods
@@ -112,7 +97,7 @@ namespace TheManOnTheMoon2.Database
             {
                 return responseBrand;
             }
-            if (ExistByName(brand.Name, DbAdmin.TableType.Brand))
+            if (ExistByName(brand.Name, TableType.Brand))
             {
                 return responseBrand;
             }
@@ -369,7 +354,7 @@ namespace TheManOnTheMoon2.Database
         //    return statusExist;
         //}
 
-        public bool ExistByName(string itemName, DbAdmin.TableType tableType)
+        public bool ExistByName(string itemName, TableType tableType)
         {
             bool statusExist = false;
  

@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
+using System.Drawing;
 
 namespace TheManOnTheMoon2.IO
 {
@@ -21,8 +22,10 @@ namespace TheManOnTheMoon2.IO
     {
         #region Variables
         readonly List<string> ImageProperties = new List<string> { "Image_Main", "Image_Alt_1","Image_Alt_2" };
+
+        string  ImagesRoot= HttpContext.Current.Server.MapPath("~/App_Data/Images/");
         #endregion
-        public T SaveImages<T>(T obj,List<byte[]> imageFiles,TableType tableType)
+        public T SaveImages<T>(T obj,List<ImageData> imageFiles,TableType tableType)
         {
             T returnObj = default;
 
@@ -36,13 +39,13 @@ namespace TheManOnTheMoon2.IO
 
             switch (tableType.Value)
             { case "Product" :
-                    imageFolderCategoricalDir = HttpContext.Current.Server.MapPath(null);
+                    imageFolderCategoricalDir ="Products/";
                     break;
                case "Brand" :
-                    imageFolderCategoricalDir = HttpContext.Current.Server.MapPath(null);
+                    imageFolderCategoricalDir ="Brands/";
                     break;
                 case "Category" :
-                    imageFolderCategoricalDir = HttpContext.Current.Server.MapPath(null);
+                    imageFolderCategoricalDir = "Categories/";
                     break;
                 default:
                     obj = default;
@@ -50,7 +53,7 @@ namespace TheManOnTheMoon2.IO
             }
 
            imageFolderUniqueDir= CreateFolder(imageFolderCategoricalDir,nameBase);
-            if(String.IsNullOrEmpty( imageFolderUniqueDir))
+            if(String.IsNullOrEmpty(imageFolderUniqueDir))
             {
                 obj = default;
                 return obj;
@@ -66,7 +69,7 @@ namespace TheManOnTheMoon2.IO
                 }
                 else
                 {
-                    for(int i=1; i<=savedImageUrls.Count; i++)
+                    for(int i=0; i<=savedImageUrls.Count-1; i++)
                     {
                        TrySetProperty(obj, ImageProperties[i], savedImageUrls[i]);
 
@@ -99,35 +102,75 @@ namespace TheManOnTheMoon2.IO
             
         }
 
-        private List<string> SaveImages(List<byte[]> imageBlobs,string imageFolderUniqueDir, string nameBase)
+        private List<string> SaveImages(List<ImageData> imageBlobs,string imageFolderUniqueDir, string nameBase)
         {
-            List<string> savedImageUrls = default;
+            List<string> savedImageUrls = new List<string>();
 
-            foreach(byte[] image in imageBlobs)
+            string extension = default;
+            string stringByte = default;
+            string filename = nameBase+"__" + Guid.NewGuid().ToString();
+            string savePath = imageFolderUniqueDir + "/";
+
+            foreach(ImageData image in imageBlobs)
             {
-                string path = imageFolderUniqueDir + "/" + nameBase + Guid.NewGuid().ToString();
-                File.WriteAllBytes(path, image);
-                savedImageUrls.Add(path);
+                extension = returnFileExtension(image.MimeType);
+                stringByte = ConvertByteArray64ToString(image.Data);
+
+                savePath += filename + extension;
+
+                
+                File.WriteAllBytes(ImagesRoot+savePath, Convert.FromBase64String(stringByte));
+                savedImageUrls.Add(savePath);
             }
 
 
             return savedImageUrls;
         }
 
-        private string CreateFolder(string baseDirectory,string baseName)
+        private string CreateFolder(string typeDirectory,string baseName)
         {
             string newDirectory = default;
 
-            if(Directory.Exists(baseDirectory+"/"+baseName))
+            if(Directory.Exists(ImagesRoot+typeDirectory + baseName))
             {
                 return newDirectory;
             }
             else
             {
-                DirectoryInfo di= Directory.CreateDirectory(baseDirectory + "/" + baseName);
-                newDirectory = di.FullName;
+                DirectoryInfo di= Directory.CreateDirectory(ImagesRoot+typeDirectory + baseName+"/");
+                newDirectory = typeDirectory + baseName;
             }
             return newDirectory;
         }
+
+        private string returnFileExtension(string Mime)
+        {
+            string extension = default;
+            switch(Mime)
+            {
+                case "image/gif": extension = ".gif";
+                    break;
+                case "image/jpeg": extension = ".jpg";
+                    break;
+                case "image/png": extension = ".png";
+                    break;
+                case "image/webp":
+                    extension = ".webp";
+                    break;
+                default: extension = ".png";
+                    break;
+            }
+            return extension;
+        }
+
+        private string ConvertByteArray64ToString(byte[] data)
+        {
+            string stringByte = default;
+
+            stringByte = Convert.ToBase64String(data);
+
+            return stringByte;
+        }
+       
     }
 }

@@ -221,6 +221,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IO\FileOps.cs" />
+    <Compile Include="IO\ImageData.cs" />
     <Compile Include="Models\dumm2.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\Category.cs" />
