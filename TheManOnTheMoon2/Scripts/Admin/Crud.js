@@ -34,9 +34,9 @@ $(document).ready(function ()
             var brandData = $('#formAddBrand').serializeToJSON();
             console.log("BRandData: " + brandData);
             FormToSend.append("ImageData", brandImage);
-            FormToSend.append("ObjectData", brandData)
+            //FormToSend.append("ObjectData", brandData)
 
-            AjaxPost("Brand", FormToSend);
+            AjaxPost("Brand", FormToSend,objData);
 
 
 
@@ -261,9 +261,9 @@ function AjaxPost(senderId, FormToSend)
     const CRUD_TYPE = "Posted";
   
 
-    const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/product";
-    const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/category";
-    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/data";
+    const API_POST_PRODUCT = " https://localhost:44383/api/Admin/PostProduct/objData";
+    const API_POST_CATEGORY = " https://localhost:44383/api/Admin/PostCategory/objData";
+    const API_POST_BRAND = " https://localhost:44383/api/Admin/PostBrand/objData";
 
     var sendToAdress = "";
     var tableType = " ";
@@ -296,8 +296,7 @@ function AjaxPost(senderId, FormToSend)
     //if (AjaxExistByName(data.Name, tableType)) {
     //    ModalMessenger(data, false, CRUD_TYPE, data.Name + " Already Exist!");
     //}
-    console.log(FormToSend.ObjectData);
-    console.log(FormToSend.ImageData);
+
     $.ajax({
         type: "POST",
         data: FormToSend,
@@ -621,7 +620,7 @@ function TestData(id,ObjData)
         console.log("this is eli: +", dumm2);
         FormToSend.append("ImageData", brandImage);
         FormToSend.append("ObjectData", JSON.stringify(dumm2));
-        console.log(FormToSend);
+        
         AjaxPost("Brand", FormToSend);
 
         

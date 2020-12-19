@@ -22,7 +22,18 @@ namespace TheManOnTheMoon2.Api
         #region Variables
         DbAdmin db = new DbAdmin();
         FileOps fops = new FileOps();
-       
+
+        private class FormItem
+        {
+            public FormItem() { }
+            public string name { get; set; }
+            public byte[] data { get; set; }
+            public string fileName { get; set; }
+            public string mediaType { get; set; }
+            public string value { get { return Encoding.Default.GetString(data); } }
+            public bool isAFileUpload { get { return !String.IsNullOrEmpty(fileName); } }
+        }
+
         #endregion
 
         #region Errorhandlers
@@ -173,74 +184,81 @@ namespace TheManOnTheMoon2.Api
         [Route("api/Admin/PostBrand/{objData}")]
         public async Task<Response<Brand>> PostBrand()
         {
-            
-            Response<Brand> responseMessage = new Response<Brand>();
+
+        Response<Brand> responseMessage = new Response<Brand>();
+
 
             Brand brand = default;
             List<byte[]> ImageFiles = default;
+
             string root = HttpContext.Current.Server.MapPath("~/App_Data");
 
-        MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+            MultipartFormDataStreamProvider provider1 = new MultipartFormDataStreamProvider(root);
 
-        
+            await Request.Content.ReadAsMultipartAsync(provider1);
 
-            if (Request.Content.IsMimeMultipartContent())
+            var dataList = provider1.FormData.GetValues("ObjectData");
+            brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
+
+         
+
+            Console.WriteLine(brand.Name);
+
+            // Read the first file from the file data collection:
+            var fileupload = provider1.FileData[0];
+
+            // Get the temp name and path that MultipartFormDataStreamProvider used to save the file as:
+            var temppath = fileupload.LocalFileName;
+
+            // Now read the file's data from the temp location.
+            var bytes = File.ReadAllBytes(temppath);
+            System.Console.WriteLine(bytes);
+
+            var provider = new MultipartMemoryStreamProvider();
+            await Request.Content.ReadAsMultipartAsync(provider);
+            var formItems = new List<FormItem>();
+
+            
+            // Scan the Multiple Parts 
+            foreach (HttpContent contentPart in provider.Contents)
             {
-                await Request.Content.ReadAsMultipartAsync(provider);
-
-                var dataList = provider.FormData.GetValues("ObjectData");
-                brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
-
-                Console.WriteLine(brand.Name);
-
-                var provider2 = new MultipartMemoryStreamProvider();
-                await Request.Content.ReadAsMultipartAsync(provider2);
-
-                for (int i =0; i <= provider.FileData.Count; i++)
+                var formItem = new FormItem();
+                var contentDisposition = contentPart.Headers.ContentDisposition;
+                formItem.name = contentDisposition.Name.Trim('"');
+                formItem.data = await contentPart.ReadAsByteArrayAsync();
+                formItem.fileName = String.IsNullOrEmpty(contentDisposition.FileName) ? "" : contentDisposition.FileName.Trim('"');
+                formItem.mediaType = contentPart.Headers.ContentType == null ? "" : String.IsNullOrEmpty(contentPart.Headers.ContentType.MediaType) ? "" : contentPart.Headers.ContentType.MediaType;
+                formItems.Add(formItem);
+            }
+            foreach (FormItem formItemToProcess in formItems)
+            {
+                if (formItemToProcess.isAFileUpload)
                 {
-                    var filedata = provider.FileData[i].LocalFileName;
-                    var data = provider.FileData[i];
-                    Console.WriteLine(data);
-                    ImageFiles.Add(File.ReadAllBytes(filedata));
-                }    
-                
-                
-                Brand returnObj = fops.SaveImages(brand, ImageFiles, TableType.Brand);
-                if (returnObj == null)
-                {
-                    responseMessage.status = HttpStatusCode.InternalServerError;
-                    responseMessage.returnData = null;
+                    System.Console.WriteLine(formItemToProcess.isAFileUpload);
+
+                    System.Console.WriteLine(formItemToProcess.name);
+                    System.Console.WriteLine(formItemToProcess.data);
+
+
+                    // This is a file. Do something with the file.  Write it to disk, store in a database.  Whatever you want to do.
+
+                    // The name the client used to identify the *file* input element of the *form post* is stored in formItem.name.
+                    // The *suggested* file name from the client is stored in formItemToProcess.fileName
+                    // The media type (MimeType) of file (as far as the client knew) if available, is stored in formItemToProcess.mediaType
+                    // The file data is stored in the byte[] formItemToProcess.data
+
                 }
                 else
                 {
-                    Brand result = db.CreateBrand(returnObj);
-                    if (result == null)
-                    {
-                        responseMessage.status = HttpStatusCode.InternalServerError;
-                        responseMessage.returnData = null;
-                    }
-                    else
-                    {
-                        responseMessage.status = HttpStatusCode.Created;
-                        responseMessage.returnData = result;
-                    }
+                    // This is a form variable.  Do something with the form variable.  Update a DB table, whatever you want to do.
+
+                    // The name the client used to identify the input element of the *form post* is stored in formItem.name.
+                    // The value the client input element is stored in formItem.value.
 
                 }
-
-            }
-            else
-            {
-
-                var _=db.CreateBrand(brand);
-                if(_==null)
-                {
-                    responseMessage.status = HttpStatusCode.InternalServerError;
-                    responseMessage.returnData = null;
-                }
-
-
             }
 
+            
 
             return responseMessage;
         }
