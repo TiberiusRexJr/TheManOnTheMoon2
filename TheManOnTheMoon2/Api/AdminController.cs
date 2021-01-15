@@ -567,6 +567,7 @@ namespace TheManOnTheMoon2.Api
         }
 
         [HttpDelete]
+        [Route("api/Admin/DeleteBrands/brands")]
         public Response<bool> DeleteBrands([FromBody] List<Brand> brands)
         {
             Response<bool> responseMessage = new Response<bool>();
@@ -623,13 +624,7 @@ namespace TheManOnTheMoon2.Api
             return responseMessage;
         }
 
-        /*?[HttpDelete]
-        //public Response<bool> DelteUser([FromBody] List<User>   user) 
-        //{ 
-        
-        //}
-        */
-        [HttpDelete]
+      
 
 
         #endregion
