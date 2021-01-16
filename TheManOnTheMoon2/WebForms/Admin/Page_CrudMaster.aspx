@@ -155,10 +155,7 @@
                 
               <div class="col-lg-6 col-md-6 bg-info">
                  
-                  <form>
                  
-                 </form>
-                  <form id="form_brand_name">
                                            <div class="form-group">
                      <i class="fas fa-hashtag"></i>
                     <label class="small mb-1" for="Id ">Id</label>
@@ -169,8 +166,36 @@
                     <label class="small mb-1" for="Name">Name</label>
                     <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
                  </div>
-                                            
-                                        </form>
+                      <form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden" id="preview-zone">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Image </b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>                        
+                                        
                   
               </div>
               
@@ -182,7 +207,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonEditBrandSubmit" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
+            <a class="btn btn-primary" id="ButtonEditBrandSubmit" >Save</a>
           
         </div>
       </div>

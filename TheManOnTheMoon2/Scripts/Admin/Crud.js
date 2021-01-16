@@ -1,7 +1,29 @@
-﻿//#region DocumentOnREady
+﻿//#region Constants
+const TableType = { "BRAND": "Brand", "PRODUCT": "Product", "CATEGORY": "Category" };
+Object.freeze(TableType);
+
+const ApiPut = { "BRAND": "https://localhost:44383/api/Admin/PutBrand/formData", "PRODUCT": "https://localhost:44383/api/Admin/PutProduct/formData", "CATEGORY": "https://localhost:44383/api/Admin/PutCategory/formData" };
+Object.freeze(ApiPut);
+
+const CRUDType = { "POST": "Post", "PUT": "Put", "GET": "Get", "DELETE": "Delete" };
+Object.freeze(CRUDType);
+
+class Brand
+{
+    constructor(Name)
+    {
+        this.Name = Name;
+    }
+}
+//#endregion
+
+//#region DocumentOnREady
 $(document).ready(function ()
 {
     AjaxGetALL("link_Inventory_Brands");
+    
+    //todo Pending
+    //$("ButtonEditBrandSubmit").on('click', AjaxPost(TableType.BRAND,))
 
 //#region Add "new" Buttons
     $("#ButtonAddBrand").on('click', function () { $("#Modal_Add_Brand").modal("show") });
@@ -341,6 +363,44 @@ function AjaxPost(senderId, FormToSend)
             ModalMessenger("error", false, CRUD_TYPE, "AjaxPost Errror");
             }
     })
+}
+
+function AjaxSubmitEdit(TableType, FormData)
+{
+    var sendToAdress = "";
+
+    if (TableType == null || FormData == null)
+    {
+        ModalMessenger("TableType or Formdata", false, "Submit Record Changes", "null data provided");
+    }
+
+    switch (TableType)
+    {
+        case 'Brand': sendToAdress = ApiPut.BRAND;
+            break;
+        case 'Product': sendToAdress = ApiPut.PRODUCT;
+            break;
+        case 'Category': sendToAdress = ApiPut.CATEGORY;
+            break;
+        default: ModalMessenger("Can't Settle a Api Address", false, CRUDType.PUT, "Could not settle upon a apiAdress to Send Updated data too");
+    }
+
+    $.ajax({
+        url: sendToAdress,
+        type: CRUDType.PUT,
+        data: FormData,
+        contentType: false,
+        processData: false,
+        success: function (response, jqXHR, data) {
+
+        },
+        statusCode:
+        {
+            500: ModalMessenger(FormData, false, CRUDType.PUT, "Failed to Update"),
+            200: ModalMessenger(FormData, true, CRUDType.PUT, "Successfully Updated!")
+        },
+        error: ModalMessenger(FormData, false, CRUDType.PUT, "Something Fucked up with AJax")
+    });
 }
 
 //#endregion
