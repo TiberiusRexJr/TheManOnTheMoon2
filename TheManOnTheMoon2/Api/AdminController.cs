@@ -319,6 +319,7 @@ namespace TheManOnTheMoon2.Api
 
         #region Put
         [HttpPut]
+        [Route("api/Admin/PutProduct/{product}")]
         public Response<Product> PutProduct(Product product)
         {
             Response<Product> responseMessage = new Response<Product>();
@@ -329,13 +330,13 @@ namespace TheManOnTheMoon2.Api
                 if (dbResponse == false)
                 {
                     responseMessage.returnData = null;
-                    responseMessage.status = HttpStatusCode.Conflict;
+                    responseMessage.status = HttpStatusCode.InternalServerError;
                     responseMessage.ReasonPhrase = "Update Failed";
                 }
                 else if (dbResponse == true)
                 {
                     responseMessage.returnData = null;
-                    responseMessage.status = HttpStatusCode.NoContent;
+                    responseMessage.status = HttpStatusCode.OK;
                     responseMessage.ReasonPhrase = "Update Succeded";
                 }
 
@@ -346,7 +347,9 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
+
         [HttpPut]
+        [Route("api/Admin/PutCategory/{category}")]
         public Response<Category> PutCategory(Category category)
         {
             Response<Category> responseMessage = new Response<Category>();
@@ -374,7 +377,9 @@ namespace TheManOnTheMoon2.Api
             }
             return responseMessage;
         }
+
         [HttpPut]
+        [Route("api/Admin/PutBrand/{brand}")]
         public Response<Brand> PutBrand(Brand brand)
         {
             Response<Brand> responseMessage = new Response<Brand>();
