@@ -152,8 +152,9 @@
          <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
              <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
           <div class="row justify-content-center" style="background-color:purple;">
-                
+
               <div class="col-lg-6 col-md-6 bg-info">
+                <form class="form_module">
                  
                  
                                            <div class="form-group">
@@ -164,8 +165,9 @@
                  <div class="form-group">
                      <i class="fas fa-tag"></i>
                     <label class="small mb-1" for="Name">Name</label>
-                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                    <input class="form-control py-4" id="BrandNameEdit" name="BrandNameEdit" value="" type="text" />
                  </div>
+                  </form>
                       <form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -200,14 +202,14 @@
               </div>
               
 
-        </div>
+       
 
          </div>
-            
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonEditBrandSubmit" >Save</a>
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonEditBrandSubmit" onclick="" >Save</a>
           
         </div>
       </div>
@@ -234,10 +236,8 @@
                 
               <div class="col-lg-6 col-md-6 bg-info">
                  
-                  <form>
-                 
-                 </form>
-                  <form id="form_brand_name">
+                  
+                  <form class="form_module">
                                            <div class="form-group">
                      <i class="fas fa-hashtag"></i>
                     <label class="small mb-1" for="Id ">Id</label>
@@ -246,7 +246,7 @@
                  <div class="form-group">
                      <i class="fas fa-tag"></i>
                     <label class="small mb-1" for="Name">Name</label>
-                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                    <input class="form-control py-4" id="CategoryNameEdit" name="CategoryNameEdit" value="" type="text" />
                  </div>
                                             
                                         </form>
@@ -260,8 +260,8 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonEditBrandSubmit" onclick="TestData($('#form_brand_name').serializeToJSON())">Save</a>
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonEditCategorySubmit" >Save</a>
           
         </div>
       </div>
@@ -276,7 +276,7 @@
 
 <!--Modal_Add_Products-->
     
-    <div class="modal fade" id="Modal_Add_Product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade add" id="Modal_Add_Product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         
       <div class="modal-content">
@@ -290,7 +290,7 @@
          <div class="container">
             
                  
-              <form id="form_product_add">
+              <form class="form_module">
 
     <div class="accordion" id="accordionAddProduct">
   
@@ -615,7 +615,7 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
             <a class="btn btn-primary" id="ButtonPostProduct" onclick="TestData($('#form_product_add').serializeToJSON())">SubmitProduct</a>
           
         </div>
@@ -643,15 +643,13 @@
           
               <div class="col-lg-6 col-md-6 ">
                  
-                  <form>
                  
-                 </form>
-                  <form id="formAddBrand">
+                  <form class="form_module">
                                            
                  <div class="form-group">
                      
                     <label class="col-form-label mb-1" for="Name">Brand Name</label>
-                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                    <input class="form-control py-4" id="BrandName" name="BrandName" value="" type="text" />
                  </div>
                 <div class="form-group">
                        <!--Image_Upload_1-->
@@ -698,8 +696,8 @@
             
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData(this.id,$('#formAddBrand').serializeToJSON())">Save</a>
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData()">Save</a>
           
         </div>
       </div>
@@ -725,10 +723,8 @@
           
               <div class="col-lg-6 col-md-6">
                  
-                  <form>
-                 
-                 </form>
-                  <form id="formAddCategory">
+                  
+                  <form class="form_module">
                                            
                  <div class="form-group">
                      <i class="fas fa-tag"></i>
@@ -781,8 +777,8 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostCategory" onclick="TestData($('#formAddCategory').serializeToJSON())">Save</a>
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonPostCategory">Save</a>
           
         </div>
       </div>

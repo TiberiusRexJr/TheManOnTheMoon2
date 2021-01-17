@@ -587,10 +587,10 @@
     <Content Include="WebForms\Admin\MasterPageAdmin.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Images\Brands\" />
-    <Folder Include="App_Data\Images\Categories\" />
-    <Folder Include="App_Data\Images\Products\" />
     <Folder Include="Content\Page_Index\" />
+    <Folder Include="Images\Brands\" />
+    <Folder Include="Images\Categories\" />
+    <Folder Include="Images\Products\" />
     <Folder Include="Views\SingleProduct\" />
   </ItemGroup>
   <ItemGroup>

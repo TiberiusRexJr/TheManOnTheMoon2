@@ -23,12 +23,32 @@ $(document).ready(function ()
     AjaxGetALL("link_Inventory_Brands");
     
     //todo Pending
-    //$("ButtonEditBrandSubmit").on('click', AjaxPost(TableType.BRAND,))
+    $("buttoneditbrandsubmit").on('click', function ()
+    {
+
+    });
 
 //#region Add "new" Buttons
     $("#ButtonAddBrand").on('click', function () { $("#Modal_Add_Brand").modal("show") });
     $("#ButtonAddProduct").on('click', function () {$("#Modal_Add_Product").modal("show") });
     $("#ButtonAddCategory").on('click', function () { $("#Modal_Add_Category").modal("show") });
+    //#endregion
+
+    //#region close All Modals
+    $(".btn.btn-secondary.closeClearForm").on("click", function ()
+    {
+        alert("hi asshole");
+        $('.form_module').trigger("reset");
+
+        $('.remove-preview').on('click', function () {
+            var boxZone = $(this).parents('.preview-zone').find('.box-body');
+            var previewZone = $(this).parents('.preview-zone');
+            var dropzone = $(this).parents('.form-group').find('.dropzone');
+            boxZone.empty();
+            previewZone.addClass('hidden');
+            reset(dropzone);
+        });
+    });
     //#endregion
 
     //#region GetImages
@@ -347,6 +367,8 @@ function AjaxPost(senderId, FormToSend)
             },
             201: function (response, jqXHR) {
                 var successStatus = true;
+                $('.form_add').trigger("reset");
+                $(".modal fade add").modal('hide');
                 ModalMessenger("201", successStatus, CRUD_TYPE, "201-SuccessFully Created");
             },
             415: function (response, jqXHR) {
@@ -550,7 +572,7 @@ function IntializeDatatable(data, tableType)
                         {
                             'targets': 2,
                             'render': function (Image_Main,) {
-                                return '<img src="../../App_Data/Images/' + Image_Main + '" class="img-fluid" alt="Responsive image">'
+                                return '<img src="../../Images/' + Image_Main + '" class="img-fluid" alt="Responsive image">'
                             }
                         }
                     ],
@@ -600,9 +622,9 @@ function GetSelectedRows(table) {
 //#endregion
 
 //#region Test & Expirimentals
-function TestData(id,ObjData)
+function TestData()
 {
-    console.log(ObjData);
+   
      
     var imageElement = null;
 
@@ -623,12 +645,13 @@ function TestData(id,ObjData)
         console.log("this is data3: "+data3);
 
         var brandImage = base64ToBlob(baseformated, ImageMimeType);
-        console.log("brandIMage: "+brandImage);
-        var dumm2 = {Name: "eli"};
-        console.log("this is object data comprad: " + ObjData);
-        console.log("this is eli: +", dumm2);
+        console.log("brandIMage: " + brandImage);
+        let b = new Brand($("#BrandName").val());
+
+        console.log(b.Name);
+ 
         FormToSend.append("ImageData", brandImage);
-        FormToSend.append("ObjectData", JSON.stringify(dumm2));
+        FormToSend.append("ObjectData", JSON.stringify(b));
         
         AjaxPost("Brand", FormToSend);
 
