@@ -125,72 +125,96 @@ namespace TheManOnTheMoon2.Api
 
         [HttpPost]
         [Route("api/Admin/PostCategory/{category}")]
-        public Response<Category> PostCategory([FromBody] Category category)
+        public async Task<Response<Category>> PostCategory()
         {
-            Response<Category> responseMessage = new Response<Category>();
-            try
-            {
-                var DbResponse = db.CreateCategory(category);
+            Category category = new Category();
 
-                if (DbResponse == null)
+            Response<Category> responseMessage = new Response<Category>();
+            List<ImageData> imageFiles = new List<ImageData>();
+
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+            var dataList = provider.FormData.GetValues("ObjectData");
+            category = (new JavaScriptSerializer()).Deserialize<Category>(dataList[0]);
+
+            if (category == null)
+            {
+                responseMessage.status = HttpStatusCode.BadRequest;
+                responseMessage.returnData = category;
+                return responseMessage;
+            }
+
+            if (db.ExistByName(category.Name, TableType.Category))
+            {
+                responseMessage.status = HttpStatusCode.Found;
+                responseMessage.returnData = category;
+                return responseMessage;
+            }
+
+            if (provider.FileData.Count > 0)
+            {
+
+                for (int i = 0; i <= provider.FileData.Count - 1; i++)
                 {
+                    ImageData imageData = new ImageData();
+                    var fileupload = provider.FileData[i];
+                    var temppath = fileupload.LocalFileName;
+                    var bytes = File.ReadAllBytes(temppath);
+                    imageData.Data = bytes;
+                    imageData.MimeType = provider.FileData[i].Headers.ContentType.ToString();
+
+                    imageFiles.Add(imageData);
+                }
+                System.Console.WriteLine(imageFiles.Count);
+
+                category = fops.SaveImages(category, imageFiles, TableType.Category);
+
+                if (category == null)
+                {
+                    responseMessage.status = HttpStatusCode.InternalServerError;
                     responseMessage.returnData = null;
-                    responseMessage.ReasonPhrase = "Database Responsed With Null";
-                    responseMessage.status = HttpStatusCode.Conflict;
+                    return responseMessage;
                 }
                 else
                 {
-                    responseMessage.returnData = DbResponse;
-                    responseMessage.ReasonPhrase = "SuccessFully Inserted";
-                    responseMessage.status = HttpStatusCode.Created;
+
+                    var _ = db.CreateCategory(category);
+                    if (_ == null)
+                    {
+                        responseMessage.returnData = null;
+                        responseMessage.status = HttpStatusCode.BadRequest;
+                        return responseMessage;
+                    }
+                    else
+                    {
+                        responseMessage.returnData = category;
+                        responseMessage.status = HttpStatusCode.Created;
+                        return responseMessage;
+                    }
                 }
+
             }
-            catch (Exception e)
+
+            var result = db.CreateCategory(category);
+            if (result == null)
             {
-                Errorhead(e);
+                responseMessage.returnData = null;
+                responseMessage.status = HttpStatusCode.BadRequest;
+
             }
+            else
+            {
+                responseMessage.returnData = category;
+                responseMessage.status = HttpStatusCode.Created;
+
+            }
+
             return responseMessage;
 
         }
 
-        //[HttpPost]
-        //[Route("api/Admin/PostBrand/{brand}")]
-        //public Response<Brand> PostBrand([FromBody] Brand brand)
-        //{
-        //    Response<Brand> responseMessage = new Response<Brand>();
-
-        //    if (brand == null)
-        //    {
-        //        responseMessage.status = HttpStatusCode.BadRequest;
-        //        responseMessage.returnData = null;
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-
-        //            var DbResponse = db.CreateBrand(brand);
-
-        //            if (DbResponse == null)
-        //            {
-        //                responseMessage.returnData = null;
-        //                responseMessage.status = HttpStatusCode.InternalServerError;
-        //            }
-        //            else
-        //            {
-        //                responseMessage.returnData = DbResponse;
-
-        //                responseMessage.status = HttpStatusCode.Created;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Errorhead(e);
-        //        }
-        //    }
-
-        //    return responseMessage;
-        //}
+      
 
         [HttpPost]
         [Route("api/Admin/PostBrand/{objData}")]

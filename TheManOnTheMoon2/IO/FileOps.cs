@@ -23,7 +23,7 @@ namespace TheManOnTheMoon2.IO
         #region Variables
         readonly List<string> ImageProperties = new List<string> { "Image_Main", "Image_Alt_1","Image_Alt_2" };
 
-        string  ImagesRoot= HttpContext.Current.Server.MapPath("~/App_Data/Images/");
+        string  ImagesRoot= HttpContext.Current.Server.MapPath("~/Images/");
         #endregion
         public T SaveImages<T>(T obj,List<ImageData> imageFiles,TableType tableType)
         {

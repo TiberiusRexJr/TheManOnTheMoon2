@@ -8,9 +8,9 @@ function readFile(input) {
             
             var htmlPreview =
                 '<img width="200" src="' + e.target.result + '" />' +
-                '<p>' + input.files[0].name + '</p>'+
-                '<p>' + input.files[0].type + '</p>';
-            ;
+                '<p class="d-none">' + input.files[0].name + '</p>'+
+                '<p class="d-none">' + input.files[0].type + '</p>';
+            
             console.log(input.files[0]);
             
             var wrapperZone = $(input).parent();
