@@ -819,6 +819,17 @@ function CreateSendBrandFormData() {
 
 
 }
+
+function CreateSendProductFormData() {
+
+    var imageElement = null;
+
+    var ImageDataBase64 = null;
+    var ImageMimeType = null;
+
+    var FormToSend = new FormData();
+    
+}
 //#endregion
 
 //#region ImageManipulation
