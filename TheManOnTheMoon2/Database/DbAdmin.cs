@@ -320,39 +320,6 @@ namespace TheManOnTheMoon2.Database
 
         #region Search
 
-        // public bool ExistByName(string itemName,DbAdmin.TableType tableType)
-        //{
-        //    bool statusExist = false;
-        //    string formattedSearchItem = string.Empty;
-
-
-        //    if (string.IsNullOrEmpty(itemName)||tableType==null)
-        //    {
-        //        return statusExist;
-        //    }
-        //    else
-        //    {
-        //        formattedSearchItem = FormatString(itemName, DbAdmin.StringFormat.ForDatabase);
-        //    }
-
-        //    switch(tableType.Value)
-        //    {
-        //        case "Brand":var queryBrand = db.Brands.Where(b => b.Name== formattedSearchItem).FirstOrDefault();
-        //            if (queryBrand != null) { statusExist = true; };
-        //            break;
-        //        case "Category":
-        //            var queryCategory = db.Categories.Where(c => c.Name == formattedSearchItem).FirstOrDefault();
-        //            if (queryCategory!= null) { statusExist = true; };
-
-        //            break;
-        //        case "Product":
-        //            var queryProducts = db.Products.Where(p => p.Name == formattedSearchItem).FirstOrDefault();
-        //            if (queryProducts!= null) { statusExist = true; };
-
-        //            break;
-        //    }
-        //    return statusExist;
-        //}
 
         public bool ExistByName(string itemName, TableType tableType)
         {

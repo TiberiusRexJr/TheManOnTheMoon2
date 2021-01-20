@@ -149,26 +149,26 @@
           </button>
         </div>
         <div class="modal-body">
-         <div class="container" style="background-color: orange; content:'f02b'; font-family:'FontAwesome'">
-             <h2><i class="fas fa-tag fa-2x"></i>Brand</h2>
-          <div class="row justify-content-center" style="background-color:purple;">
+         
+          
 
-              <div class="col-lg-6 col-md-6 bg-info">
+              <div class="col-lg-6 col-md-6 ">
                 <form class="form_module">
                  
                  
                                            <div class="form-group">
                      <i class="fas fa-hashtag"></i>
                     <label class="small mb-1" for="Id ">Id</label>
-                    <input class="form-control py-4" readonly id="Id" name="Id" value="" type="number" />
-                 </div>
-                 <div class="form-group">
+                    <input class="form-control py-4" readonly id="BrandIdEdit" name="Id" value="" type="number" />
+                
+                 
                      <i class="fas fa-tag"></i>
                     <label class="small mb-1" for="Name">Name</label>
                     <input class="form-control py-4" id="BrandNameEdit" name="BrandNameEdit" value="" type="text" />
                  </div>
                   </form>
-                      <form>
+
+                      <form class="form_image_upload">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
@@ -178,7 +178,7 @@
                             <div class="box-header with-border">
                               <div><b>Image </b></div>
                               <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                <button type="button" id="close_edit" class="btn btn-danger btn-xs remove-preview">
                                  <i class="fas fa-sync-alt"></i> Reset 
                                 </button>
                               </div>
@@ -204,8 +204,8 @@
 
        
 
-         </div>
-            </div>
+         
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
@@ -241,7 +241,7 @@
                                            <div class="form-group">
                      <i class="fas fa-hashtag"></i>
                     <label class="small mb-1" for="Id ">Id</label>
-                    <input class="form-control py-4" readonly id="Id" name="Id" value="" type="number" />
+                    <input class="form-control py-4" readonly id="CategoryIdEdit" name="CategoryIdEdit" value="" type="number" />
                  </div>
                  <div class="form-group">
                      <i class="fas fa-tag"></i>
@@ -250,6 +250,36 @@
                  </div>
                                             
                                         </form>
+
+                  <form class="form_image_upload">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden" id="preview-zone">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Image </b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" id="close_edit" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
                   
               </div>
               
@@ -271,6 +301,352 @@
 
     <!--Modal_Edit_Cateogry-->
 
+    <!--Modal_Edit_Product-->
+    
+    <div class="modal fade add" id="Modal_Edit_Product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleEditProduct"><i class="fas fa-box mr-1"></i>Edit Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container">
+            
+                 
+              <form class="form_module">
+
+    <div class="accordion" id="accordionEditProduct">
+  
+     <div class="card">
+ 
+       <div class="card-header" id="cardHeaderDescriptionEdit">
+           <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductDescriptionEdit" data-toggle="collapse" data-target="#collapseProductDescriptionEdit">
+         <h2 class="mb-0">
+          <i class="fas fa-list-alt"></i> Description
+         </h2>
+               </a>
+       </div>
+ 
+       
+       <div id="collapseProductDescriptionEdit" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEditProduct">
+         <div class="card-body">
+                 <div class="col-lg-6 col-md-6 ">
+                 <div class="form-group d-none">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_id_Edit ">Product_Id</label>
+                    <input class="form-control py-4" name="product_id_Edit" value="" id="product_id_Edit " type="number" />
+                 </div>
+                <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_name_Edit ">Name</label>
+                    <input class="form-control py-4" value="" name="product_name_Edit" id="product_name_Edit " type="text" />
+                 </div>
+                 <div class="form-group ">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_description_Edit ">Description</label>
+                    <input class="form-control py-4" id="product_description_Edit " name="product_description_Edit" value="" type="text" />
+                 </div>
+                <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_upc_Edit ">UPC</label>
+                    <input class="form-control py-4" name="product_upc_Edit" value="" id="product_upc_Edit " type="text" />
+                 </div>
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_brand_Select_Edit">Brand</label>
+                    <select name="product_brand_Select_Edit" id="product_brand_Select_Edit" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+            </div>
+         </div>
+       </div>
+     
+     </div>
+
+     <div class="card">
+     
+           <div class="card-header" id="cardHeadingCategoryEdit">
+               <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductCategoryEdit" data-toggle="collapse" data-target="#collapseProductCategoryEdit">
+             <h2 class="mb-0">
+              <i class="fas fa-list-alt"></i> Categories
+             </h2>
+ </a>
+           </div>
+     
+           
+           <div id="collapseProductCategoryEdit" class="collapse " aria-labelledby="headingOne" data-parent="#accordionEditProduct">
+             <div class="card-body">
+                <div class="col-lg-6 col-md-6 ">
+               <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_category_select_Edit ">Category</label>
+                          <select name="product_category_select_Edit" id="product_category_select_Edit" class="form-control selectpicker">
+                  <option value="">Select your Depatment/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sub_category_Edit ">Sub-Category</label>
+                      <select name="product_sub_category_Edit" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_type_Edit ">Type</label>
+                      <select name="product_type_Edit" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sub_type_Edit ">Sub-Type</label>
+                      <select name="product_sub_type_Edit" class="form-control selectpicker">
+                  <option value="">Select your Department/Office</option>
+                  <option value="">Department of Engineering</option>
+                  <option value="">Department of Agriculture</option>
+                  <option value="" >Tourism Office</option>
+                    </select>
+                 </div>
+           
+        </div>
+             </div>
+           </div>
+         </div>
+   
+       <div class="card">
+     
+         <div class="card-header" id="cardHeadingFinancial_Edit">
+             <a class="btn btn-block collapsed" type="button" id="alinkButtonProductFinancial_Edit" data-toggle="collapse" data-target="#collapseProductFinancial_Edit">
+           <h2 class="mb-0">
+             <i class="fas fa-hand-holding-usd"></i>Financial
+           </h2>
+             </a>
+         </div>
+   
+         
+         <div id="collapseProductFinancial_Edit" class="collapse " aria-labelledby="headingOne" data-parent="#accordionEditProduct">
+           <div class="card-body">
+                <div class="col-lg-6 col-md-6 bg-light">
+                 
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_purchase_cost_Edit ">Purchase Cost</label>
+                    <input class="form-control py-4" id="product_purchase_cost_Edit" name="Cost" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_retail_Edit">Retail</label>
+                    <input class="form-control py-4" id="product_retail_Edit " name="Retail_Price" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sale_price_Edit ">On Sale Price</label>
+                    <input class="form-control py-4" id="product_sale_price_Edit " name="Sale_Price" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_sale_status_Edit ">On Sale Status</label>
+                    <label class="radio-inline d-block"><input type="radio" name="product_sale_status_Edit" id="product_sale_status_Edit" value="True" checked>Yes</label>
+<label class="radio-inline"><input type="radio" name="product_sale_status_radio_Edit" value="False">No</label>
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_stock_quantity_Edit ">Stock Quantity</label>
+                    <input class="form-control py-4" id="product_stock_quantity_Edit " name="Stock_Quantity" value="" type="number" />
+                 </div>
+              </div>
+           </div>
+         </div>
+       </div>
+      
+       
+         <div class="card">
+     
+           <div class="card-header" id="cardHeadingPictures_Edit">
+               <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductImages_Edit" data-toggle="collapse" data-target="#collapseProductImages_Edit">
+             <h2 class="mb-0">
+              <i class="fas fa-images"></i> Pictures
+             </h2>
+ </a>
+           </div>
+     
+           
+           <div id="collapseProductImages_Edit" class="collapse " aria-labelledby="headingOne" data-parent="#accordionEditProduct">
+             <div class="card-body">
+                <div class="col-lg-6 col-md-6 bg-info">
+               
+            <!--Image_Upload_1-->
+            <form class="form_image_upload" id="form_image_upload_main_Edit">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden" id="preview-zone">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Image </b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_1--End-->
+          <!--Image_Upload_2-->
+            <form class="form_image_upload" id="form_image_upload_alt1_Edit">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Alternative Image 1</b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_2--End-->
+             <!--Image_Upload_3-->
+            <form class="form_image_upload" id="form_image_upload_alt2_Edit">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="form-group">
+                       
+                        <div class="preview-zone hidden">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <div><b>Alternative Image 2</b></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                 <i class="fas fa-sync-alt"></i> Reset 
+                                </button>
+                              </div>
+                            </div>
+                            <div class="box-body"></div>
+                          </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                          <div class="dropzone-desc">
+                            <i class="fas fa-sync-alt"></i>
+                            <p>Choose an image file or drag it here.</p>
+                          </div>
+                          <input type="file" name="img_logo" class="dropzone">
+                        </div>
+                      </div>
+                </div>
+             </div>
+            </form>
+            <!--Image_Upload_3--End-->
+        </div>
+             </div>
+           </div>
+         </div>
+       
+       
+           <div class="card">
+                
+             <div class="card-header" id="cardHeadingDimensions_Edit">
+                   <a class="btn btn-block collapsed" href="#" type="button" id="alinkButtonProductDimensions_Edit" data-toggle="collapse" data-target="#collapseProductDimensions_Edit">
+               <h2 class="mb-0">
+               <i class="fas fa-ruler-combined"></i>  Dimensions
+               </h2>
+                       </a>
+             </div>
+       
+             
+             <div id="collapseProductDimensions_Edit" class="collapse " aria-labelledby="headingOne" data-parent="#accordionEditProduct">
+               <div class="card-body">
+                  <div class="col-lg-6 col-md-6 ">
+                 
+                 <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_length_Edit ">Length</label>
+                    <input class="form-control py-4" id="product_length_Edit " name="product_length_Edit" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_width_Edit ">Width</label>
+                    <input class="form-control py-4" id="product_width_Edit " name="product_width_Edit" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_height_Edit ">Height</label>
+                    <input class="form-control py-4" id="product_height_Edit " name="product_height_Edit" value="" type="number" />
+                 </div>
+                  <div class="form-group">
+                     <i class="fas fa-user"></i>
+                    <label class="small mb-1" for="product_weight_Edit ">Weight</label>
+                    <input class="form-control py-4" id="product_weight_Edit " name="Weight" value="" type="number" />
+                 </div>
+              </div>
+               </div>
+             </div>
+           </div>
+          
+ </div>
+    </form>
+         </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" id="ButtonEditProductSubmit">SubmitProduct</a>
+          
+        </div>
+      </div>
+          
+    </div>
+  </div>
+            
+<!--Modal_Edit_Products-->
 
 
 
@@ -330,8 +706,8 @@
                  </div>
                  <div class="form-group">
                      <i class="fas fa-user"></i>
-                    <label class="small mb-1" for="product_brand ">Brand</label>
-                    <select name="Brand" class="form-control selectpicker">
+                    <label class="small mb-1" for="product_brand_Select ">Brand</label>
+                    <select name="product_brand_Select" id="product_brand_Select" class="form-control selectpicker">
                   <option value="">Select your Department/Office</option>
                   <option value="">Department of Engineering</option>
                   <option value="">Department of Agriculture</option>
@@ -360,7 +736,7 @@
                <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_category_select ">Category</label>
-                          <select name="Category" class="form-control selectpicker">
+                          <select name="product_category_select" id="product_category_select" class="form-control selectpicker">
                   <option value="">Select your Depatment/Office</option>
                   <option value="">Department of Engineering</option>
                   <option value="">Department of Agriculture</option>
@@ -616,7 +992,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostProduct" onclick="TestData($('#form_product_add').serializeToJSON())">SubmitProduct</a>
+            <a class="btn btn-primary" id="ButtonPostProduct">Submit</a>
           
         </div>
       </div>
@@ -651,9 +1027,10 @@
                     <label class="col-form-label mb-1" for="Name">Brand Name</label>
                     <input class="form-control py-4" id="BrandName" name="BrandName" value="" type="text" />
                  </div>
-                <div class="form-group">
+                      </form>
+                
                        <!--Image_Upload_1-->
-            <form>
+            <form class="form_image_upload">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
@@ -683,9 +1060,9 @@
              </div>
             </form>
             <!--Image_Upload_1--End-->
-                    </div>
+                    
                                             
-                                        </form>
+                                        
                   
               </div>
               
@@ -728,17 +1105,20 @@
                                            
                  <div class="form-group">
                      <i class="fas fa-tag"></i>
-                    <label class="col-form-label mb-1" for="Name">Name</label>
-                    <input class="form-control py-4" id="Name" name="Name" value="" type="text" />
+                    <label class="col-form-label mb-1" for="CategoryName">Name</label>
+                    <input class="form-control py-4" id="CategoryName" name="CategoryName" value="" type="text" />
+                                         
+
                  </div>
-                <div class="form-group">
+                      </form>
+                
                        <!--Image_Upload_1-->
-                        <form>
+                        <form class="form_image_upload">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                   <div class="form-group">
                                     <label class="control-label">Upload File</label>
-                                    <div class="preview-zone hidden">
+                                    <div class="preview-zone hidden" id="previewZoneAddCategory">
                                       <div class="box box-solid">
                                         <div class="box-header with-border">
                                           <div><b>Image </b></div>
@@ -748,7 +1128,7 @@
                                             </button>
                                           </div>
                                         </div>
-                                        <div class="box-body"></div>
+                                        <div class="box-body" id="boxBodyAddCategory"></div>
                                       </div>
                                     </div>
                                     <div class="dropzone-wrapper">
@@ -763,9 +1143,9 @@
                          </div>
                         </form>
                         <!--Image_Upload_1--End-->
-                </div>
+                
                                             
-                                        </form>
+                                        
                 
                   
               </div>
@@ -778,7 +1158,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostCategory">Save</a>
+            <a class="btn btn-primary" id="ButtonPostCategory" onclick="CreateSendCategoryFormData()">Save</a>
           
         </div>
       </div>
