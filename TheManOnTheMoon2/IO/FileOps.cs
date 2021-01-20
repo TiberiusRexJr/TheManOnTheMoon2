@@ -83,12 +83,7 @@ namespace TheManOnTheMoon2.IO
             return returnObj;
         }
 
-<<<<<<< HEAD
-        public book GetBook(string author,int year,string Title)
-        {
-            
-        }
-=======
+
         private object TrySetProperty(object obj,string proptery,object value)
         {
             var property = obj.GetType().GetProperty(proptery, BindingFlags.Public | BindingFlags.Instance);
@@ -178,6 +173,5 @@ namespace TheManOnTheMoon2.IO
             return stringByte;
         }
        
->>>>>>> de56bb802e993a76cb1ce5495b116cfae4f3802a
     }
 }

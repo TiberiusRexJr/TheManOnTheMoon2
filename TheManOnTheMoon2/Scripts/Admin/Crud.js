@@ -27,6 +27,14 @@ class Category {
         this.Name = Name;
     }
 }
+
+class Product {
+    constructor(Name_NotNull, Description, Upc_NotNull, Brand, Length, Weight, Height, Cost, Retail_Price, Sale_Price, Stock_QuantityNotNull, Category, Sub_Category, On_Sale_Category, Width, Type, Sub_Type, Image_Main, Image_Alt_1, Image_Alt_2) {
+        this.Name = Name_NotNull, this.Description = Description, this.Upc = Upc_NotNull, this.Brand = Brand, this.Length = Length, this.Weight = Weight, this.Height = Height, this.Cost = Cost, this.Retail_Price = Retail_Price, this.Sale_Price = Sale_Price, this.Stock_Quantity = Stock_QuantityNotNull,
+            this.Category = Category, this.Sub_Category = Sub_Category, this.On_Sale_Category = On_Sale_Category, this.Width = Width, this.Type = Type, this.Sub_Type = Sub_Type, this.Image_Main = Image_Main, this.Image_Alt_1 = Image_Alt_1, this.Image_Alt_2 = Image_Alt_2
+    };
+    }
+
 //#endregion
 
 //#region DocumentOnREady
@@ -116,6 +124,29 @@ $(document).ready(function () {
 //#endregion
 
 //#region Dynamic Insertion Stuff
+
+function InsertDynamicSelectData(data, tableType) {
+    var target;
+    var target_2;
+
+    if (data == null) { ModalMessenger("null", false, "Dynamic Inserttion", "data sent was null") };
+
+    switch (tableType) {
+        case "Brand": target = "#product_brand_Select"; target_2 = "#product_brand_Select_Edit";
+            break;
+        case "Category": target = "#product_category_select"; target_2 = "#product_category_select_Edit";
+            break;
+        default: ModalMessenger("null", false, "im in her mouth like toothpase", "fuck nigga");
+    }
+
+    $.each(data, function (index, obj) {
+        $(target).append('<option value="' + obj.Name + '">' + obj.Name + '</option>');
+        $(target_2).append('<option value="' + obj.Name + '">' + obj.Name + '</option>');
+    });
+
+
+
+}
 async function DynamicInsertion() {
     await AjaxGetSelectData(TableType.BRAND).then((data) => { InsertDynamicSelectData(data,TableType.BRAND) });
     
@@ -125,30 +156,7 @@ async function DynamicInsertion() {
 }
 //#endregion
 
- function  InsertDynamicSelectData(data,tableType)
-{
-    var target;
-    var target_2;
-
-    if (data == null) { ModalMessenger("null", false, "Dynamic Inserttion", "data sent was null") };
-
-    switch (tableType)
-    {
-        case "Brand": target = "#product_brand_Select"; target_2 = "#product_brand_Select_Edit";
-            break;
-        case "Category": target = "#product_category_select"; target_2 = "#product_category_select_Edit";
-            break;
-        default: ModalMessenger("null", false, "im in her mouth like toothpase", "fuck nigga");
-    }
-     
-    $.each(data, function (index, obj) {
-        $(target).append('<option value="' + obj.Name + '">' + obj.Name + '</option>');
-        $(target_2).append('<option value="' + obj.Name + '">' + obj.Name + '</option>');
-    });
-    
-
-
-}
+ 
 
 
 //#region AjaxCrud 
