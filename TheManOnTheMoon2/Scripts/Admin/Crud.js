@@ -51,6 +51,7 @@ $(document).ready(function () {
     
 
 })
+//#endregion
 
 //#region Add "new" Buttons
     $("#ButtonAddBrand").on('click', function () { $("#Modal_Add_Brand").modal("show") });
@@ -58,7 +59,7 @@ $(document).ready(function () {
     $("#ButtonAddCategory").on('click', function () { $("#Modal_Add_Category").modal("show") });
     //#endregion
 
-    //#region Reset *modal forms,reset *imageSelect
+//#region Reset *modal forms,reset *imageSelect
     $(".btn.btn-secondary.closeClearForm").on("click", function (event)
     {
         alert("hi asshole");
@@ -90,10 +91,9 @@ $(document).ready(function () {
     });
     //#endregion
 
+//#region Dynamic Insertion Stuff
 
-//#region Get&Insert_Brands&Categories
- function AjaxGetSelectData(tableType)
-{
+function AjaxGetSelectData(tableType) {
     var sendToAdress = "";
     let result;
 
@@ -109,7 +109,7 @@ $(document).ready(function () {
     }
 
     try {
-            return $.ajax(
+        return $.ajax(
 
             {
                 type: CRUDType.GET,
@@ -121,9 +121,6 @@ $(document).ready(function () {
         ModalMessenger("fucked up", false, CRUDType.GET, "Failed to get data for dynmnaic <Select>");
     }
 }
-//#endregion
-
-//#region Dynamic Insertion Stuff
 
 function InsertDynamicSelectData(data, tableType) {
     var target;
@@ -147,6 +144,7 @@ function InsertDynamicSelectData(data, tableType) {
 
 
 }
+
 async function DynamicInsertion() {
     await AjaxGetSelectData(TableType.BRAND).then((data) => { InsertDynamicSelectData(data,TableType.BRAND) });
     
@@ -155,9 +153,6 @@ async function DynamicInsertion() {
 
 }
 //#endregion
-
- 
-
 
 //#region AjaxCrud 
 function AjaxGetALL(senderId) {
@@ -363,49 +358,7 @@ function AjaxEditRecord(event, Id) {
 
 }
 
-function SetEditProductModal(RowData)
-{
-    if (RowData == null) {
-        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
-    }
-    else {
-       
 
-    }
-}
-
-function SetEditCategoryModal(RowData)
-{
-    if (RowData == null) {
-        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
-    }
-    else {
-        $("#CategoryIdEdit").val(RowData.Id);
-        $("#CategoryNameEdit").val(RowData.Name);
-        $("#Modal_Edit_Category").modal('show');
-    }
-
-}
-
-function SetEditBrandModal(RowData)
-{
-    if (RowData == null) {
-        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
-    }
-    else {
-        $("#BrandIdEdit").val(RowData.Id);
-        $("#BrandNameEdit").val(RowData.Name);
-
-        var boxzone = $("#BrandNameEdit").parent().parent().parent().find('.form_image_upload').find('.preview-zone').find('.box').find('.box-body');
-        console.log(boxZone);
-        $("#Modal_Edit_Brand").modal("show");
-
-
-
-
-    }
-
-}
 
 function AjaxPost(senderId, FormToSend)
 {
@@ -598,6 +551,47 @@ function ModalMessenger(data, successStatus, crudType, serverMessage) {
     $('#ModalAdminMessenger').modal('hide');
 
 }
+
+function SetEditProductModal(RowData) {
+    if (RowData == null) {
+        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
+    }
+    else {
+
+
+    }
+}
+
+function SetEditCategoryModal(RowData) {
+    if (RowData == null) {
+        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
+    }
+    else {
+        $("#CategoryIdEdit").val(RowData.Id);
+        $("#CategoryNameEdit").val(RowData.Name);
+        $("#Modal_Edit_Category").modal('show');
+    }
+
+}
+
+function SetEditBrandModal(RowData) {
+    if (RowData == null) {
+        ModalMessenger("null data!", false, "SetEditProductModal", "null data provided");
+    }
+    else {
+        $("#BrandIdEdit").val(RowData.Id);
+        $("#BrandNameEdit").val(RowData.Name);
+
+        var boxzone = $("#BrandNameEdit").parent().parent().parent().find('.form_image_upload').find('.preview-zone').find('.box').find('.box-body');
+        console.log(boxZone);
+        $("#Modal_Edit_Brand").modal("show");
+
+
+
+
+    }
+
+}
 //#endregion
 
 //#region Datables
@@ -722,6 +716,8 @@ function GetSelectedRows(table) {
     
 }
 //#endregion
+
+//#region PrepareFormSubmission Area
 function CreateSendCategoryFormData() {
 
 
@@ -772,11 +768,10 @@ function CreateSendCategoryFormData() {
 
 
 }
-//#region Test & Expirimentals
-function TestData()
-{
-   
-     
+
+function CreateSendBrandFormData() {
+
+
     var imageElement = null;
 
     var ImageDataBase64 = null;
@@ -790,22 +785,22 @@ function TestData()
 
         ImageMimeType = $("#boxBodyAddBrand").children()[2].innerText;
 
-       
+
         var baseformated = getBase64Image(imageElement);
-        
+
 
         var brandImage = base64ToBlob(baseformated, ImageMimeType);
-       
+
         let b = new Brand($("#BrandName").val());
 
         console.log(b.Name);
- 
+
         FormToSend.append("ImageData", brandImage);
         FormToSend.append("ObjectData", JSON.stringify(b));
-        
+
         AjaxPost("Brand", FormToSend);
 
-        
+
 
         try {
 
@@ -822,8 +817,12 @@ function TestData()
 
 
 
-   
+
 }
+//#endregion
+
+//#region ImageManipulation
+
 
 function getBase64Image(img)
 {

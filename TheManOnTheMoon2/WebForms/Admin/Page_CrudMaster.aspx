@@ -1074,7 +1074,7 @@
         
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostBrand" onclick="TestData()">Save</a>
+            <a class="btn btn-primary" id="ButtonPostBrand" onclick="CreateSendBrandFormData()">Save</a>
           
         </div>
       </div>
