@@ -96,31 +96,96 @@ namespace TheManOnTheMoon2.Api
 
         [HttpPost]
         [Route("api/Admin/PostProduct/{product}")]
-        public Response<Product> PostProduct([FromBody] Product product)
+        public async Task<Response<Product>> PostProduct()
         {
-            Response<Product> responseMessage = new Response<Product>();
-            try
-            {
-                var DbResponse = db.CreateProduct(product);
+            Product product = new Product();
+            List<ImageData> imageFiles = new List<ImageData>();
 
-                if (DbResponse == null)
+            Response<Product> responseMessage = new Response<Product>();
+
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            var dataList = provider.FormData.GetValues("ObjectData");
+
+            product = (new JavaScriptSerializer()).Deserialize<Product>(dataList[0]);
+
+            if (product == null)
+            {
+                responseMessage.status = HttpStatusCode.BadRequest;
+                responseMessage.returnData = product;
+                return responseMessage;
+            }
+
+            if (db.ExistByName(product.Name, TableType.Product))
+            {
+                responseMessage.status = HttpStatusCode.Found;
+                responseMessage.returnData = product;
+                return responseMessage;
+            }
+
+            if (provider.FileData.Count > 0)
+            {
+
+                for (int i = 0; i <= provider.FileData.Count - 1; i++)
                 {
+                    ImageData imageData = new ImageData();
+                    var fileupload = provider.FileData[i];
+                    var temppath = fileupload.LocalFileName;
+                    var bytes = File.ReadAllBytes(temppath);
+                    imageData.Data = bytes;
+                    imageData.MimeType = provider.FileData[i].Headers.ContentType.ToString();
+
+                    imageFiles.Add(imageData);
+                }
+                System.Console.WriteLine(imageFiles.Count);
+
+                product = fops.SaveImages(product, imageFiles, TableType.Category);
+
+                if (product == null)
+                {
+                    responseMessage.status = HttpStatusCode.InternalServerError;
                     responseMessage.returnData = null;
-                    responseMessage.ReasonPhrase = "Database Responsed With Null";
-                    responseMessage.status = HttpStatusCode.Conflict;
+                    return responseMessage;
                 }
                 else
                 {
-                    responseMessage.returnData = DbResponse;
-                    responseMessage.ReasonPhrase = "SuccessFully Inserted";
-                    responseMessage.status = HttpStatusCode.Created;
+
+                    var _ = db.CreateProduct(product);
+                    if (_ == null)
+                    {
+                        responseMessage.returnData = null;
+                        responseMessage.status = HttpStatusCode.BadRequest;
+                        return responseMessage;
+                    }
+                    else
+                    {
+                        responseMessage.returnData = product;
+                        responseMessage.status = HttpStatusCode.Created;
+                        return responseMessage;
+                    }
                 }
+
             }
-            catch (Exception e)
+
+            var result = db.CreateProduct(product);
+            if (result == null)
             {
-                Errorhead(e);
+                responseMessage.returnData = null;
+                responseMessage.status = HttpStatusCode.BadRequest;
+
             }
+            else
+            {
+                responseMessage.returnData = product;
+                responseMessage.status = HttpStatusCode.Created;
+
+            }
+
             return responseMessage;
+
+
         }
 
         [HttpPost]

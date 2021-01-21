@@ -371,7 +371,7 @@ function AjaxPost(senderId, FormToSend)
 
     var sendToAdress = "";
     var tableType = " ";
-
+    console.log(FormToSend);
     if (FormToSend == null || senderId == null) {
         ModalMessenger(null, false, CRUD_TYPE, "null parameters provided");
     }
@@ -776,10 +776,10 @@ function CreateSendBrandFormData() {
 
     var ImageDataBase64 = null;
     var ImageMimeType = null;
-
+    var brandImage = null;
     var FormToSend = new FormData();
 
-    if (!$("previewZoneAddBrand").hasClass("hidden")) {
+    if ($("previewZoneAddBrand").hasClass("hidden")) {
         imageElement = $("#boxBodyAddBrand").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
 
@@ -789,16 +789,12 @@ function CreateSendBrandFormData() {
         var baseformated = getBase64Image(imageElement);
 
 
-        var brandImage = base64ToBlob(baseformated, ImageMimeType);
+        brandImage = base64ToBlob(baseformated, ImageMimeType);
 
-        let b = new Brand($("#BrandName").val());
-
-        console.log(b.Name);
+       
 
         FormToSend.append("ImageData", brandImage);
-        FormToSend.append("ObjectData", JSON.stringify(b));
 
-        AjaxPost("Brand", FormToSend);
 
 
 
@@ -810,10 +806,14 @@ function CreateSendBrandFormData() {
             ModalMessenger(err, false, "Image Upload", "failed to upload");
         }
 
+       
     }
-    else {
-        console.log("Nope no image data hoe");
-    }
+    let b = new Brand($("#BrandName").val());
+
+    console.log(b.Name);
+    FormToSend.append("ObjectData", JSON.stringify(b));
+
+    AjaxPost("Brand", FormToSend);
 
 
 
@@ -826,7 +826,7 @@ function CreateSendProductFormData() {
     console.log(ProductObj);
 
     var imageElement = null;
-
+    
     var ImageDataBase64 = null;
     var ImageMimeType = null;
 
@@ -887,10 +887,10 @@ function CreateSendProductFormData() {
     }
 
 
-    
+    console.log(FormToSend);
 
 
-    FormToSend.append("ObjectData", ProductObj);
+    FormToSend.append("ObjectData", JSON.stringify(ProductObj));
 
     AjaxPost(TableType.PRODUCT, FormToSend);
     
