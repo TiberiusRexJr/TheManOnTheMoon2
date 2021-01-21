@@ -822,12 +822,77 @@ function CreateSendBrandFormData() {
 
 function CreateSendProductFormData() {
 
+    var ProductObj = new Product($("#product_name").val(), $("#product_description").val(), $("#product_upc").val(), $("#product_brand_Select").val(), $("#product_length").val(), $("#product_width").val(), $("#product_height").val(), $("#product_purchase_cost").val(), $("#product_retail_price").val(), $("#product_sale_price").val(), $("#product_stock_quantity").val(), $("#product_category_select").val(), $("#product_sub_category").val(), $("#product_onSale_Status").val(), $("#product_width").val(), $("#product_type_Select").val(), $("#product_sub_type_select").val(), "", "", "");
+    console.log(ProductObj);
+
     var imageElement = null;
 
     var ImageDataBase64 = null;
     var ImageMimeType = null;
 
+    var ImagesData = [];
+
     var FormToSend = new FormData();
+
+    if (!$("#ProductImageMain_Add").find("#previewZoneAddProductImageMain").hasClass("hidden"))
+    {
+        imageElement = $("#boxBodyAddProductImageMain").children()[0];
+        ImageDataBase64 = $(imageElement).attr('src');
+
+        ImageMimeType = $("#boxBodyAddProductImageMain").children()[2].innerText;
+
+
+        var baseformated = getBase64Image(imageElement);
+
+
+        var productImage = base64ToBlob(baseformated, ImageMimeType);
+
+        
+
+        FormToSend.append("ProductImageMain", productImage);
+    }
+
+    if (!$("#ProductImageAlt1_Add").find("#previewZoneAddProductImageAlt1").hasClass("hidden")) {
+        imageElement = $("#boxBodyAddProductImageAlt1").children()[0];
+        ImageDataBase64 = $(imageElement).attr('src');
+
+        ImageMimeType = $("#boxBodyAddProductImageAlt1").children()[2].innerText;
+
+
+        var baseformated = getBase64Image(imageElement);
+
+
+        var productImage = base64ToBlob(baseformated, ImageMimeType);
+
+
+
+        FormToSend.append("ProductImageAlt1", productImage);
+    }
+
+    if (!$("#ProductImageAlt2_Add").find("#previewZoneAddProductImageAlt2").hasClass("hidden")) {
+        imageElement = $("#boxBodyAddProductImageAlt2").children()[0];
+        ImageDataBase64 = $(imageElement).attr('src');
+
+        ImageMimeType = $("#boxBodyAddProductImageAlt2").children()[2].innerText;
+
+
+        var baseformated = getBase64Image(imageElement);
+
+
+        var productImage = base64ToBlob(baseformated, ImageMimeType);
+
+
+
+        FormToSend.append("ProductImageAlt2", productImage);
+    }
+
+
+    
+
+
+    FormToSend.append("ObjectData", ProductObj);
+
+    AjaxPost(TableType.PRODUCT, FormToSend);
     
 }
 //#endregion

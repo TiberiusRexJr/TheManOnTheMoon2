@@ -681,25 +681,21 @@
        <div id="collapseProductDescription" class="collapse " aria-labelledby="headingOne" data-parent="#accordionAddProduct">
          <div class="card-body">
                  <div class="col-lg-6 col-md-6 ">
-                 <div class="form-group d-none">
-                     <i class="fas fa-user"></i>
-                    <label class="small mb-1" for="product_id ">Product_Id</label>
-                    <input class="form-control py-4" name="Id" value="" id="product_id " type="number" />
-                 </div>
+                
                 <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_name ">Name</label>
-                    <input class="form-control py-4" value="" name="Name" id="product_name " type="text" />
+                    <input class="form-control py-4" value="" name="product_name" id="product_name" type="text" />
                  </div>
                  <div class="form-group ">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_description ">Description</label>
-                    <input class="form-control py-4" id="product_description " name="Description" value="" type="text" />
+                    <input class="form-control py-4" id="product_description" name="product_description" value="" type="text" />
                  </div>
                 <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_upc ">UPC</label>
-                    <input class="form-control py-4" name="Upc" value="" id="product_upc " type="text" />
+                    <input class="form-control py-4" name="product_upc" value="" id="product_upc" type="text" />
                  </div>
                  <div class="form-group">
                      <i class="fas fa-user"></i>
@@ -716,6 +712,7 @@
        </div>
      
      </div>
+
      <div class="card">
      
            <div class="card-header" id="cardHeadingCategory">
@@ -743,7 +740,7 @@
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_sub_category ">Sub-Category</label>
-                      <select name="Sub_Category" class="form-control selectpicker">
+                      <select name="product_sub_category" id="product_sub_category" class="form-control selectpicker">
                   <option value="">Select your Department/Office</option>
                   <option value="">Department of Engineering</option>
                   <option value="">Department of Agriculture</option>
@@ -752,8 +749,8 @@
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
-                    <label class="small mb-1" for="product_type ">Type</label>
-                      <select name="Type" class="form-control selectpicker">
+                    <label class="small mb-1" for="product_sub_category ">Type</label>
+                      <select name="product_type_Select" id="product_type_Select" class="form-control selectpicker">
                   <option value="">Select your Department/Office</option>
                   <option value="">Department of Engineering</option>
                   <option value="">Department of Agriculture</option>
@@ -763,7 +760,7 @@
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_sub_type ">Sub-Type</label>
-                      <select name="Sub_Type" class="form-control selectpicker">
+                      <select name="product_sub_type" id="product_sub_type_select" class="form-control selectpicker">
                   <option value="">Select your Department/Office</option>
                   <option value="">Department of Engineering</option>
                   <option value="">Department of Agriculture</option>
@@ -794,28 +791,28 @@
                  <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_purchase_cost ">Purchase Cost</label>
-                    <input class="form-control py-4" id="product_purchase_cost" name="Cost" value="" type="number" />
+                    <input class="form-control py-4" id="product_purchase_cost" name="product_purchase_cost" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
-                    <label class="small mb-1" for="product_retail ">Retail</label>
-                    <input class="form-control py-4" id="product_retail " name="Retail_Price" value="" type="number" />
+                    <label class="small mb-1" for="product_retail_price ">Retail</label>
+                    <input class="form-control py-4" id="product_retail_price" name="product_retail_price" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_sale_price ">On Sale Price</label>
-                    <input class="form-control py-4" id="product_sale_price " name="Sale_Price" value="" type="number" />
+                    <input class="form-control py-4" id="product_sale_price" name="product_sale_price" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
-                    <label class="small mb-1" for="product_sale_status ">On Sale Status</label>
-                    <label class="radio-inline d-block"><input type="radio" name="On_Sale_Status" value="True" checked>Yes</label>
-<label class="radio-inline"><input type="radio" name="On_Sale_Status" value="False">No</label>
+                    <label class="small mb-1" for="product_onSale_Status ">On Sale Status</label>
+                    <label class="radio-inline d-block"><input type="radio" name="product_onSale_Status" id="product_onSale_Status" value="False" checked>No</label>
+<label class="radio-inline"><input type="radio" name="On_Sale_Status" value="Yest">Yes</label>
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_stock_quantity ">Stock Quantity</label>
-                    <input class="form-control py-4" id="product_stock_quantity " name="Stock_Quantity" value="" type="number" />
+                    <input class="form-control py-4" id="product_stock_quantity" name="product_stock_quantity" value="" type="number" />
                  </div>
               </div>
            </div>
@@ -839,22 +836,22 @@
                 <div class="col-lg-6 col-md-6 bg-info">
                
             <!--Image_Upload_1-->
-            <form>
-                <div class="row">
+            <form id="ProductImageMain_Add">
+                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
                         <label class="control-label">Upload File</label>
-                        <div class="preview-zone hidden" id="preview-zone">
+                        <div class="preview-zone hidden" id="previewZoneAddProductImageMain">
                           <div class="box box-solid">
                             <div class="box-header with-border">
-                              <div><b>Image </b></div>
+                              <div id="ImageHolder-AddProduct"><b>Image </b></div>
                               <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-danger btn-xs remove-preview">
                                  <i class="fas fa-sync-alt"></i> Reset 
                                 </button>
                               </div>
                             </div>
-                            <div class="box-body"></div>
+                            <div class="box-body" id="boxBodyAddProductImageMain"></div>
                           </div>
                         </div>
                         <div class="dropzone-wrapper">
@@ -870,21 +867,22 @@
             </form>
             <!--Image_Upload_1--End-->
           <!--Image_Upload_2-->
-            <form>
+            <form id="ProductImageAlt1_Add">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
-                        <div class="preview-zone hidden">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden" id="previewZoneAddProductImageAlt1">
                           <div class="box box-solid">
                             <div class="box-header with-border">
-                              <div><b>Alternative Image 1</b></div>
+                              <div id="ImageHolder-AddProduct"><b>Image </b></div>
                               <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-danger btn-xs remove-preview">
                                  <i class="fas fa-sync-alt"></i> Reset 
                                 </button>
                               </div>
                             </div>
-                            <div class="box-body"></div>
+                            <div class="box-body" id="boxBodyAddProductImageAlt1"></div>
                           </div>
                         </div>
                         <div class="dropzone-wrapper">
@@ -900,22 +898,22 @@
             </form>
             <!--Image_Upload_2--End-->
              <!--Image_Upload_3-->
-            <form>
-                <div class="row">
+            <form id="ProductImageAlt2_Add">
+                  <div class="row">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
-                       
-                        <div class="preview-zone hidden">
+                        <label class="control-label">Upload File</label>
+                        <div class="preview-zone hidden" id="previewZoneAddProductImageAlt2">
                           <div class="box box-solid">
                             <div class="box-header with-border">
-                              <div><b>Alternative Image 2</b></div>
+                              <div id="ImageHolder-AddProduct"><b>Image </b></div>
                               <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-danger btn-xs remove-preview">
                                  <i class="fas fa-sync-alt"></i> Reset 
                                 </button>
                               </div>
                             </div>
-                            <div class="box-body"></div>
+                            <div class="box-body" id="boxBodyAddProductImageAlt2"></div>
                           </div>
                         </div>
                         <div class="dropzone-wrapper">
@@ -954,22 +952,22 @@
                  <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_length ">Length</label>
-                    <input class="form-control py-4" id="product_length " name="Length" value="" type="number" />
+                    <input class="form-control py-4" id="product_length" name="Length" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_width ">Width</label>
-                    <input class="form-control py-4" id="product_width " name="Width" value="" type="number" />
+                    <input class="form-control py-4" id="product_width" name="Width" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_height ">Height</label>
-                    <input class="form-control py-4" id="product_height " name="Height" value="" type="number" />
+                    <input class="form-control py-4" id="product_height" name="Height" value="" type="number" />
                  </div>
                   <div class="form-group">
                      <i class="fas fa-user"></i>
                     <label class="small mb-1" for="product_weight ">Weight</label>
-                    <input class="form-control py-4" id="product_weight " name="Weight" value="" type="number" />
+                    <input class="form-control py-4" id="product_weight" name="Weight" value="" type="number" />
                  </div>
               </div>
                </div>
@@ -989,7 +987,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary closeClearForm" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary" id="ButtonPostProduct">Submit</a>
+            <a class="btn btn-primary" id="ButtonPostProduct" onclick="CreateSendProductFormData()">Submit</a>
           
         </div>
       </div>
