@@ -409,7 +409,7 @@ function AjaxPost(senderId, FormToSend)
         processData: false,
         success: function (response, jqXHR, data)
         {
-            
+            console.log(response.responseJSON);
         },
         statusCode:
         {
@@ -728,7 +728,7 @@ function CreateSendCategoryFormData() {
 
     var FormToSend = new FormData();
 
-    if (!$("#previewZoneAddCategory").hasClass("hidden")) {
+    if ((!$("#previewZoneAddCategory").hasClass("hidden"))) {
         imageElement = $("#boxBodyAddCategory").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
 
@@ -740,32 +740,19 @@ function CreateSendCategoryFormData() {
 
         var categoryImage = base64ToBlob(baseformated, ImageMimeType);
     
-        let c = new Category($("#CategoryName").val());
-
-        console.log(c.Name);
-
+       
         FormToSend.append("ImageData", categoryImage);
-        FormToSend.append("ObjectData", JSON.stringify(c));
+
+
+
+    }
+    let c = new Category($("#CategoryName").val());
+
+    console.log(c.Name);
+
+    FormToSend.append("ObjectData", JSON.stringify(c));
 
         AjaxPost(TableType.CATEGORY, FormToSend);
-
-
-
-        try {
-
-            //GetImageData(ImageDataBase64);
-        }
-        catch (err) {
-            ModalMessenger(err, false, "Image Upload", "failed to upload");
-        }
-
-    }
-    else {
-        console.log("Nope no image data hoe");
-    }
-
-
-
 
 }
 
@@ -779,7 +766,7 @@ function CreateSendBrandFormData() {
     var brandImage = null;
     var FormToSend = new FormData();
 
-    if ($("previewZoneAddBrand").hasClass("hidden")) {
+    if ((!$("previewZoneAddBrand").hasClass("hidden"))) {
         imageElement = $("#boxBodyAddBrand").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
 
@@ -795,19 +782,8 @@ function CreateSendBrandFormData() {
 
         FormToSend.append("ImageData", brandImage);
 
-
-
-
-        try {
-
-            //GetImageData(ImageDataBase64);
-        }
-        catch (err) {
-            ModalMessenger(err, false, "Image Upload", "failed to upload");
-        }
-
-       
     }
+
     let b = new Brand($("#BrandName").val());
 
     console.log(b.Name);
@@ -830,11 +806,10 @@ function CreateSendProductFormData() {
     var ImageDataBase64 = null;
     var ImageMimeType = null;
 
-    var ImagesData = [];
 
     var FormToSend = new FormData();
 
-    if (!$("#ProductImageMain_Add").find("#previewZoneAddProductImageMain").hasClass("hidden"))
+    if ((!$("#ProductImageMain_Add").find("#previewZoneAddProductImageMain").hasClass("hidden")))
     {
         imageElement = $("#boxBodyAddProductImageMain").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
@@ -852,7 +827,7 @@ function CreateSendProductFormData() {
         FormToSend.append("ProductImageMain", productImage);
     }
 
-    if (!$("#ProductImageAlt1_Add").find("#previewZoneAddProductImageAlt1").hasClass("hidden")) {
+    if ((!$("#ProductImageAlt1_Add").find("#previewZoneAddProductImageAlt1").hasClass("hidden"))) {
         imageElement = $("#boxBodyAddProductImageAlt1").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
 
@@ -869,7 +844,7 @@ function CreateSendProductFormData() {
         FormToSend.append("ProductImageAlt1", productImage);
     }
 
-    if (!$("#ProductImageAlt2_Add").find("#previewZoneAddProductImageAlt2").hasClass("hidden")) {
+    if ((!$("#ProductImageAlt2_Add").find("#previewZoneAddProductImageAlt2").hasClass("hidden"))) {
         imageElement = $("#boxBodyAddProductImageAlt2").children()[0];
         ImageDataBase64 = $(imageElement).attr('src');
 

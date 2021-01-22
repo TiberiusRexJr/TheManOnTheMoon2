@@ -20,9 +20,9 @@ namespace TheManOnTheMoon2.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ManOnTheMoonDB")]
+    using System.Text.Json.Serialization;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ManOnTheMoonDB")]
 	public partial class DataBaseModelsDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -143,9 +143,11 @@ namespace TheManOnTheMoon2.Models
 		private string _Image_Alt_1;
 		
 		private string _Image_Alt_2;
-		
+
+		[JsonIgnore]
 		private EntityRef<Brand> _Brand1;
-		
+
+		[JsonIgnore]
 		private EntityRef<Category> _Category1;
 		
     #region Extensibility Method Definitions
@@ -731,7 +733,8 @@ namespace TheManOnTheMoon2.Models
 		private string _Name;
 		
 		private string _Image_Main;
-		
+
+		[JsonIgnore]
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions
@@ -869,7 +872,8 @@ namespace TheManOnTheMoon2.Models
 		private string _Name;
 		
 		private string _Image_Main;
-		
+
+		[JsonIgnore]
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions

@@ -67,7 +67,7 @@ namespace TheManOnTheMoon2.Api
             #region IImplementation
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
-
+                
                 var data = JsonSerializer.Serialize(returnData);
                 var response = new HttpResponseMessage()
                 {
@@ -110,6 +110,8 @@ namespace TheManOnTheMoon2.Api
             var dataList = provider.FormData.GetValues("ObjectData");
 
             product = (new JavaScriptSerializer()).Deserialize<Product>(dataList[0]);
+
+            
 
             if (product == null)
             {
@@ -202,6 +204,7 @@ namespace TheManOnTheMoon2.Api
             await Request.Content.ReadAsMultipartAsync(provider);
             var dataList = provider.FormData.GetValues("ObjectData");
             category = (new JavaScriptSerializer()).Deserialize<Category>(dataList[0]);
+          
 
             if (category == null)
             {
@@ -279,8 +282,6 @@ namespace TheManOnTheMoon2.Api
 
         }
 
-      
-
         [HttpPost]
         [Route("api/Admin/PostBrand/{objData}")]
         public async Task<Response<Brand>> PostBrand()
@@ -298,8 +299,10 @@ namespace TheManOnTheMoon2.Api
             await Request.Content.ReadAsMultipartAsync(provider);
             var dataList = provider.FormData.GetValues("ObjectData");
             brand = (new JavaScriptSerializer()).Deserialize<Brand>(dataList[0]);
+            
+           
 
-            if(brand==null)
+            if (brand==null)
             {
                 responseMessage.status = HttpStatusCode.BadRequest;
                 responseMessage.returnData = brand;
@@ -512,6 +515,8 @@ namespace TheManOnTheMoon2.Api
             {
                 var DbResponse = db.GetproductById(productId);
 
+                DbResponse.Brand1.Products.Clear();
+                DbResponse.Category1.Products.Clear();
                 if (DbResponse == null)
                 {
                     responseMessage.returnData = DbResponse;

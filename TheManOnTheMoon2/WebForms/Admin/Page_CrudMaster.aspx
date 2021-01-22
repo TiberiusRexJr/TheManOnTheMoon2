@@ -836,8 +836,8 @@
                 <div class="col-lg-6 col-md-6 bg-info">
                
             <!--Image_Upload_1-->
-            <form id="ProductImageMain_Add">
-                 <div class="row">
+            <form id="">
+                 <div class="row" id="ProductImageMain_Add">
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
                         <label class="control-label">Upload File</label>
