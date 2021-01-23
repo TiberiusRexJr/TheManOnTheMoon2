@@ -72,7 +72,7 @@
                 
             </tr>
         </thead>
-                                        <tbody>
+                                        <tbody id="dataTableInventoryTBody">
 
                                         </tbody>
         <tfoot>

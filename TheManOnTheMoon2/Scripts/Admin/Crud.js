@@ -635,15 +635,17 @@ function IntializeDatatable(data, tableType)
             
 
             //todo Individual Objects
-            var indiviaulObj = data[0];
-
+        var indiviaulObj = data[0];
+      
+      
             //todo Keys
-            var keys = Object.keys(indiviaulObj);
-
+        var keys = Object.keys(indiviaulObj);
+        
             //todo columnArrays
             var columnsArray = new Array(keys.length);
 
-            $("#dataTableInventoryThead_Tr").empty();
+        $("#dataTableInventoryThead_Tr").empty();
+        $("#dataTableInventoryTBody").empty();
             $.each(keys, function (index, key) {
                 columnsArray[index] = {
                     data: key, title: key

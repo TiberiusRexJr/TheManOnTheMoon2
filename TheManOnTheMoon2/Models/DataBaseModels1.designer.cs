@@ -244,7 +244,28 @@ namespace TheManOnTheMoon2.Models
 				}
 			}
 		}
-		
+
+
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Image_Main", DbType = "NVarChar(256)")]
+		public string Image_Main
+		{
+			get
+			{
+				return this._Image_Main;
+			}
+			set
+			{
+				if ((this._Image_Main != value))
+				{
+					this.OnImage_MainChanging(value);
+					this.SendPropertyChanging();
+					this._Image_Main = value;
+					this.SendPropertyChanged("Image_Main");
+					this.OnImage_MainChanged();
+				}
+			}
+		}
+
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
 		public string Description
 		{
@@ -573,25 +594,6 @@ namespace TheManOnTheMoon2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image_Main", DbType="NVarChar(256)")]
-		public string Image_Main
-		{
-			get
-			{
-				return this._Image_Main;
-			}
-			set
-			{
-				if ((this._Image_Main != value))
-				{
-					this.OnImage_MainChanging(value);
-					this.SendPropertyChanging();
-					this._Image_Main = value;
-					this.SendPropertyChanged("Image_Main");
-					this.OnImage_MainChanged();
-				}
-			}
-		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image_Alt_1", DbType="NVarChar(256)")]
 		public string Image_Alt_1

@@ -7,7 +7,7 @@ using System.Web;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -67,8 +67,13 @@ namespace TheManOnTheMoon2.Api
             #region IImplementation
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
-                
-                var data = JsonSerializer.Serialize(returnData);
+                var settings = new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+
+                    
+                };
+                var data = JsonConvert.SerializeObject(returnData,settings);
                 var response = new HttpResponseMessage()
                 {
                     Content = new StringContent(data, Encoding.UTF8, "application/json"),

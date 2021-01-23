@@ -217,4 +217,3 @@ C:\Users\rouni\Desktop\The Man On The Moon 2\TheManOnTheMoon2\obj\Debug\TheManOn
 C:\Users\rouni\Desktop\The Man On The Moon 2\TheManOnTheMoon2\obj\Debug\TheManOnTheMoon2.csproj.CopyComplete
 C:\Users\rouni\Desktop\The Man On The Moon 2\TheManOnTheMoon2\obj\Debug\TheManOnTheMoon2.dll
 C:\Users\rouni\Desktop\The Man On The Moon 2\TheManOnTheMoon2\obj\Debug\TheManOnTheMoon2.pdb
-C:\Users\rouni\Desktop\CODE\TheManOnTheMoon2\TheManOnTheMoon2\obj\Debug\TheManOnTheMoon2.csprojAssemblyReference.cache
