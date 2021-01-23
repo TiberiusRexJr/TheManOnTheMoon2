@@ -20,9 +20,9 @@ namespace ManOnTheMoon.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ManOnTheMoonDB")]
+    using System.Text.Json.Serialization;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ManOnTheMoonDB")]
 	public partial class DataBaseModelsDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -39,9 +39,7 @@ namespace ManOnTheMoon.Models
     partial void InsertBrand(Brand instance);
     partial void UpdateBrand(Brand instance);
     partial void DeleteBrand(Brand instance);
-    partial void InsertProduct_Image(Product_Image instance);
-    partial void UpdateProduct_Image(Product_Image instance);
-    partial void DeleteProduct_Image(Product_Image instance);
+    
     #endregion
 		
 		public DataBaseModelsDataContext() : 
@@ -98,13 +96,7 @@ namespace ManOnTheMoon.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Product_Image> Product_Images
-		{
-			get
-			{
-				return this.GetTable<Product_Image>();
-			}
-		}
+		
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Products")]
@@ -120,7 +112,7 @@ namespace ManOnTheMoon.Models
 		private string _Description;
 		
 		private int _Upc;
-		
+
 		private string _Brand;
 		
 		private System.Nullable<double> _Length;
@@ -145,10 +137,10 @@ namespace ManOnTheMoon.Models
 		
 		private System.Nullable<double> _Width;
 		
-		private EntitySet<Product_Image> _Product_Images;
-		
+		[JsonIgnore]
 		private EntityRef<Category> _Category1;
-		
+
+		[JsonIgnore]
 		private EntityRef<Brand> _Brand1;
 		
     #region Extensibility Method Definitions
@@ -191,7 +183,6 @@ namespace ManOnTheMoon.Models
 		
 		public Product()
 		{
-			this._Product_Images = new EntitySet<Product_Image>(new Action<Product_Image>(this.attach_Product_Images), new Action<Product_Image>(this.detach_Product_Images));
 			this._Category1 = default(EntityRef<Category>);
 			this._Brand1 = default(EntityRef<Brand>);
 			OnCreated();
@@ -525,18 +516,6 @@ namespace ManOnTheMoon.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_Image", Storage="_Product_Images", ThisKey="Id", OtherKey="Product_Id")]
-		public EntitySet<Product_Image> Product_Images
-		{
-			get
-			{
-				return this._Product_Images;
-			}
-			set
-			{
-				this._Product_Images.Assign(value);
-			}
-		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Product", Storage="_Category1", ThisKey="Category", OtherKey="Name", IsForeignKey=true)]
 		public Category Category1
@@ -626,17 +605,6 @@ namespace ManOnTheMoon.Models
 			}
 		}
 		
-		private void attach_Product_Images(Product_Image entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = this;
-		}
-		
-		private void detach_Product_Images(Product_Image entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
@@ -650,7 +618,7 @@ namespace ManOnTheMoon.Models
 		private string _Name;
 
 		
-
+		[JsonIgnore]
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions
@@ -764,7 +732,8 @@ namespace ManOnTheMoon.Models
 		private int _Id;
 		
 		private string _Name;
-		
+
+		[JsonIgnore]
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions
@@ -869,203 +838,6 @@ namespace ManOnTheMoon.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Product_Images")]
-	public partial class Product_Image : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Product_Id;
-		
-		private string _Product_Image_1;
-		
-		private string _Product_Image_2;
-		
-		private string _Product_Image_3;
-		
-		private EntityRef<Product> _Product;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnProduct_IdChanging(System.Nullable<int> value);
-    partial void OnProduct_IdChanged();
-    partial void OnProduct_Image_1Changing(string value);
-    partial void OnProduct_Image_1Changed();
-    partial void OnProduct_Image_2Changing(string value);
-    partial void OnProduct_Image_2Changed();
-    partial void OnProduct_Image_3Changing(string value);
-    partial void OnProduct_Image_3Changed();
-    #endregion
-		
-		public Product_Image()
-		{
-			this._Product = default(EntityRef<Product>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", DbType="Int")]
-		public System.Nullable<int> Product_Id
-		{
-			get
-			{
-				return this._Product_Id;
-			}
-			set
-			{
-				if ((this._Product_Id != value))
-				{
-					if (this._Product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProduct_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Product_Id = value;
-					this.SendPropertyChanged("Product_Id");
-					this.OnProduct_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_1", DbType="VarChar(MAX)")]
-		public string Product_Image_1
-		{
-			get
-			{
-				return this._Product_Image_1;
-			}
-			set
-			{
-				if ((this._Product_Image_1 != value))
-				{
-					this.OnProduct_Image_1Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_1 = value;
-					this.SendPropertyChanged("Product_Image_1");
-					this.OnProduct_Image_1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_2", DbType="VarChar(MAX)")]
-		public string Product_Image_2
-		{
-			get
-			{
-				return this._Product_Image_2;
-			}
-			set
-			{
-				if ((this._Product_Image_2 != value))
-				{
-					this.OnProduct_Image_2Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_2 = value;
-					this.SendPropertyChanged("Product_Image_2");
-					this.OnProduct_Image_2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Image_3", DbType="VarChar(MAX)")]
-		public string Product_Image_3
-		{
-			get
-			{
-				return this._Product_Image_3;
-			}
-			set
-			{
-				if ((this._Product_Image_3 != value))
-				{
-					this.OnProduct_Image_3Changing(value);
-					this.SendPropertyChanging();
-					this._Product_Image_3 = value;
-					this.SendPropertyChanged("Product_Image_3");
-					this.OnProduct_Image_3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_Image", Storage="_Product", ThisKey="Product_Id", OtherKey="Id", IsForeignKey=true)]
-		public Product Product
-		{
-			get
-			{
-				return this._Product.Entity;
-			}
-			set
-			{
-				Product previousValue = this._Product.Entity;
-				if (((previousValue != value) 
-							|| (this._Product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Product.Entity = null;
-						previousValue.Product_Images.Remove(this);
-					}
-					this._Product.Entity = value;
-					if ((value != null))
-					{
-						value.Product_Images.Add(this);
-						this._Product_Id = value.Id;
-					}
-					else
-					{
-						this._Product_Id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Product");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
+	
 }
 #pragma warning restore 1591

@@ -223,16 +223,16 @@
     <Compile Include="IO\book.cs" />
     <Compile Include="IO\FileOps.cs" />
     <Compile Include="IO\ImageData.cs" />
-    <Compile Include="Models\dumm2.cs" />
-    <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DataBaseModels.cs">
+      <DependentUpon>DataBaseModels.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataBaseModels.designer.cs" />
     <Compile Include="Models\DataBaseModels1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseModels.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dummy.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Mobile.Master.cs">
