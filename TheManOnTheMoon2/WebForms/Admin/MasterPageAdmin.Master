@@ -59,25 +59,25 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
+                            <div class="sb-sidenav-menu-heading">Home</div>
+                            <a class="nav-link" href="#" onclick="Redirect('Store Front')">
+                                <div class="sb-nav-link-icon"><i class="fas fa-store-alt"></i></div>
+                                Store Front
                             </a>
                             <a class="nav-link" href="Page_CrudMaster.aspx">
-                                <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
-                                C.R.U.D AdminPro
+                                <div class="sb-nav-link-icon"><i class="fas fa-sign-in-alt"></i></div>
+                               Store Login
                             </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
+                            <div class="sb-sidenav-menu-heading">Administration</div>
+                            <a class="nav-link collapsed"  href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                               
+                                C.R.U.D MasterPro &trade; 
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                    <a class="nav-link d-inline" href="Page_CrudMaster.aspx">InventoryPro &reg;</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">PeoplePro  &trade;</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -111,14 +111,14 @@
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <div class="sb-sidenav-menu-heading">DatMoney &trade;</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
+                                SalesChartsPro &copy;
                             </a>
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
+                                TablesChartsPro &reg;
                             </a>
                         </div>
                     </div>
@@ -153,3 +153,17 @@
                             </asp:ContentPlaceHolder>
 </body>
 </html>
+
+<script>
+    function Redirect(PageRequest)
+    {
+        alert("hi");
+        var page;
+        switch (PageRequest)
+        {
+            case "Store Front": alert("hi"); page = "/Home/Index";
+        }
+
+        window.location.href = page;
+    }
+</script>

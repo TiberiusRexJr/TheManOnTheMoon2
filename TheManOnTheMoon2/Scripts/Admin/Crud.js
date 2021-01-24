@@ -29,9 +29,9 @@ class Category {
 }
 
 class Product {
-    constructor(Name_NotNull, Description, Upc_NotNull, Brand, Length, Weight, Height, Cost, Retail_Price, Sale_Price, Stock_QuantityNotNull, Category, Sub_Category, On_Sale_Category, Width, Type, Sub_Type, Image_Main, Image_Alt_1, Image_Alt_2) {
+    constructor(Name_NotNull, Description, Upc_NotNull, Brand, Length, Weight, Height, Cost, Retail_Price, Sale_Price, Stock_QuantityNotNull, Category, Sub_Category, On_Sale_Status, Width, Type, Sub_Type, Image_Main, Image_Alt_1, Image_Alt_2) {
         this.Name = Name_NotNull, this.Description = Description, this.Upc = Upc_NotNull, this.Brand = Brand, this.Length = Length, this.Weight = Weight, this.Height = Height, this.Cost = Cost, this.Retail_Price = Retail_Price, this.Sale_Price = Sale_Price, this.Stock_Quantity = Stock_QuantityNotNull,
-            this.Category = Category, this.Sub_Category = Sub_Category, this.On_Sale_Category = On_Sale_Category, this.Width = Width, this.Type = Type, this.Sub_Type = Sub_Type, this.Image_Main = Image_Main, this.Image_Alt_1 = Image_Alt_1, this.Image_Alt_2 = Image_Alt_2
+            this.Category = Category, this.Sub_Category = Sub_Category, this.On_Sale_Status = this.On_Sale_Status, this.Width = Width, this.Type = Type, this.Sub_Type = Sub_Type, this.Image_Main = Image_Main, this.Image_Alt_1 = Image_Alt_1, this.Image_Alt_2 = Image_Alt_2
     };
     }
 

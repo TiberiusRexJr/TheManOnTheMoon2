@@ -114,8 +114,16 @@ namespace TheManOnTheMoon2.Api
 
             var dataList = provider.FormData.GetValues("ObjectData");
 
-            product = (new JavaScriptSerializer()).Deserialize<Product>(dataList[0]);
 
+            try
+            {
+
+                product = (new JavaScriptSerializer()).Deserialize<Product>(dataList[0]);
+            }
+            catch(SystemException se)
+            {
+                Errorhead(se);
+            }
             
 
             if (product == null)
