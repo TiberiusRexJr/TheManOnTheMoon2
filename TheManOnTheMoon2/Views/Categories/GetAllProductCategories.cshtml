@@ -19,27 +19,40 @@
     });
 </script>
 
-<h2>GetAllProductCategories</h2>
+<h2>Shop</h2>
 <div class="main">
     <div class="shop_top">
         <div class="container">
             <div class="row ex_box">
-                <h3 class="m_2">Our Experiance</h3>
+                <h3 class="m_2">Check out our Categories!</h3>
 
                 @foreach (var category in Model)
                 {
+                    
+                    var imageUrl=string.Empty;
 
-                    <div class="col-md-4 team1">
-                        <div class="img_section magnifier2">
-                            <a class="fancybox" href="" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
-                                <img src="@category.Category_Image_Url" class="img-responsive" alt=""><span> </span>
-                                <div class="img_section_txt">
-                                    @category.Name;
-                                    
-
-                                </div>
-                            </a>
+                    if (string.IsNullOrEmpty(category.Image_Main))
+                    {
+                        imageUrl = "../../Img/Front/Image_NA.jpg";
+                    }
+                    else
+                    {
+                        imageUrl = "../../Images/"+@category.Image_Main;
+                    }
+                    <div class="col-md-4 col-sm-1">
+                        
+                        <a href="@Url.Action("Products", "Products", new { searchBy = category.GetType().Name,name=category.Name }, null)">
+                        <div class="card">
+                            <img src="@imageUrl" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@category.Name</h5>
+                            </div>
+                       
+                      
                         </div>
+                             </a>
+
+                       
                     </div>
                 }
 

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TheManOnTheMoon2.Database;
+using TheManOnTheMoon2.Models;
 
 namespace TheManOnTheMoon2.Controllers
 {
     public class CategoriesController : Controller
     {
+        private DbAdmin db = new DbAdmin();
         // GET: Categories
         public ActionResult GetAllProductCategories()
         {
-            return View();
+            List<Category> categories = db.GetAllCategories();
+            return View(categories);
         }
 
         // GET: Categories/Details/5

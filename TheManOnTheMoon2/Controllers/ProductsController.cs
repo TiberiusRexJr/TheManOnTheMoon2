@@ -1,16 +1,13 @@
-﻿using System;
-using System.Dynamic;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using TheManOnTheMoon2.Models;
 using TheManOnTheMoon2.Database;
+using TheManOnTheMoon2.Models;
 
 namespace TheManOnTheMoon2.Controllers
 {
     public class ProductsController : Controller
     {
+        private DbAdmin db = new DbAdmin();
         #region NestedClasses
         public class ViewModelProduct
         {
@@ -23,9 +20,21 @@ namespace TheManOnTheMoon2.Controllers
         private DbQueryProducts dbqueryProducts = new DbQueryProducts();
        
         // GET: SingleProduct
-        public ActionResult AllProducts()
+        public ActionResult Products(string SearchBy,string name)
         {
-            return View();
+            List<Product> products = default;
+
+           switch(SearchBy)
+            {
+                case "Category":products= db.RetrieveProductByCategory(name);
+                    break;
+                case "Brand":
+                    break;
+                default: products = db.GetAllProducts();
+                    break;
+            }
+
+            return View(products);
         }
 
         public ActionResult SingleProductDetail(int id)
