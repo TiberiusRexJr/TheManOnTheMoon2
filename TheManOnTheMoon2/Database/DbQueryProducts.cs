@@ -179,7 +179,6 @@ namespace TheManOnTheMoon2.Database
                 reassingments will apply to the primaryProduct and relatedProduct nested in
                 the Resultdata.
              */
-            var resultData = new Tuple<Product,List<Product>>(primaryProduct,relatedProducts);
             
             primaryProduct = db.Products.Where(p => p.Id == primaryProductId).FirstOrDefault();
 
@@ -187,10 +186,11 @@ namespace TheManOnTheMoon2.Database
             {
                 primaryProduct = null;
                 relatedProducts = null;
-                return (resultData);
+               
             }
             else
             {
+                
 
              relatedProducts = db.Products.Where(p => p.Category == primaryProduct.Category && p.Brand == primaryProduct.Brand).OrderBy(p => p.Name).ToList();
                 if(relatedProducts==null)
@@ -198,9 +198,10 @@ namespace TheManOnTheMoon2.Database
                     relatedProducts = db.Products.OrderBy(p => p.Retail_Price).ToList();
                 }
             }
-
+            var resultData = new Tuple<Product,List<Product>>(primaryProduct,relatedProducts);
 
             return resultData;
+
         }
         #endregion
 
